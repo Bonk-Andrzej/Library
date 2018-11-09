@@ -85,7 +85,7 @@ public class CrudFacade<T, I> implements GenericDao<T, I> {
         try {
             entityManager = entityManagerFactory.createEntityManager();
             entityManager.getTransaction().begin();
-            entityManager.remove(entityManager.contains(entity) ? entity : entityManager.merge(entity));//TODO CO TO??
+            entityManager.remove(entityManager.contains(entity) ? entity : entityManager.merge(entity));
             entityManager.getTransaction().commit();
 
         } catch (HibernateException e) {
