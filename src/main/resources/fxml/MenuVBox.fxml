@@ -1,34 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="165.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.fx.contollers.MenuVBoxController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="165.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bonk_andrzej.app.fx.contollers.MenuVBoxController">
     <children>
-        <ToggleButton mnemonicParsing="false" onAction="#OpenListBooks" prefHeight="200.0" prefWidth="150.0" text="%list.books">
+        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OpenListBooks" prefHeight="200.0" prefWidth="150.0" text="%list.books">
          <toggleGroup>
                 <ToggleGroup fx:id="toggleButtons" />
-         </toggleGroup></ToggleButton>
-        <ToggleButton mnemonicParsing="false" onAction="#openStatistics" prefHeight="200.0" prefWidth="150.0" text="%lender.books" toggleGroup="$toggleButtons" />
+         </toggleGroup>
+         <graphic>
+            <ImageView fitHeight="92.0" fitWidth="104.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/booksListIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></ToggleButton>
+        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#openStatistics" prefHeight="200.0" prefWidth="150.0" text="%lender.books" toggleGroup="$toggleButtons">
+         <graphic>
+            <ImageView fitHeight="93.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/lenderBookIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></ToggleButton>
         <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#addBook" prefHeight="200.0" prefWidth="150.0" text="%add.book" toggleGroup="$toggleButtons">
          <graphic>
-                <ImageView fitHeight="54.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../icons/add_book.png" />
-                    </image>
-               <viewport>
-                  <Rectangle2D />
-               </viewport>
-                </ImageView>
+            <ImageView fitHeight="87.0" fitWidth="94.0">
+               <image>
+                  <Image url="@../icons/bookIcon.png" />
+               </image>
+            </ImageView>
          </graphic>
         </ToggleButton>
-        <ToggleButton mnemonicParsing="false" onAction="#addAuthor" prefHeight="200.0" prefWidth="150.0" text="%add.author" toggleGroup="$toggleButtons" />
-        <ToggleButton mnemonicParsing="false" onAction="#addCategory" prefHeight="200.0" prefWidth="150.0" text="%add.categoryFxObjectProperty" toggleGroup="$toggleButtons" />
+        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#addAuthor" prefHeight="200.0" prefWidth="150.0" text="%add.author" toggleGroup="$toggleButtons">
+         <graphic>
+            <ImageView fitHeight="79.0" fitWidth="102.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/authorIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></ToggleButton>
+        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#addCategory" prefHeight="200.0" prefWidth="150.0" text="%add.categoryFxObjectProperty" toggleGroup="$toggleButtons">
+         <graphic>
+            <ImageView fitHeight="92.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/categoryIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></ToggleButton>
     </children>
     <padding>
         <Insets bottom="10.0" left="10.0" top="10.0" />
