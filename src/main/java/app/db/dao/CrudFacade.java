@@ -20,7 +20,6 @@ public class CrudFacade<T, I> implements GenericDao<T, I> {
             entityManager = entityManagerFactory.createEntityManager();
             entityManager.getTransaction().begin();
             entityManager.merge(entity);
-//            entityManager.flush();
             entityManager.getTransaction().commit();
             return entity;
         } catch (HibernateException e) {
@@ -97,7 +96,7 @@ public class CrudFacade<T, I> implements GenericDao<T, I> {
         }
     }
 
-    //to do naprawienia ale w sumie najpierw mohge znalesc przez id a potem ten obiekt usunac w  2 metodzie i tyle
+
     @Override
     public void deleteById(Class<T> classType, I id) throws IllegalStateException, IllegalArgumentException, TransactionRequiredException, PersistenceException, ApplicationException {
         try {

@@ -1,8 +1,10 @@
 package app.fx.view;
 
 import javafx.beans.property.*;
+import javafx.scene.chart.PieChart;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class BookFx {
 
@@ -137,13 +139,10 @@ public class BookFx {
         this.addedDate.set(addedDate);
     }
 
-
     @Override
     public String toString() {
         return "BookFx{" +
                 "id=" + id.get() +
-//                ", categoryFx=" + categoryFx.get() +
-//                ", authorFx=" + authorFx.get() +
                 ", title=" + title.get() +
                 ", description=" + description.get() +
                 ", releaseDate=" + releaseDate.get() +

@@ -1,6 +1,7 @@
 package app.db.modelsDb;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -22,13 +23,12 @@ public class Book {
     @Column
     private String amount;
     @Column
-    private Date releaseDate;
-    //todo zobaczyc czy mi sie to przyda
+    private LocalDate releaseDate;
     @Column
-    private Date addedDate;
+    private LocalDate addedDate;
 
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
     private Author author;
 
@@ -37,7 +37,7 @@ public class Book {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @ManyToMany(mappedBy = "bookList", cascade=CascadeType.ALL)
+    @ManyToMany(mappedBy = "bookList", cascade = CascadeType.ALL)
     private List<LenderBooks> lenderBooksList;
 
     public Book() {
@@ -91,14 +91,6 @@ public class Book {
         this.amount = amount;
     }
 
-    public Date getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(Date release_date) {
-        this.releaseDate = release_date;
-    }
-
     public Author getAuthor() {
         return author;
     }
@@ -123,11 +115,19 @@ public class Book {
         this.lenderBooksList = lenderBooksList;
     }
 
-    public Date getAddedDate() {
+    public LocalDate getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(LocalDate releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public LocalDate getAddedDate() {
         return addedDate;
     }
 
-    public void setAddedDate(Date addedDate) {
+    public void setAddedDate(LocalDate addedDate) {
         this.addedDate = addedDate;
     }
 }

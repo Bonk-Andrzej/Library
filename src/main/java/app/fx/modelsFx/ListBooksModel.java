@@ -71,8 +71,7 @@ public class ListBooksModel {
         Predicate<BookFx> predicate = bookFx -> bookFx.getCategoryFxObjectProperty().getId()
                 == getCategoryFxObjectProperty().getId();
         return predicate;
-        //czyli porownoje czy categoria w bookfx kjtora jest obserwowana ma taka sama kategoria jak ta wybrana
-        //categopria do filtrowania
+
     }
 
     private Predicate<BookFx> predicateAuthor(){

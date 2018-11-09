@@ -45,11 +45,9 @@ public class MenuVBoxController {
 
     public void addAuthor() {
         mainController.setCenter(ADD_AUTHOR_FXML);
-
     }
 
     public void addCategory() throws ApplicationException {
         mainController.setCenter(ADD_CATEGORY_FXML);
-//        AddObjectToDB.addObjectToDB();
     }
 }

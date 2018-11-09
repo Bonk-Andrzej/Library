@@ -6,6 +6,7 @@ import app.db.modelsDb.Book;
 import app.db.modelsDb.Category;
 import app.utils.exceptions.ApplicationException;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -46,9 +47,10 @@ public class AddObjectToDB {
         book1.setTitle("Kłamca");
         book1.setIsbn("2222");
         book1.setRating(4);
-        book1.setReleaseDate(new Date());
-        book1.setAddedDate(new Date());
+        book1.setReleaseDate(LocalDate.of(1500,10,10));
+        book1.setAddedDate(LocalDate.now());
         book1.setDescription("Super mega hiper fullwypas ksiazka");
+        book1.setAmount("5");
 
         Book book2 = new Book();
         book2.setCategory(category3);
@@ -56,9 +58,10 @@ public class AddObjectToDB {
         book2.setTitle("Pan Lodowego Ogrodu");
         book2.setIsbn("5555");
         book2.setRating(5);
-        book2.setReleaseDate(new Date());
-        book2.setAddedDate(new Date());
+        book2.setReleaseDate(LocalDate.of(1500,10,10));
+        book2.setAddedDate(LocalDate.now());
         book2.setDescription("Super mega hiper fullwypas ksiazka");
+        book2.setAmount("5");
 
         Book book3 = new Book();
         book3.setCategory(category4);
@@ -66,9 +69,10 @@ public class AddObjectToDB {
         book3.setTitle("Pani Jeziorna");
         book3.setIsbn("2222");
         book3.setRating(5);
-        book3.setReleaseDate(new Date());
-        book3.setAddedDate(new Date());
+        book3.setReleaseDate(LocalDate.of(1500,10,10));
+        book3.setAddedDate(LocalDate.now());
         book3.setDescription("Super mega hiper fullwypas ksiazka");
+        book3.setAmount("5");
 
         Book book4 = new Book();
         book4.setCategory(category4);
@@ -76,9 +80,10 @@ public class AddObjectToDB {
         book4.setTitle("Gamedec Zabaweczki");
         book4.setIsbn("2222");
         book4.setRating(3);
-        book4.setReleaseDate(new Date());
-        book4.setAddedDate(new Date());
+        book4.setReleaseDate(LocalDate.of(1500,10,10));
+        book4.setAddedDate(LocalDate.now());
         book4.setDescription("Super mega hiper fullwypas ksiazka");
+        book4.setAmount("5");
 
         try {
             crudFacade.create(book1);

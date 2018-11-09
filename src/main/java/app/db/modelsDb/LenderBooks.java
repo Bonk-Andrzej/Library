@@ -1,6 +1,7 @@
 package app.db.modelsDb;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -17,11 +18,11 @@ public class LenderBooks {
     @Column(name = "lender_surname")
     private String surname;
     @Column
-    private Date lenderDate;
+    private LocalDate lenderDate;
     @Column
-    private Date returnDate;
+    private LocalDate returnDate;
     @Column
-    private Date actualDateOfReturn;
+    private LocalDate actualDateOfReturn;
 
     @ManyToMany(cascade=CascadeType.ALL)
     private List<Book> bookList;
@@ -54,28 +55,28 @@ public class LenderBooks {
         this.surname = lender_surname;
     }
 
-    public Date getLenderDate() {
+    public LocalDate getLenderDate() {
         return lenderDate;
     }
 
-    public void setLenderDate(Date lender_date) {
-        this.lenderDate = lender_date;
+    public void setLenderDate(LocalDate lenderDate) {
+        this.lenderDate = lenderDate;
     }
 
-    public Date getReturnDate() {
+    public LocalDate getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(Date return_date) {
-        this.returnDate = return_date;
+    public void setReturnDate(LocalDate returnDate) {
+        this.returnDate = returnDate;
     }
 
-    public Date getActualDateOfReturn() {
+    public LocalDate getActualDateOfReturn() {
         return actualDateOfReturn;
     }
 
-    public void setActualDateOfReturn(Date actual_date_of_return) {
-        this.actualDateOfReturn = actual_date_of_return;
+    public void setActualDateOfReturn(LocalDate actualDateOfReturn) {
+        this.actualDateOfReturn = actualDateOfReturn;
     }
 
     public List<Book> getBookList() {

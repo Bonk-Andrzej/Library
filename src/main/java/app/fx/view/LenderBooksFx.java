@@ -25,7 +25,6 @@ public class LenderBooksFx {
         this.id.set(id);
     }
 
-
     public String getName() {
         return name.get();
     }

@@ -35,7 +35,6 @@ public class MainController {
 
     public void setCenter(String fxmlPath) {
         borderPane.setCenter(FxmlUtils.fxmlLoader(fxmlPath));
-
     }
 
     public void closeApplication() {
@@ -44,7 +43,6 @@ public class MainController {
             Platform.exit();
             System.exit(0);
         }
-
     }
 
     public void setCaspian() {
@@ -59,47 +57,26 @@ public class MainController {
         Stage stage = (Stage) borderPane.getScene().getWindow();
         boolean value = ((CheckMenuItem) actionEvent.getSource()).selectedProperty().get();
         stage.setAlwaysOnTop(value);
-
-
     }
 
     public void about() {
         DialogsUtils.dialogAboutApplication();
-
     }
 
     public void setLanguageToPl() {
         Stage newPrimaryStage = new Stage();
         Locale.setDefault(Locale.getDefault());
         Pane borderPane = FxmlUtils.fxmlLoader(BORDER_PAINE_MAIN_FXML);
-//        Scene scene = new Scene(borderPane);
         newPrimaryStage.setScene(new Scene(borderPane));
         newPrimaryStage.show();
-//        primaryStage.setScene(scene);
-//        primaryStage.setTitle(FxmlUtils.setResourceBundle().getString("tittle.application"));
-//        primaryStage.show();
-
-
-//        main.startDefaultWindow(newPrimaryStage);
-
-
     }
 
     public void setLanguageToEn() {
         Stage newPrimaryStage = new Stage();
         Locale.setDefault(Locale.ENGLISH);
-                Pane borderPane = FxmlUtils.fxmlLoader(BORDER_PAINE_MAIN_FXML);
-//        Scene scene = new Scene(borderPane);
-//        primaryStage.setScene(scene);
-//        primaryStage.setTitle(FxmlUtils.setResourceBundle().getString("tittle.application"));
-//        primaryStage.show();
+        Pane borderPane = FxmlUtils.fxmlLoader(BORDER_PAINE_MAIN_FXML);
         newPrimaryStage.setScene(new Scene(borderPane));
         newPrimaryStage.show();
-
-
-//        main.startDefaultWindow(newPrimaryStage);
-
-
     }
 
 

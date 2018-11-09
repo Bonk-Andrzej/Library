@@ -36,7 +36,6 @@ public class AuthorModel {
                 Author.class, getAuthorFxObjectProperty().getId());
         crudFacade.deleteO(authorTodelete);
         initializeAuthorFromDb();
-
     }
 
     public void initializeAuthorFromDb() throws ApplicationException {

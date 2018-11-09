@@ -10,7 +10,6 @@ import javafx.scene.control.*;
 
 public class BookController {
 
-
     @FXML
     private Button addButton;
     @FXML
@@ -86,7 +85,6 @@ public class BookController {
                         .or(isbnTextField.textProperty().isEmpty())
                         .or(releaseDatePicker.valueProperty().isNull())
                         .or(amountBooksTextField.textProperty().isEmpty())
-
 
                 ));
     }

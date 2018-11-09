@@ -1,7 +1,6 @@
 package app.db.dao;
 
 import app.utils.exceptions.ApplicationException;
-
 import javax.persistence.EntityExistsException;
 import javax.persistence.PersistenceException;
 import javax.persistence.TransactionRequiredException;

@@ -20,7 +20,6 @@ public class FxmlUtils {
         return null;
     }
 
-
     public static ResourceBundle getResourceBundle() {
         return ResourceBundle.getBundle("bundles.messages");
     }

@@ -42,7 +42,6 @@ public class CategoryController extends TextField {
     }
 
     private void startBindings() {
-        //czyli przycisk dodaj_kategorie jest wylaczony jesli pole do wpisywania jest puste
         addCategoryButton.disableProperty().bind(categoryTextField.textProperty().isEmpty());
         deleteCategoryButton.disableProperty().bind(categoryModel.categoryFxObjectPropertyProperty().isNull());
         editCategoryButton.disableProperty().bind(categoryModel.categoryFxObjectPropertyProperty().isNull());
@@ -93,11 +92,10 @@ public class CategoryController extends TextField {
             DialogsUtils.errorDialogs(e.getMessage());
         }
     }
-
-    public void deleteSelected() {
-       TreeItem c = (TreeItem) categoryTreeView.getSelectionModel().getSelectedItems();
-        c.getParent().getChildren().remove(c);
-
-    }
+//todo
+//    public void deleteSelected() {
+//        TreeItem c = (TreeItem) categoryTreeView.getSelectionModel().getSelectedItems();
+//        c.getParent().getChildren().remove(c);
+//
+//    }
 }
-//TODO NIE DZIALA UNIKALNE KATEGORIE, NIE DIZLA WYSWIETLANIE OKIENKA FX Z BLEDEM

@@ -76,19 +76,15 @@ public class AuthorController {
         }
         textFieldBindings();
         tableViewBindings();
-        //inaczej  niz w kategori - to daJE MI TO ZE OD RAZU BINDUJE TO CO WPISUJE W FX DO JAVY ze wzgl na to ze w modelu tworzy mi sie od razu
-        //nowy obiekt authorFx
-        //do zerkniecia jak to jest w categori
     }
 
     private void tableViewBindings() {
         authorTableView.setItems(authorModel.getAuthorFxObservableList());
         nameColumn.setCellValueFactory(cellDate -> cellDate.getValue().nameProperty());
         surnameColumn.setCellValueFactory(cellDate -> cellDate.getValue().surnameProperty());
-        nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());//dzieki temu po dwukliku moge wlaczyc edytowanie kliknietych komorek
+        nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         surnameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        authorTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue)//daje mi to ze jak zaznacze ppm lub lpm to on nasluchuje co robie
-                //przetrzymuje stara i nowa wartosc
+        authorTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue)
                 -> authorModel.setAuthorFxObjectProperty(newValue));
     }
 

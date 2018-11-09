@@ -56,11 +56,7 @@ public class CategoryModel {
             c.getBookListForCategory().forEach(
                     book -> categoryItem.getChildren()
                             .add(new TreeItem<>(book.getTitle())));
-            //TODO CO TO JEST! JAK TO DZIALA??
-            //TODO UNIKALNE WARTOSCI DLA KATEGORI I RESZTY
-            // TODO DLACZEGO BAZA MI SIE WLACZA PRZY KATEGORI I CZY SIE WGL WYLACZA I CZEMU SIE CZASAMI PRZECIAZA
-            //TODO CZY HIBERNATE MUSI TAK SIE LADOWAC ZA KAZDYM RAZEM, CZY MOZNA TO JAKOS PRZYSPESZIC - DO SPRAWDZENIA W KATALOGU SQL
-            treeItemRoot.getChildren().add(categoryItem);
+                    treeItemRoot.getChildren().add(categoryItem);
         });
     }
 
