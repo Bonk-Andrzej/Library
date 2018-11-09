@@ -10,36 +10,45 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.contollers.MainController">
-   <top>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <MenuBar>
-           <menus>
-             <Menu id="Plik" mnemonicParsing="false" text="%file">
-               <items>
-                 <MenuItem id="Zamknij" mnemonicParsing="false" onAction="#closeApplication" text="%close" />
-               </items>
-             </Menu>
-             <Menu id="Edycja" mnemonicParsing="false" text="%edit">
-                  <items>
-                     <RadioMenuItem id="Caspian" mnemonicParsing="false" onAction="#setCaspian" text="%caspian">
-                        <toggleGroup>
-                           <ToggleGroup fx:id="styleGroup" />
-                        </toggleGroup>
-                     </RadioMenuItem>
-                     <RadioMenuItem id="Modena" mnemonicParsing="false" onAction="#setModena" text="%modena" toggleGroup="$styleGroup" />
-                     <SeparatorMenuItem mnemonicParsing="false" />
-                     <CheckMenuItem id="Zawsze na wierzchu" mnemonicParsing="false" onAction="#setAlwaysOnTop" text="%alwaysOnTop" />
-                  </items>
-             </Menu>
-             <Menu id="Pomoc" mnemonicParsing="false" text="%help">
-               <items>
-                 <MenuItem id="O mnie" mnemonicParsing="false" onAction="#about" text="%about" />
-               </items>
-             </Menu>
-           </menus>
-         </MenuBar>
-       <fx:include fx:id="upperButtomHBox" source="TopMenuButtons.fxml" />
-       </VBox>
-   </top>
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="835.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.fx.contollers.MainController">
+    <left>
+        <VBox id="menu" alignment="BOTTOM_LEFT" prefHeight="800.0" prefWidth="0.0" BorderPane.alignment="TOP_LEFT">
+            <fx:include fx:id="menuVBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" source="MenuVBox.fxml" />
+        </VBox>
+    </left>
+    <top>
+        <MenuBar prefHeight="37.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+            <menus>
+                <Menu id="Plik" mnemonicParsing="false" text="%file">
+                    <items>
+                        <MenuItem id="Zamknij" mnemonicParsing="false" onAction="#closeApplication" text="%close" />
+                    </items>
+                </Menu>
+                <Menu id="Edycja" mnemonicParsing="false" text="%edit">
+                    <items>
+                        <RadioMenuItem id="Caspian" mnemonicParsing="false" onAction="#setCaspian" text="%caspian">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="styleGroup" />
+                            </toggleGroup>
+                        </RadioMenuItem>
+                        <RadioMenuItem id="Modena" mnemonicParsing="false" onAction="#setModena" text="%modena" toggleGroup="$styleGroup" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <RadioMenuItem id="Change language to Polish" mnemonicParsing="false" onAction="#setLanguageToPl" text="%change.to.pl">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="languageGroup" />
+                            </toggleGroup>
+                        </RadioMenuItem>
+                        <RadioMenuItem id="Change language to English" mnemonicParsing="false" onAction="#setLanguageToEn" text="%change.to.en" toggleGroup="$languageGroup" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <CheckMenuItem id="Zawsze na wierzchu" mnemonicParsing="false" onAction="#setAlwaysOnTop" text="%alwaysOnTop" />
+                    </items>
+                </Menu>
+                <Menu id="Pomoc" mnemonicParsing="false" text="%help">
+                    <items>
+                        <MenuItem id="O mnie" mnemonicParsing="false" onAction="#about" text="%about" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
 </BorderPane>
