@@ -1,5 +1,6 @@
 package bonk_andrzej.app.fx.contollers;
 
+import bonk_andrzej.app.fx.view.BookFx;
 import bonk_andrzej.app.fx.view.CategoryFx;
 import bonk_andrzej.app.fx.modelsFx.CategoryModel;
 import bonk_andrzej.app.utils.DialogsUtils;
@@ -48,7 +49,7 @@ public class CategoryController extends TextField {
         categoryComboBox.setItems(categoryModel.getCategoryFxObservableList());
         categoryTreeView.setRoot(categoryModel.getTreeItemRoot());
         categoryTreeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-//         categoryModel.getCategoryFxObjectProperty(newValue);
+                    categoryModel.getCategoryFxObjectProperty();
                 }
 
         );
@@ -92,7 +93,9 @@ public class CategoryController extends TextField {
             DialogsUtils.errorDialogs(e.getMessage());
         }
     }
-//todo
+
+    //todo
+    @FXML
     public void deleteSelected() {
 //        TreeItem c = (TreeItem) categoryTreeView.getSelectionModel().getSelectedItems();
 //        c.getParent().getChildren().remove(c);

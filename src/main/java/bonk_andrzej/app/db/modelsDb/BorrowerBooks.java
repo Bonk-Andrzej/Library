@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity(name = "lender_books")
 @Table
-public class LenderBooks {
+public class BorrowerBooks {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,17 +17,19 @@ public class LenderBooks {
     @Column(name = "lender_surname")
     private String surname;
     @Column
-    private LocalDate lenderDate;
+    private LocalDate rentalDate;
     @Column
     private LocalDate returnDate;
     @Column
     private LocalDate actualDateOfReturn;
+    @Column
+    private long amountBorrowedBook;
 
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private List<Book> bookList;
 
 
-    public LenderBooks() {
+    public BorrowerBooks() {
     }
 
     public long getId() {
@@ -54,12 +56,12 @@ public class LenderBooks {
         this.surname = lender_surname;
     }
 
-    public LocalDate getLenderDate() {
-        return lenderDate;
+    public LocalDate getRentalDate() {
+        return rentalDate;
     }
 
-    public void setLenderDate(LocalDate lenderDate) {
-        this.lenderDate = lenderDate;
+    public void setRentalDate(LocalDate lenderDate) {
+        this.rentalDate = lenderDate;
     }
 
     public LocalDate getReturnDate() {
@@ -84,5 +86,13 @@ public class LenderBooks {
 
     public void setBookList(List<Book> bookList) {
         this.bookList = bookList;
+    }
+
+    public long getAmountBorrowedBook() {
+        return amountBorrowedBook;
+    }
+
+    public void setAmountBorrowedBook(long amountBooksRent) {
+        this.amountBorrowedBook = amountBooksRent;
     }
 }

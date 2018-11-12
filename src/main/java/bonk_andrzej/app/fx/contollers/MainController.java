@@ -1,16 +1,15 @@
 package bonk_andrzej.app.fx.contollers;
 
+import bonk_andrzej.app.Main;
 import bonk_andrzej.app.utils.DialogsUtils;
 import bonk_andrzej.app.utils.FxmlUtils;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.util.Locale;
@@ -20,13 +19,14 @@ import static javafx.application.Application.STYLESHEET_CASPIAN;
 import static javafx.application.Application.STYLESHEET_MODENA;
 
 public class MainController {
-    public static final String BORDER_PAINE_MAIN_FXML = "/fxml/BorderPaineMain.fxml";
+    public static final Locale DEFAULT_LOCALE = Locale.getDefault();
+    public static final Locale ENGLISH_LOCALE = Locale.ENGLISH;
 
     @FXML
     private BorderPane borderPane;
 
     @FXML
-    private MenuVBoxController menuVBoxController;
+    MenuVBoxController menuVBoxController;
 
     @FXML
     private void initialize() {
@@ -65,19 +65,11 @@ public class MainController {
 
     public void setLanguageToPl() {
         Stage newPrimaryStage = new Stage();
-        Locale.setDefault(Locale.getDefault());
-        Pane borderPane = FxmlUtils.fxmlLoader(BORDER_PAINE_MAIN_FXML);
-        newPrimaryStage.setScene(new Scene(borderPane));
-        newPrimaryStage.show();
+        Main.startWindow(newPrimaryStage, ENGLISH_LOCALE);
     }
 
     public void setLanguageToEn() {
         Stage newPrimaryStage = new Stage();
-        Locale.setDefault(Locale.ENGLISH);
-        Pane borderPane = FxmlUtils.fxmlLoader(BORDER_PAINE_MAIN_FXML);
-        newPrimaryStage.setScene(new Scene(borderPane));
-        newPrimaryStage.show();
+        Main.startWindow(newPrimaryStage, DEFAULT_LOCALE);
     }
-
-
 }

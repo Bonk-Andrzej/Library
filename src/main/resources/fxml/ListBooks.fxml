@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bonk_andrzej.app.fx.contollers.ListBooksController">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bonk_andrzej.app.fx.contollers.BooksListController">
    <children>
       <HBox prefHeight="58.0" prefWidth="600.0" spacing="10.0">
          <children>
-            <Label text="%categoryFxObjectProperty.book" />
+            <Label text="%category" />
             <ComboBox fx:id="categoryComboBox" onAction="#filterOnActionComboBox" prefWidth="150.0" />
             <Button mnemonicParsing="false" onAction="#clearCategoryComboBox" text="%clear.button" />
             <Label text="%author.book" />
@@ -29,7 +29,7 @@
           <TableColumn fx:id="titleColumn" prefWidth="75.0" text="%title.book" />
           <TableColumn fx:id="descColumn" prefWidth="75.0" text="%desc.book" />
             <TableColumn fx:id="authorColumn" prefWidth="75.0" text="%author.book" />
-            <TableColumn fx:id="categoryColumn" prefWidth="75.0" text="%categoryFxObjectProperty.book" />
+            <TableColumn fx:id="categoryColumn" prefWidth="75.0" text="%category" />
             <TableColumn fx:id="ratingColumn" prefWidth="75.0" text="%rating.book" />
             <TableColumn fx:id="isbnColumn" prefWidth="75.0" text="%isbn.book" />
             <TableColumn fx:id="releaseColumn" prefWidth="75.0" text="%release.book" />

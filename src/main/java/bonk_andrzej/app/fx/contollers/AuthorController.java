@@ -89,8 +89,8 @@ public class AuthorController {
     }
 
     private void textFieldBindings() {
-        authorModel.authorFxObjectPropertyProperty().get().nameProperty().bind(nameTextField.textProperty());
-        authorModel.authorFxObjectPropertyProperty().get().surnameProperty().bind(surnameTextField.textProperty());
+        authorModel.getAuthorFxObjectProperty().nameProperty().bind(nameTextField.textProperty());
+        authorModel.getAuthorFxObjectProperty().surnameProperty().bind(surnameTextField.textProperty());
         addButton.disableProperty().bind(nameTextField.textProperty().isEmpty().or(surnameTextField.textProperty().isEmpty()));
         deleteMenuItem.disableProperty().bind(authorTableView.getSelectionModel().selectedItemProperty().isNull());
     }

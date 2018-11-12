@@ -5,7 +5,7 @@ import javafx.scene.control.ToggleGroup;
 
 public class MenuVBoxController {
     public static final String LIST_BOOKS_FXML = "/fxml/ListBooks.fxml";
-    public static final String BOOK_LENDER_FXML = "/fxml/BooksLender.fxml";
+    public static final String BOOK_LENDER_FXML = "/fxml/AddBorrower.fxml";
     public static final String ADD_BOOK_FXML = "/fxml/AddBook.fxml";
     public static final String ADD_CATEGORY_FXML = "/fxml/AddCategory.fxml";
     public static final String ADD_AUTHOR_FXML = "/fxml/AddAuthor.fxml";
@@ -16,17 +16,17 @@ public class MenuVBoxController {
     private ToggleGroup toggleButtons;
 
     @FXML
-    public void OpenListBooks() {
+    public void OpenListBooksWindow() {
         mainController.setCenter(LIST_BOOKS_FXML);
     }
 
     @FXML
-    public void openStatistics() {
+    public void openBooksLenderWindow() {
         mainController.setCenter(BOOK_LENDER_FXML);
     }
 
     @FXML
-    public void addBook() {
+    public void openAddBookWindow() {
         mainController.setCenter(ADD_BOOK_FXML);
     }
 
@@ -36,11 +36,11 @@ public class MenuVBoxController {
     }
 
 
-    public void addAuthor() {
+    public void openAddAuthorWindow() {
         mainController.setCenter(ADD_AUTHOR_FXML);
     }
 
-    public void addCategory() {
+    public void openAddCategoryWindow() {
         mainController.setCenter(ADD_CATEGORY_FXML);
     }
 }

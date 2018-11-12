@@ -49,7 +49,7 @@ public class AddObjectToDB {
         book1.setReleaseDate(LocalDate.of(1500,10,10));
         book1.setAddedDate(LocalDate.now());
         book1.setDescription("Super mega hiper fullwypas ksiazka");
-        book1.setAmount("5");
+        book1.setAmount(6);
 
         Book book2 = new Book();
         book2.setCategory(category3);
@@ -60,7 +60,7 @@ public class AddObjectToDB {
         book2.setReleaseDate(LocalDate.of(1500,10,10));
         book2.setAddedDate(LocalDate.now());
         book2.setDescription("Super mega hiper fullwypas ksiazka");
-        book2.setAmount("5");
+        book2.setAmount(6);
 
         Book book3 = new Book();
         book3.setCategory(category4);
@@ -71,7 +71,7 @@ public class AddObjectToDB {
         book3.setReleaseDate(LocalDate.of(1500,10,10));
         book3.setAddedDate(LocalDate.now());
         book3.setDescription("Super mega hiper fullwypas ksiazka");
-        book3.setAmount("5");
+        book3.setAmount(6);
 
         Book book4 = new Book();
         book4.setCategory(category4);
@@ -82,7 +82,7 @@ public class AddObjectToDB {
         book4.setReleaseDate(LocalDate.of(1500,10,10));
         book4.setAddedDate(LocalDate.now());
         book4.setDescription("Super mega hiper fullwypas ksiazka");
-        book4.setAmount("5");
+        book4.setAmount(6);
 
         try {
             crudFacade.create(book1);

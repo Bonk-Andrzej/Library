@@ -9,7 +9,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="165.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bonk_andrzej.app.fx.contollers.MenuVBoxController">
     <children>
-        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OpenListBooks" prefHeight="200.0" prefWidth="150.0" text="%list.books">
+        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OpenListBooksWindow" prefHeight="200.0" prefWidth="150.0" text="%list.books">
          <toggleGroup>
                 <ToggleGroup fx:id="toggleButtons" />
          </toggleGroup>
@@ -20,7 +20,7 @@
                </image>
             </ImageView>
          </graphic></ToggleButton>
-        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#openStatistics" prefHeight="200.0" prefWidth="150.0" text="%lender.books" toggleGroup="$toggleButtons">
+        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#openBooksLenderWindow" prefHeight="200.0" prefWidth="150.0" text="%borrower.books" toggleGroup="$toggleButtons">
          <graphic>
             <ImageView fitHeight="93.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -28,7 +28,7 @@
                </image>
             </ImageView>
          </graphic></ToggleButton>
-        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#addBook" prefHeight="200.0" prefWidth="150.0" text="%add.book" toggleGroup="$toggleButtons">
+        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#openAddBookWindow" prefHeight="200.0" prefWidth="150.0" text="%add.book" toggleGroup="$toggleButtons">
          <graphic>
             <ImageView fitHeight="87.0" fitWidth="94.0">
                <image>
@@ -37,7 +37,7 @@
             </ImageView>
          </graphic>
         </ToggleButton>
-        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#addAuthor" prefHeight="200.0" prefWidth="150.0" text="%add.author" toggleGroup="$toggleButtons">
+        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#openAddAuthorWindow" prefHeight="200.0" prefWidth="150.0" text="%add.author" toggleGroup="$toggleButtons">
          <graphic>
             <ImageView fitHeight="79.0" fitWidth="102.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -45,7 +45,7 @@
                </image>
             </ImageView>
          </graphic></ToggleButton>
-        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#addCategory" prefHeight="200.0" prefWidth="150.0" text="%add.categoryFxObjectProperty" toggleGroup="$toggleButtons">
+        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#openAddCategoryWindow" prefHeight="200.0" prefWidth="150.0" text="%add.category" toggleGroup="$toggleButtons">
          <graphic>
             <ImageView fitHeight="92.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true">
                <image>

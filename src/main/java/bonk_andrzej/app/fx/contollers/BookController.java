@@ -5,8 +5,18 @@ import bonk_andrzej.app.fx.modelsFx.BookModel;
 import bonk_andrzej.app.fx.view.CategoryFx;
 import bonk_andrzej.app.utils.DialogsUtils;
 import bonk_andrzej.app.utils.exceptions.ApplicationException;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.util.converter.IntegerStringConverter;
+import javafx.util.converter.NumberStringConverter;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.text.NumberFormat;
+import java.util.function.UnaryOperator;
+
 
 public class BookController {
 
@@ -29,7 +39,7 @@ public class BookController {
     @FXML
     private TextField amountBooksTextField;
 
-    private BookModel bookModel = new BookModel();
+    private BookModel bookModel;
 
 
     @FXML
@@ -40,6 +50,7 @@ public class BookController {
         } catch (ApplicationException e) {
             DialogsUtils.errorDialogs(e.getMessage());
         }
+
         bindProperties();
         setAmountBooksTextFieldNumericOnly();
         disableAddButtom();
@@ -55,26 +66,34 @@ public class BookController {
         }
     }
 
-    private void bindProperties() {
+    protected void bindProperties() {
         categoryComboBox.setItems(bookModel.getCategoryFxObservableList());
         authorComboBox.setItems(bookModel.getAuthorFxObservableList());
-        bookModel.getBookFxObjectProperty().categoryFxObjectPropertyProperty().bind(categoryComboBox.valueProperty());
-        bookModel.getBookFxObjectProperty().authorFxObjectPropertyProperty().bind(authorComboBox.valueProperty());
-        bookModel.getBookFxObjectProperty().titleProperty().bind(titleTextField.textProperty());
-        bookModel.getBookFxObjectProperty().descriptionProperty().bind(descTextArea.textProperty());
-        bookModel.getBookFxObjectProperty().ratingProperty().bind(ratingSlider.valueProperty());
-        bookModel.getBookFxObjectProperty().isbnProperty().bind(isbnTextField.textProperty());
-        bookModel.getBookFxObjectProperty().releaseDateProperty().bind(releaseDatePicker.valueProperty());
-        bookModel.getBookFxObjectProperty().amounrtProperty().bind(amountBooksTextField.textProperty());
+
+        authorComboBox.valueProperty().bindBidirectional(bookModel.getBookFxObjectProperty().authorFxProperty());
+        categoryComboBox.valueProperty().bindBidirectional(bookModel.getBookFxObjectProperty().categoryFxProperty());
+        titleTextField.textProperty().bindBidirectional(bookModel.getBookFxObjectProperty().titleProperty());
+        descTextArea.textProperty().bindBidirectional(bookModel.getBookFxObjectProperty().descriptionProperty());
+        ratingSlider.valueProperty().bindBidirectional(bookModel.getBookFxObjectProperty().ratingProperty());
+        isbnTextField.textProperty().bindBidirectional(bookModel.getBookFxObjectProperty().isbnProperty());
+        releaseDatePicker.valueProperty().bindBidirectional(bookModel.getBookFxObjectProperty().releaseDateProperty());
+        amountBooksTextField.textProperty().bindBidirectional(bookModel.getBookFxObjectProperty().amounrtProperty());
+
+
     }
 
     private void setAmountBooksTextFieldNumericOnly() {
-        bookModel.getBookFxObjectProperty().amounrtProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*")) {
-                amountBooksTextField.setText(newValue.replaceAll("[^\\d]", ""));
+        amountBooksTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    amountBooksTextField.setText(newValue.replaceAll("[^\\d]", ""));
+                }
             }
         });
     }
+
 
     private void disableAddButtom() {
         addButton.disableProperty().bind(categoryComboBox.valueProperty().isNull()
@@ -100,4 +119,7 @@ public class BookController {
         amountBooksTextField.clear();
     }
 
+    public BookModel getBookModel() {
+        return bookModel;
+    }
 }

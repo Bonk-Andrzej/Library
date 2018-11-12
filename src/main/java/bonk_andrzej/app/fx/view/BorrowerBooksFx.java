@@ -4,14 +4,15 @@ import javafx.beans.property.*;
 
 import java.time.LocalDate;
 
-public class LenderBooksFx {
+public class BorrowerBooksFx {
 
     private LongProperty id = new SimpleLongProperty();
     private StringProperty name = new SimpleStringProperty();
     private StringProperty surname = new SimpleStringProperty();
     private ObjectProperty<LocalDate> lenderDate = new SimpleObjectProperty(LocalDate.now());
-    private  ObjectProperty<LocalDate> returnDate = new SimpleObjectProperty(LocalDate.of(2020,10,10));
-    private ObjectProperty<LocalDate> actualDateOfReturn = new SimpleObjectProperty(LocalDate.of(2020,10,10));
+    private ObjectProperty<LocalDate> returnDate = new SimpleObjectProperty(LocalDate.of(2020, 10, 10));
+    private ObjectProperty<LocalDate> actualDateOfReturn = new SimpleObjectProperty(LocalDate.of(2020, 10, 10));
+    private StringProperty amountBorrowedBook = new SimpleStringProperty();
 
     public long getId() {
         return id.get();
@@ -83,5 +84,17 @@ public class LenderBooksFx {
 
     public void setActualDateOfReturn(LocalDate actualDateOfReturn) {
         this.actualDateOfReturn.set(actualDateOfReturn);
+    }
+
+    public String getAmountBorrowedBook() {
+        return amountBorrowedBook.get();
+    }
+
+    public StringProperty amountBorrowedBookProperty() {
+        return amountBorrowedBook;
+    }
+
+    public void setAmountBorrowedBook(String amountBorrowedBook) {
+        this.amountBorrowedBook.set(amountBorrowedBook);
     }
 }

@@ -32,9 +32,9 @@ public class BookModel {
     public void saveBookInDB() throws ApplicationException {
         Book book = BookConverter.convertFromBookFxToBook(getBookFxObjectProperty());
         Category category = (Category) crudFacade.getById(Category.class, getBookFxObjectProperty()
-                .getCategoryFxObjectProperty().getId());
+                .getCategoryFx().getId());
         Author author = (Author) crudFacade.getById(Author.class, getBookFxObjectProperty()
-                .getAuthorFxObjectProperty().getId());
+                .getAuthorFx().getId());
         book.setCategory(category);
         book.setAuthor(author);
         crudFacade.create(book);

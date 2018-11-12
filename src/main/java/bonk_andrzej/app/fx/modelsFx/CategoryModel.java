@@ -1,7 +1,10 @@
 package bonk_andrzej.app.fx.modelsFx;
 
 import bonk_andrzej.app.db.dao.CrudFacade;
+import bonk_andrzej.app.db.modelsDb.Book;
 import bonk_andrzej.app.db.modelsDb.Category;
+import bonk_andrzej.app.fx.view.BookFx;
+import bonk_andrzej.app.utils.converter.BookConverter;
 import bonk_andrzej.app.utils.converter.CategoryConverter;
 import bonk_andrzej.app.utils.exceptions.ApplicationException;
 import bonk_andrzej.app.fx.view.CategoryFx;
@@ -13,8 +16,8 @@ import javafx.scene.control.TreeItem;
 
 import java.util.List;
 
+
 public class CategoryModel {
-//TUTAJ MAM IMPLEMENTACJE METOD CRUDA DO CATEGORY NP
 
 
     private ObservableList<CategoryFx> categoryFxObservableList = FXCollections.observableArrayList();
@@ -56,7 +59,7 @@ public class CategoryModel {
             c.getBookListForCategory().forEach(
                     book -> categoryItem.getChildren()
                             .add(new TreeItem<>(book.getTitle())));
-                    treeItemRoot.getChildren().add(categoryItem);
+            treeItemRoot.getChildren().add(categoryItem);
         });
     }
 
@@ -68,6 +71,7 @@ public class CategoryModel {
             categoryFxObservableList.add(categoryFx);
         });
     }
+
 
     public CrudFacade getCrudFacade() {
         return crudFacade;

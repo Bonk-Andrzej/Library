@@ -12,12 +12,14 @@ public class BookConverter {
         book.setDescription(bookFx.getDescription());
         book.setRating(bookFx.getRating());
         book.setIsbn(bookFx.getIsbn());
-        book.setAmount(bookFx.getAmounrt());
+        book.setAmount(Integer.valueOf(bookFx.getAmounrt()));
         book.setReleaseDate(bookFx.getReleaseDate());
         book.setAddedDate((bookFx.getAddedDate()));
+        book.setCategory(CategoryConverter.convertFromCategoryFxToCategory(bookFx.getCategoryFx()));
+        book.setAuthor(AuthorConverter.convertFromAuthorFxToAuthor(bookFx.getAuthorFx()));
         return book;
     }
-   
+
     public static BookFx convertFromBookToBookFx(Book book) {
         BookFx bookFx = new BookFx();
         bookFx.setId(book.getId());
@@ -25,12 +27,10 @@ public class BookConverter {
         bookFx.setDescription(book.getDescription());
         bookFx.setRating(book.getRating());
         bookFx.setIsbn(book.getIsbn());
-        bookFx.setAmounrt(book.getAmount());
+        bookFx.setAmounrt(String.valueOf(book.getAmount()));
         bookFx.setReleaseDate(book.getReleaseDate());
-        bookFx.setAuthorFxObjectProperty(AuthorConverter
-                .convertFromAuthorToAuthorFx(book.getAuthor()));
-        bookFx.setCategoryFxObjectProperty(CategoryConverter
-                .convertFromCategoryToCategoryFx(book.getCategory()));
+        bookFx.setCategoryFx(CategoryConverter.convertFromCategoryToCategoryFx(book.getCategory()));
+        bookFx.setAuthorFx(AuthorConverter.convertFromAuthorToAuthorFx(book.getAuthor()));
         return bookFx;
 
     }

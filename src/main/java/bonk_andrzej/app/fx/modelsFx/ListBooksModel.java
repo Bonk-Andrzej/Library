@@ -4,33 +4,34 @@ import bonk_andrzej.app.db.dao.CrudFacade;
 import bonk_andrzej.app.db.modelsDb.Author;
 import bonk_andrzej.app.db.modelsDb.Book;
 import bonk_andrzej.app.db.modelsDb.Category;
+import bonk_andrzej.app.fx.view.AuthorFx;
+import bonk_andrzej.app.fx.view.BookFx;
+import bonk_andrzej.app.fx.view.CategoryFx;
 import bonk_andrzej.app.utils.converter.AuthorConverter;
 import bonk_andrzej.app.utils.converter.BookConverter;
 import bonk_andrzej.app.utils.converter.CategoryConverter;
 import bonk_andrzej.app.utils.exceptions.ApplicationException;
-import bonk_andrzej.app.fx.view.AuthorFx;
-import bonk_andrzej.app.fx.view.BookFx;
-import bonk_andrzej.app.fx.view.CategoryFx;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class ListBooksModel {
     private ObservableList<BookFx> bookFxObservableList = FXCollections.observableArrayList();
     private ObservableList<AuthorFx> authorFxObservableList = FXCollections.observableArrayList();
     private ObservableList<CategoryFx> categoryFxObservableList = FXCollections.observableArrayList();
 
-    //potrzebuje do przechpwywania cat lub authora przy filtrowaniu
     private ObjectProperty<AuthorFx> authorFxObjectProperty = new SimpleObjectProperty<>();
     private ObjectProperty<CategoryFx> categoryFxObjectProperty = new SimpleObjectProperty<>();
 
     private CrudFacade crudFacade = new CrudFacade();
-
+    private List<BookFx> bookFxList = new ArrayList<>();
 
     public void initAllObservableList() throws ApplicationException {
         initAuthorFxList();
@@ -38,6 +39,41 @@ public class ListBooksModel {
         initBookFxList();
     }
 
+    public void deleteBook(BookFx bookFx) throws ApplicationException {
+        Book book = BookConverter.convertFromBookFxToBook(bookFx);
+        crudFacade.deleteO(book);
+        initAllObservableList();
+    }
+
+    public void setFilterBooksList() throws ApplicationException {
+        if (getAuthorFxObjectProperty() != null && getCategoryFxObjectProperty() != null) {
+            filterBookListWithPredicates(authorPredicate().and(categoryPredicate()));
+        } else if (getCategoryFxObjectProperty() != null) {
+            filterBookListWithPredicates(categoryPredicate());
+        } else if (getAuthorFxObjectProperty() != null) {
+            filterBookListWithPredicates(authorPredicate());
+        } else {
+            this.bookFxObservableList.setAll(this.bookFxList);
+        }
+    }
+
+    private void filterBookListWithPredicates(Predicate<BookFx> predicate) {
+        List<BookFx> newList = bookFxList.stream().filter(predicate).collect(Collectors.toList());
+        this.bookFxObservableList.setAll(newList);
+    }
+
+    private Predicate<BookFx> categoryPredicate() {
+        Predicate<BookFx> predicate = bookFx -> bookFx.getCategoryFx().getId()
+                == getCategoryFxObjectProperty().getId();
+        return predicate;
+
+    }
+
+    private Predicate<BookFx> authorPredicate() {
+        Predicate<BookFx> predicate = bookFx -> bookFx.getAuthorFx().getId()
+                == getAuthorFxObjectProperty().getId();
+        return predicate;
+    }
 
     private void initAuthorFxList() throws ApplicationException {
         List<Author> authors = crudFacade.getAll(Author.class);
@@ -60,24 +96,11 @@ public class ListBooksModel {
 
     private void initBookFxList() throws ApplicationException {
         List<Book> books = crudFacade.getAll(Book.class);
-        bookFxObservableList.clear();
+        bookFxList.clear();
         books.forEach(book -> {
-            BookFx bookFx = BookConverter.convertFromBookToBookFx(book);
-            bookFxObservableList.add(bookFx);
+            bookFxList.add(BookConverter.convertFromBookToBookFx(book));
         });
-    }
-
-    private Predicate<BookFx> predicateCategory() {
-        Predicate<BookFx> predicate = bookFx -> bookFx.getCategoryFxObjectProperty().getId()
-                == getCategoryFxObjectProperty().getId();
-        return predicate;
-
-    }
-
-    private Predicate<BookFx> predicateAuthor(){
-        Predicate<BookFx> predicate = bookFx -> bookFx.getAuthorFxObjectProperty().getId()
-                == getAuthorFxObjectProperty().getId();
-        return predicate;
+        bookFxObservableList.setAll(bookFxList);
     }
 
 
@@ -137,5 +160,5 @@ public class ListBooksModel {
         this.bookFxList = bookFxList;
     }
 
-    private List<BookFx> bookFxList = new ArrayList<>();
+
 }

@@ -1,6 +1,5 @@
 package bonk_andrzej.app;
 
-import bonk_andrzej.app.utils.AddObjectToDB;
 import bonk_andrzej.app.utils.FxmlUtils;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -11,31 +10,23 @@ import java.util.Locale;
 
 public class Main extends Application {
 
-    public static final String BORDER_PAINE_MAIN_FXML = "/fxml/BorderPaineMain.fxml";
-   private Stage primaryStage;
+    public static final String BORDER_PAINE_MAIN_FXML = "/fxml/MainWindow.fxml";
+    public static final Locale ENGLISH_LOCALE = Locale.ENGLISH;
 
-    public Stage getPrimaryStage() {
-        return primaryStage;
-    }
-
-    public void setPrimaryStage(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-    }
 
     public void start(Stage primaryStage) throws Exception {
 //        AddObjectToDB.addObjectToDB();
-        startDefaultWindow(primaryStage);
+        startWindow(primaryStage, ENGLISH_LOCALE);
 
     }
 
-    public void startDefaultWindow(Stage primaryStage) {
-        Locale.setDefault(Locale.ENGLISH);
-
+    public static void startWindow(Stage primaryStage, Locale locale ) {
+        Locale.setDefault(locale);
         Pane borderPane = FxmlUtils.fxmlLoader(BORDER_PAINE_MAIN_FXML);
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
         primaryStage.setTitle(FxmlUtils.getResourceBundle().getString("tittle.application"));
         primaryStage.show();
-        setPrimaryStage(primaryStage);
+        Application.setUserAgentStylesheet(STYLESHEET_CASPIAN);
     }
 }

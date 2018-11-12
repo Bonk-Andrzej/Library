@@ -37,7 +37,6 @@ public class CrudFacade<T, I> implements GenericDao<T, I> {
             entityManager.getTransaction().begin();
             T object = classType.cast(entityManager.find(classType, id));
             entityManager.getTransaction().commit();
-
             return object;
         } catch (HibernateException e) {
             e.printStackTrace();

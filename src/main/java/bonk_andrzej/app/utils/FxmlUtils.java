@@ -24,5 +24,9 @@ public class FxmlUtils {
         return ResourceBundle.getBundle("bundles.messages");
     }
 
-
+    public static FXMLLoader getLoader(String fxmlPath) {
+        FXMLLoader loader = new FXMLLoader(FxmlUtils.class.getResource(fxmlPath));
+        loader.setResources(getResourceBundle());
+        return loader;
+    }
 }

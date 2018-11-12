@@ -6,8 +6,8 @@ import java.time.LocalDate;
 
 public class BookFx {
 
-    private ObjectProperty<AuthorFx> authorFxObjectProperty = new SimpleObjectProperty<>();
-    private ObjectProperty<CategoryFx> categoryFxObjectProperty = new SimpleObjectProperty<>();
+    private ObjectProperty<CategoryFx> categoryFx = new SimpleObjectProperty<>();
+    private ObjectProperty<AuthorFx> authorFx = new SimpleObjectProperty();
     private LongProperty id = new SimpleLongProperty();
     private StringProperty title = new SimpleStringProperty();
     private StringProperty description = new SimpleStringProperty();
@@ -77,28 +77,28 @@ public class BookFx {
         this.isbn.set(isbn);
     }
 
-    public AuthorFx getAuthorFxObjectProperty() {
-        return authorFxObjectProperty.get();
+    public CategoryFx getCategoryFx() {
+        return categoryFx.get();
     }
 
-    public ObjectProperty<AuthorFx> authorFxObjectPropertyProperty() {
-        return authorFxObjectProperty;
+    public ObjectProperty<CategoryFx> categoryFxProperty() {
+        return categoryFx;
     }
 
-    public void setAuthorFxObjectProperty(AuthorFx authorFxObjectProperty) {
-        this.authorFxObjectProperty.set(authorFxObjectProperty);
+    public void setCategoryFx(CategoryFx categoryFx) {
+        this.categoryFx.set(categoryFx);
     }
 
-    public CategoryFx getCategoryFxObjectProperty() {
-        return categoryFxObjectProperty.get();
+    public AuthorFx getAuthorFx() {
+        return authorFx.get();
     }
 
-    public ObjectProperty<CategoryFx> categoryFxObjectPropertyProperty() {
-        return categoryFxObjectProperty;
+    public ObjectProperty<AuthorFx> authorFxProperty() {
+        return authorFx;
     }
 
-    public void setCategoryFxObjectProperty(CategoryFx categoryFxObjectProperty) {
-        this.categoryFxObjectProperty.set(categoryFxObjectProperty);
+    public void setAuthorFx(AuthorFx authorFx) {
+        this.authorFx.set(authorFx);
     }
 
     public String getAmounrt() {
@@ -141,6 +141,8 @@ public class BookFx {
     public String toString() {
         return "BookFx{" +
                 "id=" + id.get() +
+                ", categoryFx=" + categoryFx.get() +
+                ", authorFx=" + authorFx.get() +
                 ", title=" + title.get() +
                 ", description=" + description.get() +
                 ", releaseDate=" + releaseDate.get() +

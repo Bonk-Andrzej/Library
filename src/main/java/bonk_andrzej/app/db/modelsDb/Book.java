@@ -20,14 +20,14 @@ public class Book {
     @Column
     private String isbn;
     @Column
-    private String amount;
+    private Integer amount;
     @Column
     private LocalDate releaseDate;
     @Column
     private LocalDate addedDate;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
     private Author author;
 
@@ -36,8 +36,8 @@ public class Book {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @ManyToMany(mappedBy = "bookList", cascade = CascadeType.ALL)
-    private List<LenderBooks> lenderBooksList;
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "bookList", cascade = CascadeType.ALL)
+    private List<BorrowerBooks> borrowerBooksList;
 
     public Book() {
     }
@@ -82,11 +82,11 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public String getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
@@ -106,12 +106,12 @@ public class Book {
         this.category = category;
     }
 
-    public List<LenderBooks> getLenderBooksList() {
-        return lenderBooksList;
+    public List<BorrowerBooks> getBorrowerBooksList() {
+        return borrowerBooksList;
     }
 
-    public void setLenderBooksList(List<LenderBooks> lenderBooksList) {
-        this.lenderBooksList = lenderBooksList;
+    public void setBorrowerBooksList(List<BorrowerBooks> borrowerBooksList) {
+        this.borrowerBooksList = borrowerBooksList;
     }
 
     public LocalDate getReleaseDate() {

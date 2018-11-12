@@ -47,7 +47,7 @@ public class AuthorModel {
         });
     }
 
-    public AuthorFx getAuthorFxObjectProperty() {//on jest jakby obiektem z fx - bo zwraca juz ta metode z get
+    public AuthorFx getAuthorFxObjectProperty() {
         return authorFxObjectProperty.get();
     }
 
