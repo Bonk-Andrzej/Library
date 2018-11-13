@@ -5,7 +5,7 @@ import javafx.scene.control.ToggleGroup;
 
 public class MenuVBoxController {
     public static final String LIST_BOOKS_FXML = "/fxml/ListBooks.fxml";
-    public static final String BOOK_LENDER_FXML = "/fxml/AddBorrower.fxml";
+    public static final String BOOK_LENDER_FXML = "/fxml/AddReader.fxml";
     public static final String ADD_BOOK_FXML = "/fxml/AddBook.fxml";
     public static final String ADD_CATEGORY_FXML = "/fxml/AddCategory.fxml";
     public static final String ADD_AUTHOR_FXML = "/fxml/AddAuthor.fxml";

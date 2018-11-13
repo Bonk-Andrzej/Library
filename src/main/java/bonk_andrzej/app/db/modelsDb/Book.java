@@ -37,7 +37,7 @@ public class Book {
     private Category category;
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "bookList", cascade = CascadeType.ALL)
-    private List<BorrowerBooks> borrowerBooksList;
+    private List<Reader> readerList;
 
     public Book() {
     }
@@ -106,12 +106,12 @@ public class Book {
         this.category = category;
     }
 
-    public List<BorrowerBooks> getBorrowerBooksList() {
-        return borrowerBooksList;
+    public List<Reader> getReaderList() {
+        return readerList;
     }
 
-    public void setBorrowerBooksList(List<BorrowerBooks> borrowerBooksList) {
-        this.borrowerBooksList = borrowerBooksList;
+    public void setReaderList(List<Reader> readerList) {
+        this.readerList = readerList;
     }
 
     public LocalDate getReleaseDate() {

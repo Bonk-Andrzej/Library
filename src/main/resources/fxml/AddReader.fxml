@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="614.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bonk_andrzej.app.fx.contollers.BorrowerController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="614.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bonk_andrzej.app.fx.contollers.ReaderController">
    <children>
       <GridPane prefHeight="797.0" prefWidth="639.0">
          <columnConstraints>
@@ -30,16 +30,16 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label text="%borrower.surname" GridPane.rowIndex="1" />
+            <Label text="%reader.surname" GridPane.rowIndex="1" />
             <Label text="%amount.book" GridPane.rowIndex="3" />
             <Label text="%how.many.books.to.rent" GridPane.rowIndex="4" />
-            <Label text="%borrower.rental.date" GridPane.rowIndex="5" />
-            <Label text="%borrower.return.date" GridPane.rowIndex="6" />
+            <Label text="%reader.rental.date" GridPane.rowIndex="5" />
+            <Label text="%reader.return.date" GridPane.rowIndex="6" />
             <DatePicker fx:id="returnDataPicker" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Label text="%title.book" GridPane.rowIndex="2" />
             <Button fx:id="addButton" mnemonicParsing="false" onAction="#addBorrowerOnAction" text="%save.button" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <Label text="%borrower.actual.date.of.return" GridPane.rowIndex="7" />
-            <Label text="%borrower.name" />
+            <Label text="%reader.actual.date.of.return" GridPane.rowIndex="7" />
+            <Label text="%reader.name" />
             <TextField fx:id="nameTextField" GridPane.columnIndex="1" />
             <TextField fx:id="surnameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <DatePicker fx:id="actualReturnDate" GridPane.columnIndex="1" GridPane.rowIndex="7" />

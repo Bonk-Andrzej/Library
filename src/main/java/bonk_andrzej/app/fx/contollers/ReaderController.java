@@ -1,10 +1,9 @@
 package bonk_andrzej.app.fx.contollers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-public class BorrowerController {
+public class ReaderController {
 
 
     @FXML

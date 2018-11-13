@@ -7,6 +7,7 @@ import javafx.beans.property.StringProperty;
 
 public class AuthorFx {
 
+
         private LongProperty id = new SimpleLongProperty();
         private StringProperty name = new SimpleStringProperty();
         private StringProperty surname = new SimpleStringProperty();

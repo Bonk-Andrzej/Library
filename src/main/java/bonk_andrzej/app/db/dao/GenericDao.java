@@ -18,7 +18,7 @@ public interface GenericDao<T, I> {
             IllegalArgumentException, TransactionRequiredException, ApplicationException;
 
     void deleteO(T entity) throws IllegalStateException,
-            IllegalArgumentException, TransactionRequiredException,
+            IllegalArgumentException,
             PersistenceException, ApplicationException;
 
     List<T> getAll(Class<T> classType) throws ApplicationException;

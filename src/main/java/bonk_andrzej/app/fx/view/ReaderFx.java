@@ -4,14 +4,17 @@ import javafx.beans.property.*;
 
 import java.time.LocalDate;
 
-public class BorrowerBooksFx {
+public class ReaderFx {
 
     private LongProperty id = new SimpleLongProperty();
     private StringProperty name = new SimpleStringProperty();
     private StringProperty surname = new SimpleStringProperty();
+    private StringProperty amounrtBorrowedBook = new SimpleStringProperty();
     private ObjectProperty<LocalDate> lenderDate = new SimpleObjectProperty(LocalDate.now());
     private ObjectProperty<LocalDate> returnDate = new SimpleObjectProperty(LocalDate.of(2020, 10, 10));
     private ObjectProperty<LocalDate> actualDateOfReturn = new SimpleObjectProperty(LocalDate.of(2020, 10, 10));
+    private ObjectProperty<BookFx> bookFx = new SimpleObjectProperty();
+
     private StringProperty amountBorrowedBook = new SimpleStringProperty();
 
     public long getId() {
@@ -96,5 +99,29 @@ public class BorrowerBooksFx {
 
     public void setAmountBorrowedBook(String amountBorrowedBook) {
         this.amountBorrowedBook.set(amountBorrowedBook);
+    }
+
+    public BookFx getBookFx() {
+        return bookFx.get();
+    }
+
+    public ObjectProperty<BookFx> bookFxProperty() {
+        return bookFx;
+    }
+
+    public void setBookFx(BookFx bookFx) {
+        this.bookFx.set(bookFx);
+    }
+
+    public String getAmounrtBorrowedBook() {
+        return amounrtBorrowedBook.get();
+    }
+
+    public StringProperty amounrtBorrowedBookProperty() {
+        return amounrtBorrowedBook;
+    }
+
+    public void setAmounrtBorrowedBook(String amounrtBorrowedBook) {
+        this.amounrtBorrowedBook.set(amounrtBorrowedBook);
     }
 }

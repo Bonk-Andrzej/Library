@@ -20,11 +20,11 @@
                </image>
             </ImageView>
          </graphic></ToggleButton>
-        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#openBooksLenderWindow" prefHeight="200.0" prefWidth="150.0" text="%borrower.books" toggleGroup="$toggleButtons">
+        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#openBooksLenderWindow" prefHeight="200.0" prefWidth="150.0" text="%add.reader" toggleGroup="$toggleButtons">
          <graphic>
             <ImageView fitHeight="93.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../icons/lenderBookIcon.png" />
+                  <Image url="@../icons/readerIcon.png" />
                </image>
             </ImageView>
          </graphic></ToggleButton>

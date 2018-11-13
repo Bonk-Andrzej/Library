@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity(name = "lender_books")
 @Table
-public class BorrowerBooks {
+public class Reader {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +29,7 @@ public class BorrowerBooks {
     private List<Book> bookList;
 
 
-    public BorrowerBooks() {
+    public Reader() {
     }
 
     public long getId() {
