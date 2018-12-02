@@ -10,7 +10,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 
 public class AuthorController {
 
-    private AuthorModel authorModel;
+
     @FXML
     private TextField nameTextField;
     @FXML
@@ -25,11 +25,24 @@ public class AuthorController {
     private TableColumn<AuthorFx, String> surnameColumn;
     @FXML
     private MenuItem deleteMenuItem;
+    private AuthorModel authorModel;
+
+    @FXML
+    private void initialize() {
+        authorModel = new AuthorModel();
+        try {
+            authorModel.initializeAuthorFromDb();
+        } catch (ApplicationException e) {
+            DialogsUtils.errorDialogs(e.getMessage());
+        }
+        textFieldBindings();
+        tableViewBindings();
+    }
 
     @FXML
     public void addAuthorOnAction() {
         try {
-            authorModel.saveAuthorInDb();
+            authorModel.saveOrUpdateAuthorInDb();
         } catch (ApplicationException e) {
             DialogsUtils.errorDialogs(e.getMessage());
         }
@@ -38,7 +51,7 @@ public class AuthorController {
     }
 
     @FXML
-    public void deleteAuthorOnAction() {
+    private void deleteAuthorOnAction() {
         try {
             authorModel.deleteAuthorInDB();
         } catch (ApplicationException e) {
@@ -47,10 +60,10 @@ public class AuthorController {
     }
 
     @FXML
-    public void onEditCommitName(TableColumn.CellEditEvent<AuthorFx, String> authorFxStringCellEditEvent) {
+    private void onEditCommitName(TableColumn.CellEditEvent<AuthorFx, String> authorFxStringCellEditEvent) {
         authorModel.getAuthorFxObjectProperty().setName(authorFxStringCellEditEvent.getNewValue());
         try {
-            authorModel.updateAuthorInDb();
+            authorModel.saveOrUpdateAuthorInDb();
         } catch (ApplicationException e) {
             DialogsUtils.errorDialogs(e.getMessage());
 
@@ -61,22 +74,12 @@ public class AuthorController {
     public void onEditCommitSurname(TableColumn.CellEditEvent<AuthorFx, String> authorFxStringCellEditEvent) {
         authorModel.getAuthorFxObjectProperty().setSurname(authorFxStringCellEditEvent.getNewValue());
         try {
-            authorModel.updateAuthorInDb();
+            authorModel.saveOrUpdateAuthorInDb();
         } catch (ApplicationException e) {
             DialogsUtils.errorDialogs(e.getMessage());
         }
     }
 
-    public void initialize() {
-        authorModel = new AuthorModel();
-        try {
-            authorModel.initializeAuthorFromDb();
-        } catch (ApplicationException e) {
-            DialogsUtils.errorDialogs(e.getMessage());
-        }
-        textFieldBindings();
-        tableViewBindings();
-    }
 
     private void tableViewBindings() {
         authorTableView.setItems(authorModel.getAuthorFxObservableList());

@@ -1,6 +1,8 @@
 package bonk_andrzej.app;
 
+
 import bonk_andrzej.app.utils.FxmlUtils;
+import bonk_andrzej.app.utils.exceptions.ApplicationException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -10,17 +12,17 @@ import java.util.Locale;
 
 public class Main extends Application {
 
-    public static final String BORDER_PAINE_MAIN_FXML = "/fxml/MainWindow.fxml";
-    public static final Locale ENGLISH_LOCALE = Locale.ENGLISH;
+    private static final String BORDER_PAINE_MAIN_FXML = "/fxml/MainWindow.fxml";
+    private static final Locale ENGLISH_LOCALE = Locale.ENGLISH;
 
 
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) throws ApplicationException {
 //        AddObjectToDB.addObjectToDB();
         startWindow(primaryStage, ENGLISH_LOCALE);
 
     }
 
-    public static void startWindow(Stage primaryStage, Locale locale ) {
+    public static void startWindow(Stage primaryStage, Locale locale) {
         Locale.setDefault(locale);
         Pane borderPane = FxmlUtils.fxmlLoader(BORDER_PAINE_MAIN_FXML);
         Scene scene = new Scene(borderPane);
@@ -29,4 +31,5 @@ public class Main extends Application {
         primaryStage.show();
         Application.setUserAgentStylesheet(STYLESHEET_CASPIAN);
     }
+
 }

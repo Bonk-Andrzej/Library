@@ -1,6 +1,6 @@
 package bonk_andrzej.app.fx.contollers;
 
-import bonk_andrzej.app.fx.modelsFx.ListBooksModel;
+import bonk_andrzej.app.fx.modelsFx.BooksListModel;
 import bonk_andrzej.app.fx.view.AuthorFx;
 import bonk_andrzej.app.fx.view.BookFx;
 import bonk_andrzej.app.fx.view.CategoryFx;
@@ -13,18 +13,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.converter.NumberStringConverter;
 
 import java.io.IOException;
 import java.time.LocalDate;
 
 public class BooksListController {
-
-
     @FXML
     private ComboBox categoryComboBox;
     @FXML
@@ -52,13 +47,13 @@ public class BooksListController {
     @FXML
     private TableColumn<BookFx, BookFx> editColumn;
 
-    private ListBooksModel listBooksModel;
+    private BooksListModel booksListModel;
 
     @FXML
-    public void initialize() {
-        listBooksModel = new ListBooksModel();
+    private void initialize() {
+        booksListModel = new BooksListModel();
         try {
-            listBooksModel.initAllObservableList();
+            booksListModel.initAllObservableList();
         } catch (ApplicationException e) {
             DialogsUtils.errorDialogs(e.getMessage());
         }
@@ -66,39 +61,39 @@ public class BooksListController {
     }
 
     @FXML
-    public void filterOnActionComboBox() throws ApplicationException {
-        listBooksModel.setFilterBooksList();
+    private void filterOnActionComboBox() {
+        booksListModel.setFilterBooksList();
     }
 
     @FXML
-    public void clearCategoryComboBox() {
+    private void clearCategoryComboBox() {
         categoryComboBox.getSelectionModel().clearSelection();
     }
 
     @FXML
-    public void clearAuthorComboBox() {
+    private void clearAuthorComboBox() {
         authorComboBox.getSelectionModel().clearSelection();
     }
 
     private void bindProperties() {
-        booksTableView.setItems(listBooksModel.getBookFxObservableList());
+        booksTableView.setItems(booksListModel.getBookFxObservableList());
         titleColumn.setCellValueFactory(infoInCell -> infoInCell.getValue().titleProperty());
-        titleColumn.setCellValueFactory(infoInCell -> infoInCell.getValue().titleProperty());
+        authorColumn.setCellValueFactory(infoInCell -> infoInCell.getValue().authorFxProperty());
         descColumn.setCellValueFactory(infoInCell -> infoInCell.getValue().descriptionProperty());
+
         ratingColumn.setCellValueFactory(infoInCell -> infoInCell.getValue().ratingProperty());
         isbnColumn.setCellValueFactory(infoInCell -> infoInCell.getValue().isbnProperty());
         releaseColumn.setCellValueFactory(infoInCell -> infoInCell.getValue().releaseDateProperty());
-        amountBooksColumn.setCellValueFactory(infoInCell -> infoInCell.getValue().amounrtProperty());
-        authorColumn.setCellValueFactory(infoInCell -> infoInCell.getValue().authorFxProperty());
+        amountBooksColumn.setCellValueFactory(infoInCell -> infoInCell.getValue().leftBooksForRentProperty());
         categoryColumn.setCellValueFactory(infoInCell -> infoInCell.getValue().categoryFxProperty());
         deleteColumn.setCellValueFactory(infoInCell -> new SimpleObjectProperty<>(infoInCell.getValue()));
         editColumn.setCellValueFactory(infoInCell -> new SimpleObjectProperty<>(infoInCell.getValue()));
 
-        categoryComboBox.setItems(listBooksModel.getCategoryFxObservableList());
-        authorComboBox.setItems(listBooksModel.getAuthorFxObservableList());
+        categoryComboBox.setItems(booksListModel.getCategoryFxObservableList());
+        authorComboBox.setItems(booksListModel.getAuthorFxObservableList());
 
-        listBooksModel.categoryFxObjectPropertyProperty().bind(categoryComboBox.valueProperty());
-        listBooksModel.authorFxObjectPropertyProperty().bind(authorComboBox.valueProperty());
+        categoryComboBox.valueProperty().bindBidirectional(booksListModel.categoryFxProperty());
+        authorComboBox.valueProperty().bindBidirectional(booksListModel.authorFxProperty());
 
         setDeleteColumn();
         setUpdateColumn();
@@ -106,7 +101,7 @@ public class BooksListController {
 
     private void setUpdateColumn() {
         editColumn.setCellFactory(param -> new TableCell<BookFx, BookFx>() {
-            Button button = createButton("/icons/edit.png");
+            Button button = FxmlUtils.createButton(this.getClass(), "/icons/edit.png");
 
             @Override
             protected void updateItem(BookFx item, boolean empty) {
@@ -139,7 +134,7 @@ public class BooksListController {
 
     private void setDeleteColumn() {
         deleteColumn.setCellFactory(param -> new TableCell<BookFx, BookFx>() {
-            Button button = createButton("/icons/delete.png");
+            Button button = FxmlUtils.createButton(this.getClass(), "/icons/delete.png");
 
             @Override
             protected void updateItem(BookFx item, boolean empty) {
@@ -152,7 +147,7 @@ public class BooksListController {
                 setGraphic(button);
                 button.setOnAction(event -> {
                     try {
-                        listBooksModel.deleteBook(item);
+                        booksListModel.deleteBook(item);
                     } catch (ApplicationException e) {
                         DialogsUtils.errorDialogs(e.getMessage());
                     }
@@ -161,11 +156,4 @@ public class BooksListController {
         });
     }
 
-    private Button createButton(String path) {
-        Button button = new Button();
-        Image image = new Image(this.getClass().getResource(path).toString());
-        ImageView imageView = new ImageView(image);
-        button.setGraphic(imageView);
-        return button;
-    }
 }

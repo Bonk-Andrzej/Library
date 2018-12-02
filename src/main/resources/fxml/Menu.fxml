@@ -7,47 +7,49 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="165.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bonk_andrzej.app.fx.contollers.MenuVBoxController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="165.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bonk_andrzej.app.fx.contollers.MenuController">
     <children>
-        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OpenListBooksWindow" prefHeight="200.0" prefWidth="150.0" text="%list.books">
+        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OpenListBooksWindow" prefHeight="114.0" prefWidth="150.0" text="%list.books">
          <toggleGroup>
                 <ToggleGroup fx:id="toggleButtons" />
          </toggleGroup>
          <graphic>
-            <ImageView fitHeight="92.0" fitWidth="104.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="117.0" fitWidth="82.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/booksListIcon.png" />
                </image>
             </ImageView>
          </graphic></ToggleButton>
-        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#openBooksLenderWindow" prefHeight="200.0" prefWidth="150.0" text="%add.reader" toggleGroup="$toggleButtons">
+      <ToggleButton mnemonicParsing="false" onAction="#openReaderListWindow" prefHeight="114.0" prefWidth="150.0" text="%reader.list" toggleGroup="$toggleButtons" />
+      <ToggleButton mnemonicParsing="false" onAction="#openRentBookWindow" prefHeight="114.0" prefWidth="150.0" text="%rent.book" toggleGroup="$toggleButtons" />
+        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#openAddReaderWindow" prefHeight="114.0" prefWidth="150.0" text="%add.reader" toggleGroup="$toggleButtons">
          <graphic>
-            <ImageView fitHeight="93.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="96.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/readerIcon.png" />
                </image>
             </ImageView>
          </graphic></ToggleButton>
-        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#openAddBookWindow" prefHeight="200.0" prefWidth="150.0" text="%add.book" toggleGroup="$toggleButtons">
+        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#openAddBookWindow" prefHeight="114.0" prefWidth="150.0" text="%add.book" toggleGroup="$toggleButtons">
          <graphic>
-            <ImageView fitHeight="87.0" fitWidth="94.0">
+            <ImageView fitHeight="72.0" fitWidth="94.0">
                <image>
                   <Image url="@../icons/bookIcon.png" />
                </image>
             </ImageView>
          </graphic>
         </ToggleButton>
-        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#openAddAuthorWindow" prefHeight="200.0" prefWidth="150.0" text="%add.author" toggleGroup="$toggleButtons">
+        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#openAddAuthorWindow" prefHeight="114.0" prefWidth="150.0" text="%add.author" toggleGroup="$toggleButtons">
          <graphic>
-            <ImageView fitHeight="79.0" fitWidth="102.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="82.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/authorIcon.png" />
                </image>
             </ImageView>
          </graphic></ToggleButton>
-        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#openAddCategoryWindow" prefHeight="200.0" prefWidth="150.0" text="%add.category" toggleGroup="$toggleButtons">
+        <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#openAddCategoryWindow" prefHeight="114.0" prefWidth="150.0" text="%add.category" toggleGroup="$toggleButtons">
          <graphic>
-            <ImageView fitHeight="92.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="80.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/categoryIcon.png" />
                </image>

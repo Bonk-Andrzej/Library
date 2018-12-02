@@ -5,7 +5,7 @@ import bonk_andrzej.app.fx.view.AuthorFx;
 
 public class AuthorConverter {
 
-    public static Author convertFromAuthorFxToAuthor(AuthorFx authorFx) {
+    public  Author convertAuthorFxToAuthor(AuthorFx authorFx) {
         Author author = new Author();
         author.setId(authorFx.getId());
         author.setName(authorFx.getName());
@@ -13,7 +13,7 @@ public class AuthorConverter {
         return author;
     }
 
-    public static AuthorFx convertFromAuthorToAuthorFx(Author author){
+    public  AuthorFx convertAuthorToAuthorFx(Author author){
         AuthorFx authorFx = new AuthorFx();
         authorFx.setId(author.getId());
         authorFx.setName(author.getName());

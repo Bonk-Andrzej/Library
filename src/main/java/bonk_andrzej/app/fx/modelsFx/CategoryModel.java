@@ -1,11 +1,8 @@
 package bonk_andrzej.app.fx.modelsFx;
 
 import bonk_andrzej.app.db.dao.CrudFacade;
-import bonk_andrzej.app.db.modelsDb.Book;
 import bonk_andrzej.app.db.modelsDb.Category;
-import bonk_andrzej.app.fx.view.BookFx;
-import bonk_andrzej.app.utils.converter.BookConverter;
-import bonk_andrzej.app.utils.converter.CategoryConverter;
+import bonk_andrzej.app.utils.converter.*;
 import bonk_andrzej.app.utils.exceptions.ApplicationException;
 import bonk_andrzej.app.fx.view.CategoryFx;
 import javafx.beans.property.ObjectProperty;
@@ -19,30 +16,24 @@ import java.util.List;
 
 public class CategoryModel {
 
-
+    private ObjectProperty<CategoryFx> categoryFxObjectProperty = new SimpleObjectProperty<>(new CategoryFx());
     private ObservableList<CategoryFx> categoryFxObservableList = FXCollections.observableArrayList();
-    private ObjectProperty<CategoryFx> categoryFxObjectProperty = new SimpleObjectProperty<>();
     private TreeItem<String> treeItemRoot = new TreeItem<>();
     private CrudFacade crudFacade = new CrudFacade();
 
-    public void saveCategoryToDB(String categoryName) throws ApplicationException {
-        Category categoryToSave = new Category();
-        categoryToSave.setName(categoryName);
-        crudFacade.create(categoryToSave);
-        initializeCategoryFromDB();
-    }
+    private CategoryConverter categoryConverter = new CategoryConverter();
+
 
     public void deleteCategory() throws ApplicationException {
         Category categoryToDelete = (Category) crudFacade.getById(
                 Category.class, getCategoryFxObjectProperty().getId());
-        crudFacade.deleteO(categoryToDelete);
+        crudFacade.delete(categoryToDelete);
         initializeCategoryFromDB();
     }
 
-    public void updateCategoryInDB() throws ApplicationException {
-        Category categoryToUpdate = CategoryConverter.convertFromCategoryFxToCategory(
-                getCategoryFxObjectProperty());
-        crudFacade.update(categoryToUpdate);
+    public void saveOrUpdateCategoryInDB() throws ApplicationException {
+        Category categoryToUpdate = categoryConverter.converCategoryFxToCategory(getCategoryFxObjectProperty());
+        crudFacade.createOrUpdate(categoryToUpdate);
         initializeCategoryFromDB();
     }
 
@@ -66,28 +57,12 @@ public class CategoryModel {
     private void initializeCategoryFxList(List<Category> categories) {
         categoryFxObservableList.clear();
         categories.forEach(c -> {
-            CategoryFx categoryFx = CategoryConverter
-                    .convertFromCategoryToCategoryFx(c);
+            CategoryFx categoryFx = categoryConverter
+                    .convertCategoryToCategoryFx(c);
             categoryFxObservableList.add(categoryFx);
         });
     }
 
-
-    public CrudFacade getCrudFacade() {
-        return crudFacade;
-    }
-
-    public void setCrudFacade(CrudFacade crudFacade) {
-        this.crudFacade = crudFacade;
-    }
-
-    public ObservableList<CategoryFx> getCategoryFxObservableList() {
-        return categoryFxObservableList;
-    }
-
-    public void setCategoryFxObservableList(ObservableList<CategoryFx> categoryFxObservableList) {
-        this.categoryFxObservableList = categoryFxObservableList;
-    }
 
     public CategoryFx getCategoryFxObjectProperty() {
         return categoryFxObjectProperty.get();
@@ -101,6 +76,14 @@ public class CategoryModel {
         this.categoryFxObjectProperty.set(categoryFxObjectProperty);
     }
 
+    public ObservableList<CategoryFx> getCategoryFxObservableList() {
+        return categoryFxObservableList;
+    }
+
+    public void setCategoryFxObservableList(ObservableList<CategoryFx> categoryFxObservableList) {
+        this.categoryFxObservableList = categoryFxObservableList;
+    }
+
     public TreeItem<String> getTreeItemRoot() {
         return treeItemRoot;
     }
@@ -108,5 +91,4 @@ public class CategoryModel {
     public void setTreeItemRoot(TreeItem<String> treeItemRoot) {
         this.treeItemRoot = treeItemRoot;
     }
-
 }

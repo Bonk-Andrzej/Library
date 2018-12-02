@@ -1,6 +1,5 @@
 package bonk_andrzej.app.fx.contollers;
 
-import bonk_andrzej.app.fx.view.BookFx;
 import bonk_andrzej.app.fx.view.CategoryFx;
 import bonk_andrzej.app.fx.modelsFx.CategoryModel;
 import bonk_andrzej.app.utils.DialogsUtils;
@@ -13,8 +12,6 @@ public class CategoryController extends TextField {
     @FXML
     public MenuItem deleteContectMenu;
     @FXML
-    private Label text;
-    @FXML
     private TextField categoryTextField;
     @FXML
     private Button addCategoryButton;
@@ -26,67 +23,32 @@ public class CategoryController extends TextField {
     private ComboBox<CategoryFx> categoryComboBox;
     @FXML
     private TreeView<String> categoryTreeView;
-
     private CategoryModel categoryModel;
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         categoryModel = new CategoryModel();
         try {
             categoryModel.initializeCategoryFromDB();
         } catch (ApplicationException e) {
             DialogsUtils.errorDialogs(e.getMessage());
         }
-
-        startBindings();
-
-    }
-
-    private void startBindings() {
-        addCategoryButton.disableProperty().bind(categoryTextField.textProperty().isEmpty());
-        deleteCategoryButton.disableProperty().bind(categoryModel.categoryFxObjectPropertyProperty().isNull());
-        editCategoryButton.disableProperty().bind(categoryModel.categoryFxObjectPropertyProperty().isNull());
-        categoryComboBox.setItems(categoryModel.getCategoryFxObservableList());
-        categoryTreeView.setRoot(categoryModel.getTreeItemRoot());
-        categoryTreeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-                    categoryModel.getCategoryFxObjectProperty();
-                }
-
-        );
+        disableButtoms();
+        bindProperties();
     }
 
     @FXML
-    public void addCategoryOnAction() {
+    private void addCategoryOnAction() {
         try {
-            categoryModel.saveCategoryToDB(categoryTextField.getText());
+            categoryModel.saveOrUpdateCategoryInDB();
         } catch (ApplicationException e) {
             DialogsUtils.errorDialogs(e.getMessage());
         }
         categoryTextField.clear();
-
     }
 
     @FXML
-    public void onActionComboBox() {
-        categoryModel.setCategoryFxObjectProperty(categoryComboBox.getSelectionModel().getSelectedItem());
-    }
-
-    @FXML
-    public void onActionEditCategory() {
-        String newCategoryName = DialogsUtils.editDialog(categoryModel.getCategoryFxObjectProperty().getName());
-        if (newCategoryName != null) {
-            categoryModel.getCategoryFxObjectProperty().setName(newCategoryName);
-            try {
-                categoryModel.updateCategoryInDB();
-            } catch (ApplicationException e) {
-                DialogsUtils.errorDialogs(e.getMessage());
-            }
-        }
-
-    }
-
-    @FXML
-    public void onActionDeleteButton() {
+    private void onActionDeleteButton() {
         try {
             categoryModel.deleteCategory();
         } catch (ApplicationException e) {
@@ -94,9 +56,44 @@ public class CategoryController extends TextField {
         }
     }
 
+    @FXML
+    private void onActionComboBox() {
+        categoryModel.setCategoryFxObjectProperty(categoryComboBox.getSelectionModel().getSelectedItem());
+    }
+
+    @FXML
+    private void onActionEditCategory() {
+        String newCategoryName = DialogsUtils.editDialog(categoryModel.getCategoryFxObjectProperty().getName());
+        if (newCategoryName != null) {
+            categoryModel.getCategoryFxObjectProperty().setName(newCategoryName);
+            try {
+                categoryModel.saveOrUpdateCategoryInDB();
+            } catch (ApplicationException e) {
+                DialogsUtils.errorDialogs(e.getMessage());
+            }
+        }
+    }
+
+    private void bindProperties() {
+        categoryComboBox.setItems(categoryModel.getCategoryFxObservableList());
+        categoryTreeView.setRoot(categoryModel.getTreeItemRoot());
+        categoryModel.getCategoryFxObjectProperty().nameProperty().bind(categoryTextField.textProperty());
+    }
+
+    private void disableButtoms() {
+        addCategoryButton.disableProperty().bind(categoryTextField.textProperty().isEmpty());
+        deleteCategoryButton.disableProperty().bind(categoryComboBox.valueProperty().isNull());
+        editCategoryButton.disableProperty().bind(categoryComboBox.valueProperty().isNull());
+        //        categoryTreeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+//                    categoryModel.getCategoryFx();
+//                }
+//        );
+    }
+
+
     //todo
     @FXML
-    public void deleteSelected() {
+    private void deleteSelected() {
 //        TreeItem c = (TreeItem) categoryTreeView.getSelectionModel().getSelectedItems();
 //        c.getParent().getChildren().remove(c);
 //

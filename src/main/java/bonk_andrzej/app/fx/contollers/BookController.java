@@ -5,17 +5,8 @@ import bonk_andrzej.app.fx.modelsFx.BookModel;
 import bonk_andrzej.app.fx.view.CategoryFx;
 import bonk_andrzej.app.utils.DialogsUtils;
 import bonk_andrzej.app.utils.exceptions.ApplicationException;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.util.converter.IntegerStringConverter;
-import javafx.util.converter.NumberStringConverter;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.text.NumberFormat;
-import java.util.function.UnaryOperator;
 
 
 public class BookController {
@@ -38,26 +29,24 @@ public class BookController {
     private DatePicker releaseDatePicker;
     @FXML
     private TextField amountBooksTextField;
-
     private BookModel bookModel;
 
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         bookModel = new BookModel();
         try {
             bookModel.initObservableCategoryListAndAuthorList();
         } catch (ApplicationException e) {
             DialogsUtils.errorDialogs(e.getMessage());
         }
-
         bindProperties();
-        setAmountBooksTextFieldNumericOnly();
+        DialogsUtils.setTextFieldNumericOnly(amountBooksTextField);
         disableAddButtom();
     }
 
     @FXML
-    public void addBookOnAction() {
+    private void addBookOnAction() {
         try {
             bookModel.saveBookInDB();
             clearAllFields();
@@ -77,23 +66,8 @@ public class BookController {
         ratingSlider.valueProperty().bindBidirectional(bookModel.getBookFxObjectProperty().ratingProperty());
         isbnTextField.textProperty().bindBidirectional(bookModel.getBookFxObjectProperty().isbnProperty());
         releaseDatePicker.valueProperty().bindBidirectional(bookModel.getBookFxObjectProperty().releaseDateProperty());
-        amountBooksTextField.textProperty().bindBidirectional(bookModel.getBookFxObjectProperty().amounrtProperty());
-
-
+        amountBooksTextField.textProperty().bindBidirectional(bookModel.getBookFxObjectProperty().leftBooksForRentProperty());
     }
-
-    private void setAmountBooksTextFieldNumericOnly() {
-        amountBooksTextField.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    amountBooksTextField.setText(newValue.replaceAll("[^\\d]", ""));
-                }
-            }
-        });
-    }
-
 
     private void disableAddButtom() {
         addButton.disableProperty().bind(categoryComboBox.valueProperty().isNull()

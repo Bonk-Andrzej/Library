@@ -1,96 +1,103 @@
-package bonk_andrzej.app.utils;
-
-import bonk_andrzej.app.db.dao.CrudFacade;
-import bonk_andrzej.app.db.modelsDb.Author;
-import bonk_andrzej.app.db.modelsDb.Book;
-import bonk_andrzej.app.db.modelsDb.Category;
-import bonk_andrzej.app.utils.exceptions.ApplicationException;
-
-import java.time.LocalDate;
-
-
-public class AddObjectToDB {
-    public static void addObjectToDB() throws ApplicationException {
-        CrudFacade crudFacade = new CrudFacade();
-
-
-        Category category1 = new Category();
-        category1.setName("Dramat");
-        Category category2 = new Category();
-        category2.setName("Sensacja");
-        Category category3 = new Category();
-        category3.setName("Reportaż");
-        Category category4 = new Category();
-        category4.setName("Fantastyka");
-
-
-
-        Author author1 = new Author();
-        author1.setName("Jakub");
-        author1.setSurname("Ćwiek");
-        Author author2 = new Author();
-        author2.setName("Jarosław");
-        author2.setSurname("Grzędowicz");
-        Author author3 = new Author();
-        author3.setName("Andrzej");
-        author3.setSurname("Sapkowski");
-        Author author4 = new Author();
-        author4.setName("Marcin ");
-        author4.setSurname("Przybyłek");
-
-
-
-        Book book1 = new Book();
-        book1.setCategory(category1);
-        book1.setAuthor(author1);
-        book1.setTitle("Kłamca");
-        book1.setIsbn("2222");
-        book1.setRating(4);
-        book1.setReleaseDate(LocalDate.of(1500,10,10));
-        book1.setAddedDate(LocalDate.now());
-        book1.setDescription("Super mega hiper fullwypas ksiazka");
-        book1.setAmount(6);
-
-        Book book2 = new Book();
-        book2.setCategory(category3);
-        book2.setAuthor(author2);
-        book2.setTitle("Pan Lodowego Ogrodu");
-        book2.setIsbn("5555");
-        book2.setRating(5);
-        book2.setReleaseDate(LocalDate.of(1500,10,10));
-        book2.setAddedDate(LocalDate.now());
-        book2.setDescription("Super mega hiper fullwypas ksiazka");
-        book2.setAmount(6);
-
-        Book book3 = new Book();
-        book3.setCategory(category4);
-        book3.setAuthor(author3);
-        book3.setTitle("Pani Jeziorna");
-        book3.setIsbn("2222");
-        book3.setRating(5);
-        book3.setReleaseDate(LocalDate.of(1500,10,10));
-        book3.setAddedDate(LocalDate.now());
-        book3.setDescription("Super mega hiper fullwypas ksiazka");
-        book3.setAmount(6);
-
-        Book book4 = new Book();
-        book4.setCategory(category4);
-        book4.setAuthor(author4);
-        book4.setTitle("Gamedec Zabaweczki");
-        book4.setIsbn("2222");
-        book4.setRating(3);
-        book4.setReleaseDate(LocalDate.of(1500,10,10));
-        book4.setAddedDate(LocalDate.now());
-        book4.setDescription("Super mega hiper fullwypas ksiazka");
-        book4.setAmount(6);
-
-        try {
-            crudFacade.create(book1);
-            crudFacade.create(book2);
-            crudFacade.create(book3);
-            crudFacade.create(book4);
-        } catch (ApplicationException e) {
-            e.printStackTrace();
-        }
-    }
-}
+//package bonk_andrzej.app.utils;
+//
+//import bonk_andrzej.app.db.dao.CrudFacade;
+//import bonk_andrzej.app.db.modelsDb.*;
+//import bonk_andrzej.app.utils.exceptions.ApplicationException;
+//
+//import java.time.LocalDate;
+//import java.util.ArrayList;
+//import java.util.List;
+//import java.util.Set;
+//
+//
+//public class AddObjectToDB {
+//    public static void addObjectToDB() throws ApplicationException {
+//        CrudFacade crudFacade = new CrudFacade();
+//
+//
+//        Category category1 = new Category("Dramat");
+//        Category category2 = new Category("Sensacja");
+//        Category category3 = new Category("Reportaż");
+//        Category category4 = new Category("Fantastyka");
+//
+//
+//        Author author1 = new Author("Jakub", "Ćwiek");
+//        Author author2 = new Author("Jarosław", "Grzędowicz");
+//        Author author3 = new Author("Andrzej", "Sapkowski");
+//        Author author4 = new Author("Marcin", "Przybyłek");
+//
+//        Book book1 = new Book("Kłamca", "Super mega hiper fullwypas ksiazka", 4, "2222", 10, 0, 10,
+//                LocalDate.now(), LocalDate.now(), author1, category1);
+//
+//        Book book2 = new Book("Pan Lodowego Ogrodu", "Super mega hiper fullwypas ksiazka", 4, "5555",
+//                10, 0, 10, LocalDate.of(1500, 10, 10), LocalDate.now(), author2, category2);
+//
+//        Book book3 = new Book("Pani Jeziorna", "Super mega hiper fullwypas ksiazka", 4, "2222",
+//                10, 0, 10, LocalDate.of(1500, 10, 10), LocalDate.now(), author3, category3);
+//
+//        Book book4 = new Book("Gamedec Zabaweczki", "Super mega hiper fullwypas ksiazka", 4, "2222",
+//                10, 0, 10, LocalDate.of(1500, 10, 10), LocalDate.now(), author4, category4);
+//
+//        Set<Book> bookList = new ArrayList<>();
+//        bookList.add(book1);
+//        bookList.add(book2);
+//        bookList.add(book3);
+//        bookList.add(book4);
+//
+//        Reader reader1 = new Reader("Andrzej", "Bonk",bookList);
+//        Reader reader2 = new Reader("aaaa", "aaaa",bookList);
+//        Reader reader3 = new Reader("wwwww", "eeeeee",bookList);
+//        Reader reader4 = new Reader("zzzzz", "xxxxxx",bookList);
+//
+//        List<Reader> readerList = new ArrayList<>();
+//        readerList.add(reader1);
+//        readerList.add(reader2);
+//        readerList.add(reader3);
+//        readerList.add(reader4);
+//
+//        BookOrder bookOrder1 = new BookOrder(10, 10, 0,
+//                LocalDate.now(), LocalDate.now(), LocalDate.now(),reader1,bookList);
+//        BookOrder bookOrder2 = new BookOrder(10, 10, 0,
+//                LocalDate.now(), LocalDate.now(), LocalDate.now(),reader2,bookList);
+//        BookOrder bookOrder3 = new BookOrder(10, 10, 0,
+//                LocalDate.now(), LocalDate.now(), LocalDate.now(),reader3,bookList);
+//        BookOrder bookOrder4 = new BookOrder(10, 10, 0,
+//                LocalDate.now(), LocalDate.now(), LocalDate.now(),reader4,bookList);
+//
+//        List<BookOrder> bookOrderList = new ArrayList<>();
+//        bookOrderList.add(bookOrder1);
+//        bookOrderList.add(bookOrder2);
+//        bookOrderList.add(bookOrder3);
+//        bookOrderList.add(bookOrder4);
+//
+//        try {
+////            crudFacade.createOrUpdate(category1);
+////            crudFacade.createOrUpdate(category2);
+////            crudFacade.createOrUpdate(category3);
+////            crudFacade.createOrUpdate(category4);
+////
+////            crudFacade.createOrUpdate(author1);
+////            crudFacade.createOrUpdate(author2);
+////            crudFacade.createOrUpdate(author3);
+////            crudFacade.createOrUpdate(author4);
+////
+////            crudFacade.createOrUpdate(book1);
+////            crudFacade.createOrUpdate(book2);
+////            crudFacade.createOrUpdate(book3);
+////            crudFacade.createOrUpdate(book4);
+////
+////            crudFacade.createOrUpdate(reader1);
+////            crudFacade.createOrUpdate(reader2);
+////            crudFacade.createOrUpdate(reader3);
+////            crudFacade.createOrUpdate(reader4);
+//
+//            crudFacade.createOrUpdate(bookOrder1);
+//            crudFacade.createOrUpdate(bookOrder2);
+//            crudFacade.createOrUpdate(bookOrder3);
+//            crudFacade.createOrUpdate(bookOrder4);
+//
+//        } catch (ApplicationException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//}

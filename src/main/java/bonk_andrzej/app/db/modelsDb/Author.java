@@ -1,10 +1,15 @@
 package bonk_andrzej.app.db.modelsDb;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.List;
-
-@Entity(name = "author")
-@Table
+@NoArgsConstructor
+@Getter
+@Setter
+@Entity
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,38 +22,12 @@ public class Author {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "author", cascade = CascadeType.ALL)
     private List<Book> bookListForAuthor;
 
-    public Author() {
+
+
+    public Author(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
     }
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long author_id) {
-        this.id = author_id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String author_name) {
-        this.name = author_name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String author_surname) {
-        this.surname = author_surname;
-    }
-
-    public List<Book> getBookListForAuthor() {
-        return bookListForAuthor;
-    }
-
-    public void setBookListForAuthor(List<Book> bookListForAuthor) {
-        this.bookListForAuthor = bookListForAuthor;
-    }
 }

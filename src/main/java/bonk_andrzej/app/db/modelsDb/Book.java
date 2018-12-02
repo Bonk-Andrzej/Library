@@ -1,17 +1,23 @@
 package bonk_andrzej.app.db.modelsDb;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
-
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
-@Table
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "book_id")
     private long id;
-    @Column(unique = true)
+    @Column()
     private String title;
     @Column
     private String description;
@@ -20,114 +26,52 @@ public class Book {
     @Column
     private String isbn;
     @Column
-    private Integer amount;
+    private Integer leftBooksForRent;
     @Column
     private LocalDate releaseDate;
     @Column
     private LocalDate addedDate;
 
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
     private Author author;
 
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne( cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "bookList", cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "orders_for_books",
+            joinColumns = {@JoinColumn(name = "book_id")},
+            inverseJoinColumns = {@JoinColumn(name = "order_id")}
+    )
+    private List<BookOrder> bookOrderList;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "books_reader",
+            joinColumns = {@JoinColumn(name = "book_id")},
+            inverseJoinColumns = {@JoinColumn(name = "reader_id")}
+    )
     private List<Reader> readerList;
 
-    public Book() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long book_id) {
-        this.id = book_id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String book_title) {
-        this.title = book_title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String book_description) {
-        this.description = book_description;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int book_rating) {
-        this.rating = book_rating;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
+    public Book(String title, String description, int rating, String isbn, Integer leftBooksForRent, Integer rentBooks,
+                Integer leftBooksJuzNieWazne, LocalDate releaseDate, LocalDate addedDate, Author author, Category category) {
+        this.title = title;
+        this.description = description;
+        this.rating = rating;
         this.isbn = isbn;
-    }
-
-    public Integer getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
-
-    public Author getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public List<Reader> getReaderList() {
-        return readerList;
-    }
-
-    public void setReaderList(List<Reader> readerList) {
-        this.readerList = readerList;
-    }
-
-    public LocalDate getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(LocalDate releaseDate) {
+        this.leftBooksForRent = leftBooksForRent;
         this.releaseDate = releaseDate;
-    }
-
-    public LocalDate getAddedDate() {
-        return addedDate;
-    }
-
-    public void setAddedDate(LocalDate addedDate) {
         this.addedDate = addedDate;
+        this.author = author;
+        this.category = category;
+
     }
+
+
 }
 

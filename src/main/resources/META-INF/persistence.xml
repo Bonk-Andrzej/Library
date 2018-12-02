@@ -9,13 +9,12 @@
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/library?serverTimezone=UTC&amp;useSSL=false"/>
-            <property name="javax.persistence.jdbc.user" value="user"/>
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:mysql://localhost:3306/library?serverTimezone=UTC&amp;useSSL=false"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
             <property name="javax.persistence.jdbc.password" value="password"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"></property>
             <property name="hibernate.event.merge.entity_copy_observer" value="allow"/>
-            <!-- pamietam by wykomentowac to wyzej by przy zmienianiu 1 wartosci w rekordzie nie nadpisalo mi sie wszyztko -->
-            <!--<property name="hibernate.hbm2ddl.auto" value="create"></property>-->
+            <property name="hibernate.hbm2ddl.auto" value="update"></property>
 
         </properties>
     </persistence-unit>

@@ -9,13 +9,6 @@ public class ReaderFx {
     private LongProperty id = new SimpleLongProperty();
     private StringProperty name = new SimpleStringProperty();
     private StringProperty surname = new SimpleStringProperty();
-    private StringProperty amounrtBorrowedBook = new SimpleStringProperty();
-    private ObjectProperty<LocalDate> lenderDate = new SimpleObjectProperty(LocalDate.now());
-    private ObjectProperty<LocalDate> returnDate = new SimpleObjectProperty(LocalDate.of(2020, 10, 10));
-    private ObjectProperty<LocalDate> actualDateOfReturn = new SimpleObjectProperty(LocalDate.of(2020, 10, 10));
-    private ObjectProperty<BookFx> bookFx = new SimpleObjectProperty();
-
-    private StringProperty amountBorrowedBook = new SimpleStringProperty();
 
     public long getId() {
         return id.get();
@@ -53,75 +46,9 @@ public class ReaderFx {
         this.surname.set(surname);
     }
 
-    public LocalDate getLenderDate() {
-        return lenderDate.get();
+    @Override
+    public String toString() {
+        return name.get() + " " + surname.get();
     }
 
-    public ObjectProperty<LocalDate> lenderDateProperty() {
-        return lenderDate;
-    }
-
-    public void setLenderDate(LocalDate lenderDate) {
-        this.lenderDate.set(lenderDate);
-    }
-
-    public LocalDate getReturnDate() {
-        return returnDate.get();
-    }
-
-    public ObjectProperty<LocalDate> returnDateProperty() {
-        return returnDate;
-    }
-
-    public void setReturnDate(LocalDate returnDate) {
-        this.returnDate.set(returnDate);
-    }
-
-    public LocalDate getActualDateOfReturn() {
-        return actualDateOfReturn.get();
-    }
-
-    public ObjectProperty<LocalDate> actualDateOfReturnProperty() {
-        return actualDateOfReturn;
-    }
-
-    public void setActualDateOfReturn(LocalDate actualDateOfReturn) {
-        this.actualDateOfReturn.set(actualDateOfReturn);
-    }
-
-    public String getAmountBorrowedBook() {
-        return amountBorrowedBook.get();
-    }
-
-    public StringProperty amountBorrowedBookProperty() {
-        return amountBorrowedBook;
-    }
-
-    public void setAmountBorrowedBook(String amountBorrowedBook) {
-        this.amountBorrowedBook.set(amountBorrowedBook);
-    }
-
-    public BookFx getBookFx() {
-        return bookFx.get();
-    }
-
-    public ObjectProperty<BookFx> bookFxProperty() {
-        return bookFx;
-    }
-
-    public void setBookFx(BookFx bookFx) {
-        this.bookFx.set(bookFx);
-    }
-
-    public String getAmounrtBorrowedBook() {
-        return amounrtBorrowedBook.get();
-    }
-
-    public StringProperty amounrtBorrowedBookProperty() {
-        return amounrtBorrowedBook;
-    }
-
-    public void setAmounrtBorrowedBook(String amounrtBorrowedBook) {
-        this.amounrtBorrowedBook.set(amounrtBorrowedBook);
-    }
 }

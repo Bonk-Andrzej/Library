@@ -5,14 +5,14 @@ import bonk_andrzej.app.fx.view.CategoryFx;
 
 public class CategoryConverter {
 
-    public static CategoryFx convertFromCategoryToCategoryFx(Category category){
+    public CategoryFx convertCategoryToCategoryFx(Category category) {
         CategoryFx categoryFx = new CategoryFx();
         categoryFx.setId(category.getId());
         categoryFx.setName(category.getName());
         return categoryFx;
     }
 
-    public static Category convertFromCategoryFxToCategory(CategoryFx categoryFx){
+    public Category converCategoryFxToCategory(CategoryFx categoryFx) {
         Category category = new Category();
         category.setId(categoryFx.getId());
         category.setName(categoryFx.getName());

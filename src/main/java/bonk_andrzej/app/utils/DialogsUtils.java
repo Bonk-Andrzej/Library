@@ -1,9 +1,8 @@
 package bonk_andrzej.app.utils;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextInputDialog;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.*;
 
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -34,8 +33,23 @@ public class DialogsUtils {
         Alert errorAllert = new Alert(Alert.AlertType.ERROR);
         errorAllert.setTitle(bundle.getString("error.title"));
         errorAllert.setHeaderText(bundle.getString("error.header"));
-
         TextArea textArea = new TextArea(error);
+        errorAllert.getDialogPane().setContent(textArea);
+        errorAllert.showAndWait();
+    }
+    public static void specificBooksOrdersError(String bundleKey){
+        Alert errorAllert = new Alert(Alert.AlertType.ERROR);
+        errorAllert.setTitle(bundle.getString("error.title"));
+        errorAllert.setHeaderText(bundle.getString("error.header"));
+        TextArea textArea = new TextArea(bundle.getString(bundleKey));
+        errorAllert.getDialogPane().setContent(textArea);
+        errorAllert.showAndWait();
+    }
+    public static void someBooksArentReturnedError(){
+        Alert errorAllert = new Alert(Alert.AlertType.ERROR);
+        errorAllert.setTitle(bundle.getString("error.title"));
+        errorAllert.setHeaderText(bundle.getString("error.header"));
+        TextArea textArea = new TextArea(bundle.getString("error.number.books.returned"));
         errorAllert.getDialogPane().setContent(textArea);
         errorAllert.showAndWait();
     }
@@ -50,6 +64,17 @@ public class DialogsUtils {
             return result.get();
         }
         else return null;
+    }
+    public static void setTextFieldNumericOnly(TextField textFieldName) {
+        textFieldName.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    textFieldName.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
     }
 
 }

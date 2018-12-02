@@ -34,6 +34,6 @@ public class CategoryFx extends TreeItem<String> {
 
     @Override
     public String toString() {
-        return name.getValue();
+        return name.get();
     }
 }

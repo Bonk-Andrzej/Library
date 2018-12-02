@@ -8,14 +8,15 @@ import org.hibernate.HibernateException;
 
 import javax.persistence.*;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class CrudFacade<T, I> implements GenericDao<T, I> {
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("my-persistence-unit");
-    EntityManager entityManager;
+public class CrudFacade<T, I> implements GenericDao<T, I>, Serializable {
+   private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("my-persistence-unit");
+   private EntityManager entityManager;
 
     @Override
-    public T create(T entity) throws EntityExistsException, IllegalStateException, IllegalArgumentException, TransactionRequiredException, ApplicationException {
+    public T createOrUpdate(T entity) throws EntityExistsException, IllegalStateException, IllegalArgumentException, TransactionRequiredException, ApplicationException {
         try {
             entityManager = entityManagerFactory.createEntityManager();
             entityManager.getTransaction().begin();
@@ -51,7 +52,7 @@ public class CrudFacade<T, I> implements GenericDao<T, I> {
         try {
             entityManager = entityManagerFactory.createEntityManager();
             entityManager.getTransaction().begin();
-            List<T> genericList = entityManager.createQuery(
+            List genericList = entityManager.createQuery(
                     "from " + classType.getName()).getResultList();
             entityManager.getTransaction().commit();
             return genericList;
@@ -64,23 +65,7 @@ public class CrudFacade<T, I> implements GenericDao<T, I> {
     }
 
     @Override
-    public void update(T entity) throws IllegalStateException, IllegalArgumentException, TransactionRequiredException, ApplicationException {
-        try {
-            entityManager = entityManagerFactory.createEntityManager();
-            entityManager.getTransaction().begin();
-            entityManager.merge(entity);
-            entityManager.getTransaction().commit();
-
-        } catch (HibernateException e) {
-            e.printStackTrace();
-            throw new ApplicationException(FxmlUtils.getResourceBundle().getString("error.update"));
-        } finally {
-            entityManager.close();
-        }
-    }
-
-    @Override
-    public void deleteO(T entity) throws IllegalStateException, IllegalArgumentException, TransactionRequiredException, PersistenceException, ApplicationException {
+    public void delete(T entity) throws IllegalStateException, IllegalArgumentException, TransactionRequiredException, PersistenceException, ApplicationException {
         try {
             entityManager = entityManagerFactory.createEntityManager();
             entityManager.getTransaction().begin();
@@ -94,7 +79,6 @@ public class CrudFacade<T, I> implements GenericDao<T, I> {
             entityManager.close();
         }
     }
-
 
     @Override
     public void deleteById(Class<T> classType, I id) throws IllegalStateException, IllegalArgumentException, TransactionRequiredException, PersistenceException, ApplicationException {

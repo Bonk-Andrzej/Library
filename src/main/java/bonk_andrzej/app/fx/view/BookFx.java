@@ -13,9 +13,33 @@ public class BookFx {
     private StringProperty description = new SimpleStringProperty();
     private IntegerProperty rating = new SimpleIntegerProperty();
     private StringProperty isbn = new SimpleStringProperty();
-    private StringProperty amounrt = new SimpleStringProperty();
+    private StringProperty leftBooksForRent = new SimpleStringProperty();
     private ObjectProperty<LocalDate> releaseDate = new SimpleObjectProperty(LocalDate.now());
-    private ObjectProperty<LocalDate> addedDate = new SimpleObjectProperty(LocalDate.now());
+
+
+    public CategoryFx getCategoryFx() {
+        return categoryFx.get();
+    }
+
+    public ObjectProperty<CategoryFx> categoryFxProperty() {
+        return categoryFx;
+    }
+
+    public void setCategoryFx(CategoryFx categoryFx) {
+        this.categoryFx.set(categoryFx);
+    }
+
+    public AuthorFx getAuthorFx() {
+        return authorFx.get();
+    }
+
+    public ObjectProperty<AuthorFx> authorFxProperty() {
+        return authorFx;
+    }
+
+    public void setAuthorFx(AuthorFx authorFx) {
+        this.authorFx.set(authorFx);
+    }
 
     public long getId() {
         return id.get();
@@ -77,42 +101,6 @@ public class BookFx {
         this.isbn.set(isbn);
     }
 
-    public CategoryFx getCategoryFx() {
-        return categoryFx.get();
-    }
-
-    public ObjectProperty<CategoryFx> categoryFxProperty() {
-        return categoryFx;
-    }
-
-    public void setCategoryFx(CategoryFx categoryFx) {
-        this.categoryFx.set(categoryFx);
-    }
-
-    public AuthorFx getAuthorFx() {
-        return authorFx.get();
-    }
-
-    public ObjectProperty<AuthorFx> authorFxProperty() {
-        return authorFx;
-    }
-
-    public void setAuthorFx(AuthorFx authorFx) {
-        this.authorFx.set(authorFx);
-    }
-
-    public String getAmounrt() {
-        return amounrt.get();
-    }
-
-    public StringProperty amounrtProperty() {
-        return amounrt;
-    }
-
-    public void setAmounrt(String amounrt) {
-        this.amounrt.set(amounrt);
-    }
-
     public LocalDate getReleaseDate() {
         return releaseDate.get();
     }
@@ -125,30 +113,24 @@ public class BookFx {
         this.releaseDate.set(releaseDate);
     }
 
-    public LocalDate getAddedDate() {
-        return addedDate.get();
+    public String getLeftBooksForRent() {
+        return leftBooksForRent.get();
     }
 
-    public ObjectProperty<LocalDate> addedDateProperty() {
-        return addedDate;
+    public StringProperty leftBooksForRentProperty() {
+        return leftBooksForRent;
     }
 
-    public void setAddedDate(LocalDate addedDate) {
-        this.addedDate.set(addedDate);
+    public void setLeftBooksForRent(String leftBooksForRent) {
+        this.leftBooksForRent.set(leftBooksForRent);
     }
 
     @Override
     public String toString() {
-        return "BookFx{" +
-                "id=" + id.get() +
-                ", categoryFx=" + categoryFx.get() +
-                ", authorFx=" + authorFx.get() +
-                ", title=" + title.get() +
-                ", description=" + description.get() +
-                ", releaseDate=" + releaseDate.get() +
-                ", isbn=" + isbn.get() +
-                ", rating=" + rating.get() +
-                ", addedDate=" + addedDate.get() +
-                '}';
+        return "TITLE: " + title.get() +
+                ", CATEGORY: " + categoryFx.get() +
+                ", AUTHOR: " + authorFx.get() +
+                ", AMOUNT: " + leftBooksForRent.get();
+
     }
 }

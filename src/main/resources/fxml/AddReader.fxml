@@ -2,55 +2,47 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="614.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bonk_andrzej.app.fx.contollers.ReaderController">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bonk_andrzej.app.fx.contollers.ReaderController">
    <children>
-      <GridPane prefHeight="797.0" prefWidth="639.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="148.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="455.0" minWidth="10.0" prefWidth="452.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
+      <HBox alignment="CENTER" prefWidth="800.0" spacing="20.0">
          <children>
-            <Label text="%reader.surname" GridPane.rowIndex="1" />
-            <Label text="%amount.book" GridPane.rowIndex="3" />
-            <Label text="%how.many.books.to.rent" GridPane.rowIndex="4" />
-            <Label text="%reader.rental.date" GridPane.rowIndex="5" />
-            <Label text="%reader.return.date" GridPane.rowIndex="6" />
-            <DatePicker fx:id="returnDataPicker" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Label text="%title.book" GridPane.rowIndex="2" />
-            <Button fx:id="addButton" mnemonicParsing="false" onAction="#addBorrowerOnAction" text="%save.button" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <Label text="%reader.actual.date.of.return" GridPane.rowIndex="7" />
             <Label text="%reader.name" />
-            <TextField fx:id="nameTextField" GridPane.columnIndex="1" />
-            <TextField fx:id="surnameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <DatePicker fx:id="actualReturnDate" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <ComboBox fx:id="booksComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label fx:id="amountBooksLabel" text="show amount of books in library" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="booksRentTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <DatePicker fx:id="rentDataPicker" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="nameTextField" />
+            <Label text="%reader.surname" />
+            <TextField fx:id="surnameTextField" />
+            <Button fx:id="addButton" mnemonicParsing="false" onAction="#addReaderOnAction" text="%add.button" />
          </children>
-      </GridPane>
+         <padding>
+            <Insets bottom="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+      <TableView fx:id="readerTableView" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="729.0" prefWidth="565.0" tableMenuButtonVisible="true">
+         <columns>
+            <TableColumn fx:id="nameColumn" maxWidth="500.0" minWidth="-1.0" onEditCommit="#onEditCommitName" prefWidth="300.0" text="%reader.name" />
+            <TableColumn fx:id="surnameColumn" maxWidth="500.0" minWidth="-1.0" onEditCommit="#onEditCommitSurname" prefWidth="298.0" text="%reader.surname" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+         <contextMenu>
+            <ContextMenu>
+               <items>
+                  <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" onAction="#deleteReaderOnAction" text="%delete.button" />
+               </items>
+            </ContextMenu>
+         </contextMenu>
+      </TableView>
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
-</HBox>
+</VBox>

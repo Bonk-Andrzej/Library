@@ -9,14 +9,20 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bonk_andrzej.app.fx.contollers.BooksListController">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" spacing="20.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bonk_andrzej.app.fx.contollers.BooksListController">
    <children>
       <HBox prefHeight="58.0" prefWidth="600.0" spacing="10.0">
          <children>
-            <Label text="%category" />
+            <Label text="%category">
+               <HBox.margin>
+                  <Insets top="5.0" />
+               </HBox.margin></Label>
             <ComboBox fx:id="categoryComboBox" onAction="#filterOnActionComboBox" prefWidth="150.0" />
             <Button mnemonicParsing="false" onAction="#clearCategoryComboBox" text="%clear.button" />
-            <Label text="%author.book" />
+            <Label text="%author.book">
+               <HBox.margin>
+                  <Insets top="5.0" />
+               </HBox.margin></Label>
             <ComboBox fx:id="authorComboBox" onAction="#filterOnActionComboBox" prefWidth="150.0" />
             <Button mnemonicParsing="false" onAction="#clearAuthorComboBox" text="%clear.button" />
          </children>
@@ -33,7 +39,7 @@
             <TableColumn fx:id="ratingColumn" prefWidth="75.0" text="%rating.book" />
             <TableColumn fx:id="isbnColumn" prefWidth="75.0" text="%isbn.book" />
             <TableColumn fx:id="releaseColumn" prefWidth="75.0" text="%release.book" />
-            <TableColumn fx:id="amountBooksColumn" prefWidth="75.0" text="%amount.book" />
+            <TableColumn fx:id="amountBooksColumn" prefWidth="75.0" text="%left.books.to.rent" />
             <TableColumn fx:id="deleteColumn" prefWidth="75.0" text="%delete.button" />
             <TableColumn fx:id="editColumn" prefWidth="75.0" text="%edit.button" />
         </columns>
