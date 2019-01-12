@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @NoArgsConstructor
 @Getter
@@ -54,5 +55,26 @@ public class BookOrder {
         this.bookList = bookList;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BookOrder bookOrder = (BookOrder) o;
+        return id == bookOrder.id &&
+                Objects.equals(amountAllBorrowedBooks, bookOrder.amountAllBorrowedBooks) &&
+                Objects.equals(amountBooksToReturn, bookOrder.amountBooksToReturn) &&
+                Objects.equals(amountReturnedBooksNow, bookOrder.amountReturnedBooksNow) &&
+                Objects.equals(allReturnedBooks, bookOrder.allReturnedBooks) &&
+                Objects.equals(lenderDate, bookOrder.lenderDate) &&
+                Objects.equals(returnDate, bookOrder.returnDate) &&
+                Objects.equals(actualDateOfReturn, bookOrder.actualDateOfReturn) &&
+                Objects.equals(reader, bookOrder.reader) &&
+                Objects.equals(bookList, bookOrder.bookList);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, amountAllBorrowedBooks, amountBooksToReturn, amountReturnedBooksNow,
+                allReturnedBooks, lenderDate, returnDate, actualDateOfReturn, reader, bookList);
+    }
 }

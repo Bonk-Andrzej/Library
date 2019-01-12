@@ -12,7 +12,7 @@ public class CategoryConverter {
         return categoryFx;
     }
 
-    public Category converCategoryFxToCategory(CategoryFx categoryFx) {
+    public Category convertCategoryFxToCategory(CategoryFx categoryFx) {
         Category category = new Category();
         category.setId(categoryFx.getId());
         category.setName(categoryFx.getName());

@@ -4,10 +4,13 @@ import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Objects;
+@NoArgsConstructor
 public class AuthorFx {
 
         private LongProperty id = new SimpleLongProperty();
@@ -48,6 +51,27 @@ public class AuthorFx {
 
     public void setSurname(String surname) {
         this.surname.set(surname);
+    }
+
+    public AuthorFx(LongProperty id, StringProperty name, StringProperty surname) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AuthorFx authorFx = (AuthorFx) o;
+        return Objects.equals(id, authorFx.id) &&
+                Objects.equals(name, authorFx.name) &&
+                Objects.equals(surname, authorFx.surname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, surname);
     }
 
     @Override

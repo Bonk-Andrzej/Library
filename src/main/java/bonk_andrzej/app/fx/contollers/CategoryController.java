@@ -10,7 +10,7 @@ import javafx.scene.control.*;
 public class CategoryController extends TextField {
 
     @FXML
-    public MenuItem deleteContectMenu;
+    public MenuItem deleteContextMenu;
     @FXML
     private TextField categoryTextField;
     @FXML
@@ -33,7 +33,7 @@ public class CategoryController extends TextField {
         } catch (ApplicationException e) {
             DialogsUtils.errorDialogs(e.getMessage());
         }
-        disableButtoms();
+        disableButtons();
         bindProperties();
     }
 
@@ -80,22 +80,11 @@ public class CategoryController extends TextField {
         categoryModel.getCategoryFxObjectProperty().nameProperty().bind(categoryTextField.textProperty());
     }
 
-    private void disableButtoms() {
+    private void disableButtons() {
         addCategoryButton.disableProperty().bind(categoryTextField.textProperty().isEmpty());
         deleteCategoryButton.disableProperty().bind(categoryComboBox.valueProperty().isNull());
         editCategoryButton.disableProperty().bind(categoryComboBox.valueProperty().isNull());
-        //        categoryTreeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-//                    categoryModel.getCategoryFx();
-//                }
-//        );
     }
 
 
-    //todo
-    @FXML
-    private void deleteSelected() {
-//        TreeItem c = (TreeItem) categoryTreeView.getSelectionModel().getSelectedItems();
-//        c.getParent().getChildren().remove(c);
-//
-    }
 }

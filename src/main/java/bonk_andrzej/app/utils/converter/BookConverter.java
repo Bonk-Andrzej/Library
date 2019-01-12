@@ -16,7 +16,7 @@ public class BookConverter {
         book.setIsbn(bookFx.getIsbn());
         book.setLeftBooksForRent(Integer.valueOf(bookFx.getLeftBooksForRent()));
         book.setReleaseDate(bookFx.getReleaseDate());
-        book.setCategory(categoryConverter.converCategoryFxToCategory(bookFx.getCategoryFx()));
+        book.setCategory(categoryConverter.convertCategoryFxToCategory(bookFx.getCategoryFx()));
         book.setAuthor(authorConverter.convertAuthorFxToAuthor(bookFx.getAuthorFx()));
         return book;
     }

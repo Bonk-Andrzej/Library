@@ -1,22 +1,22 @@
 package bonk_andrzej.app.db.dao;
 
-
 import bonk_andrzej.app.utils.FxmlUtils;
 import bonk_andrzej.app.utils.exceptions.ApplicationException;
 import org.hibernate.HibernateException;
 
-
-import javax.persistence.*;
-
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.io.Serializable;
 import java.util.List;
 
+
 public class CrudFacade<T, I> implements GenericDao<T, I>, Serializable {
-   private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("my-persistence-unit");
-   private EntityManager entityManager;
+    private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("my-persistence-unit");
+    private EntityManager entityManager;
 
     @Override
-    public T createOrUpdate(T entity) throws EntityExistsException, IllegalStateException, IllegalArgumentException, TransactionRequiredException, ApplicationException {
+    public T createOrUpdate(T entity) throws ApplicationException {
         try {
             entityManager = entityManagerFactory.createEntityManager();
             entityManager.getTransaction().begin();
@@ -24,15 +24,15 @@ public class CrudFacade<T, I> implements GenericDao<T, I>, Serializable {
             entityManager.getTransaction().commit();
             return entity;
         } catch (HibernateException e) {
-            e.printStackTrace();
-            throw new ApplicationException(FxmlUtils.getResourceBundle().getString("error.create"));
+            e.getMessage();
+            throw new ApplicationException(FxmlUtils.getBundleForApplicationErros().getString("error.create.or.update"));
         } finally {
             entityManager.close();
         }
     }
 
     @Override
-    public T getById(Class<T> classType, I id) throws IllegalStateException, IllegalArgumentException, TransactionRequiredException, EntityExistsException, ApplicationException {
+    public T getById(Class<T> classType, I id) throws ApplicationException {
         try {
             entityManager = entityManagerFactory.createEntityManager();
             entityManager.getTransaction().begin();
@@ -40,15 +40,15 @@ public class CrudFacade<T, I> implements GenericDao<T, I>, Serializable {
             entityManager.getTransaction().commit();
             return object;
         } catch (HibernateException e) {
-            e.printStackTrace();
-            throw new ApplicationException(FxmlUtils.getResourceBundle().getString("error.not.found"));
+            e.getMessage();
+            throw new ApplicationException(FxmlUtils.getBundleForApplicationErros().getString("error.not.found"));
         } finally {
             entityManager.close();
         }
     }
 
     @Override
-    public List<T> getAll(Class<T> classType) throws IllegalStateException, IllegalArgumentException, TransactionRequiredException, PersistenceException, ApplicationException {
+    public List<T> getAll(Class<T> classType) throws ApplicationException {
         try {
             entityManager = entityManagerFactory.createEntityManager();
             entityManager.getTransaction().begin();
@@ -57,15 +57,15 @@ public class CrudFacade<T, I> implements GenericDao<T, I>, Serializable {
             entityManager.getTransaction().commit();
             return genericList;
         } catch (HibernateException e) {
-            e.printStackTrace();
-            throw new ApplicationException(FxmlUtils.getResourceBundle().getString("error.not.found.all"));
+            e.getMessage();
+            throw new ApplicationException(FxmlUtils.getBundleForApplicationErros().getString("error.not.found.all"));
         } finally {
             entityManager.close();
         }
     }
 
     @Override
-    public void delete(T entity) throws IllegalStateException, IllegalArgumentException, TransactionRequiredException, PersistenceException, ApplicationException {
+    public void delete(T entity) throws ApplicationException {
         try {
             entityManager = entityManagerFactory.createEntityManager();
             entityManager.getTransaction().begin();
@@ -73,15 +73,15 @@ public class CrudFacade<T, I> implements GenericDao<T, I>, Serializable {
             entityManager.getTransaction().commit();
 
         } catch (HibernateException e) {
-            e.printStackTrace();
-            throw new ApplicationException(FxmlUtils.getResourceBundle().getString("error.delete"));
+            e.getMessage();
+            throw new ApplicationException(FxmlUtils.getBundleForApplicationErros().getString("error.delete"));
         } finally {
             entityManager.close();
         }
     }
 
     @Override
-    public void deleteById(Class<T> classType, I id) throws IllegalStateException, IllegalArgumentException, TransactionRequiredException, PersistenceException, ApplicationException {
+    public void deleteById(Class<T> classType, I id) throws ApplicationException {
         try {
             entityManager = entityManagerFactory.createEntityManager();
             entityManager.getTransaction().begin();
@@ -90,13 +90,12 @@ public class CrudFacade<T, I> implements GenericDao<T, I>, Serializable {
             entityManager.getTransaction().commit();
 
         } catch (HibernateException e) {
-            e.printStackTrace();
-            throw new ApplicationException(FxmlUtils.getResourceBundle().getString("error.delete"));
+            e.getMessage();
+            throw new ApplicationException(FxmlUtils.getBundleForApplicationErros().getString("error.delete"));
         } finally {
             entityManager.close();
         }
     }
-
 
 }
 

@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 
 public class DialogsUtils {
 
+    private DialogsUtils() {
+    }
 
     static ResourceBundle bundle = FxmlUtils.getResourceBundle();
 
@@ -20,7 +22,6 @@ public class DialogsUtils {
         informationAlert.showAndWait();
     }
 
-
     public static Optional<ButtonType> confirmAlert() {
         Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
         confirmationDialog.setTitle(bundle.getString("exit.title"));
@@ -30,41 +31,32 @@ public class DialogsUtils {
     }
 
     public static void errorDialogs(String error) {
-        Alert errorAllert = new Alert(Alert.AlertType.ERROR);
-        errorAllert.setTitle(bundle.getString("error.title"));
-        errorAllert.setHeaderText(bundle.getString("error.header"));
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle(bundle.getString("error.title"));
+        errorAlert.setHeaderText(bundle.getString("error.header"));
         TextArea textArea = new TextArea(error);
-        errorAllert.getDialogPane().setContent(textArea);
-        errorAllert.showAndWait();
-    }
-    public static void specificBooksOrdersError(String bundleKey){
-        Alert errorAllert = new Alert(Alert.AlertType.ERROR);
-        errorAllert.setTitle(bundle.getString("error.title"));
-        errorAllert.setHeaderText(bundle.getString("error.header"));
-        TextArea textArea = new TextArea(bundle.getString(bundleKey));
-        errorAllert.getDialogPane().setContent(textArea);
-        errorAllert.showAndWait();
-    }
-    public static void someBooksArentReturnedError(){
-        Alert errorAllert = new Alert(Alert.AlertType.ERROR);
-        errorAllert.setTitle(bundle.getString("error.title"));
-        errorAllert.setHeaderText(bundle.getString("error.header"));
-        TextArea textArea = new TextArea(bundle.getString("error.number.books.returned"));
-        errorAllert.getDialogPane().setContent(textArea);
-        errorAllert.showAndWait();
+        errorAlert.getDialogPane().setContent(textArea);
+        errorAlert.showAndWait();
     }
 
-    public static String editDialog (String values){
+    public static void specificBooksOrdersError(String bundleKey) {
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle(bundle.getString("error.title"));
+        errorAlert.setHeaderText(bundle.getString("error.header"));
+        TextArea textArea = new TextArea(bundle.getString(bundleKey));
+        errorAlert.getDialogPane().setContent(textArea);
+        errorAlert.showAndWait();
+    }
+
+    public static String editDialog(String values) {
         TextInputDialog dialog = new TextInputDialog(values);
         dialog.setTitle(bundle.getString("edit.title"));
         dialog.setHeaderText(bundle.getString("edit.header"));
         dialog.setContentText(bundle.getString("edit.content"));
         Optional<String> result = dialog.showAndWait();
-        if (result.isPresent()){
-            return result.get();
-        }
-        else return null;
+        return result.orElse(null);
     }
+
     public static void setTextFieldNumericOnly(TextField textFieldName) {
         textFieldName.textProperty().addListener(new ChangeListener<String>() {
             @Override

@@ -31,7 +31,7 @@
          <contextMenu>
             <ContextMenu prefHeight="800.0">
               <items>
-                <MenuItem id="deleteContextMenu" fx:id="deleteContectMenu" mnemonicParsing="false" onAction="#deleteSelected" text="%delete.button" />
+                <MenuItem id="deleteContextMenu" fx:id="deleteContextMenu" mnemonicParsing="false" text="%delete.button" />
               </items>
             </ContextMenu>
          </contextMenu>

@@ -6,10 +6,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 
 public class FxmlUtils {
+    private FxmlUtils() {
+    }
 
     public static Pane fxmlLoader(String fxmlPath) {
         FXMLLoader loader = new FXMLLoader(FxmlUtils.class.getClass().getResource(fxmlPath));
@@ -24,6 +27,12 @@ public class FxmlUtils {
     }
 
     public static ResourceBundle getResourceBundle() {
+        Locale.setDefault(new Locale("eng"));
+        return ResourceBundle.getBundle("bundles.messages");
+    }
+
+    public static ResourceBundle getBundleForApplicationErros() {
+        Locale.setDefault(new Locale("eng"));
         return ResourceBundle.getBundle("bundles.messages");
     }
 
@@ -33,9 +42,9 @@ public class FxmlUtils {
         return loader;
     }
 
-    public static Button createButton(Class classes ,String path) {
+    public static Button createButton(Class classes, String path) {
         Button button = new Button();
-        Image image = new Image(classes.getClass().getResource(path).toString());
+        Image image = new Image(classes.getResource(path).toString());
         ImageView imageView = new ImageView(image);
         button.setGraphic(imageView);
         return button;

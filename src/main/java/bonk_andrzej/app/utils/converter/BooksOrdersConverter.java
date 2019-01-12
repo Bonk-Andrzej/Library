@@ -62,6 +62,7 @@ public class BooksOrdersConverter {
 
     private int calculateAllReturnedBooks(BookOrder bookOrder) {
         int allReturnedBefore;
+        //todo moze doddac optionale
         if (bookOrder.getAllReturnedBooks() == null) {
             allReturnedBefore = 0;
         } else {

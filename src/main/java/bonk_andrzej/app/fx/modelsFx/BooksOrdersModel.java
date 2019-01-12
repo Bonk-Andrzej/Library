@@ -4,13 +4,10 @@ import bonk_andrzej.app.db.dao.CrudFacade;
 import bonk_andrzej.app.db.modelsDb.Book;
 import bonk_andrzej.app.db.modelsDb.BookOrder;
 import bonk_andrzej.app.db.modelsDb.Reader;
-import bonk_andrzej.app.fx.contollers.MainController;
-import bonk_andrzej.app.fx.contollers.OrdersListController;
 import bonk_andrzej.app.fx.view.BookFx;
 import bonk_andrzej.app.fx.view.BookOrdersFx;
 import bonk_andrzej.app.fx.view.ReaderFx;
 import bonk_andrzej.app.utils.DialogsUtils;
-import bonk_andrzej.app.utils.FxmlUtils;
 import bonk_andrzej.app.utils.converter.*;
 import bonk_andrzej.app.utils.exceptions.ApplicationException;
 import javafx.beans.property.ObjectProperty;
@@ -66,7 +63,7 @@ public class BooksOrdersModel {
         reader = (Reader) crudFacade.getById(Reader.class, getBookOrdersFxObjectProperty().getReaderFx().getId());
         int allToReturnBefore = bookOrder.getAmountBooksToReturn();
         int returnedBooksNow = Integer.parseInt(getBookOrdersFxObjectProperty().getAmountReturnedBooksNow());
-        if (checkNumberReturnedBooks(allToReturnBefore, returnedBooksNow)) {
+        if (isGoodAmountReturnedBooks(allToReturnBefore, returnedBooksNow)) {
             int leftBooksForRent = book.getLeftBooksForRent();
             leftBooksForRent += returnedBooksNow;
 
@@ -91,11 +88,11 @@ public class BooksOrdersModel {
         book = (Book) crudFacade.getById(Book.class, getBookOrdersFxObjectProperty().getBookFx().getId());
         int allBorrowedBooks = Integer.parseInt(getBookOrdersFxObjectProperty().getAmountAllBorrowedBooks());
         int returnedBooks = Integer.parseInt(getBookOrdersFxObjectProperty().getAmountReturnedBooksNow());
-        if (checkBookStatus(book, allBorrowedBooks, returnedBooks)) {
+        if (isBooksLeftForBorrow(book, allBorrowedBooks, returnedBooks)) {
             bookOrder = booksOrdersConverter.convertBookOrdersFxToBookOrders(getBookOrdersFxObjectProperty());
             reader = (Reader) crudFacade.getById(Reader.class, getBookOrdersFxObjectProperty().getReaderFx().getId());
 
-            if (checkNumberReturnedBooks(allBorrowedBooks, returnedBooks)) {
+            if (isGoodAmountReturnedBooks(allBorrowedBooks, returnedBooks)) {
                 int amountAllBorrowedBooks = bookOrder.getAmountAllBorrowedBooks();
                 int allReturned = bookOrder.getAllReturnedBooks();
                 int leftBooksForRent = book.getLeftBooksForRent();
@@ -141,7 +138,7 @@ public class BooksOrdersModel {
         reader.setBookOrderList(bookOrderList);
     }
 
-    private boolean checkNumberReturnedBooks(int amountToReturn, int returnedBooks) {
+    private boolean isGoodAmountReturnedBooks(int amountToReturn, int returnedBooks) {
         if (amountToReturn >= returnedBooks) {
             return true;
         } else {
@@ -150,7 +147,7 @@ public class BooksOrdersModel {
         }
     }
 
-    private boolean checkBookStatus(Book book, int allBorrowedBooks, int returnedBooks) {
+    private boolean isBooksLeftForBorrow(Book book, int allBorrowedBooks, int returnedBooks) {
         int leftBooksForRent = book.getLeftBooksForRent();
         allBorrowedBooks -= returnedBooks;
         if (leftBooksForRent >= allBorrowedBooks) {

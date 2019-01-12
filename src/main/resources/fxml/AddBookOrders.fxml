@@ -11,12 +11,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="614.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bonk_andrzej.app.fx.contollers.BooksOrdersController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bonk_andrzej.app.fx.contollers.BooksOrdersController">
    <children>
-      <GridPane prefHeight="797.0" prefWidth="639.0">
+      <GridPane prefHeight="793.0" prefWidth="700.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="148.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="455.0" minWidth="10.0" prefWidth="452.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="212.7999755859375" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="548.8000282287596" minWidth="10.0" prefWidth="388.8000244140624" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -29,21 +29,21 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label text="%reader" />
-            <Label text="%how.many.books.to.rent" GridPane.rowIndex="2" />
-            <Label text="%reader.rental.date" GridPane.rowIndex="3" />
-            <Label text="%reader.return.date" GridPane.rowIndex="4" />
+            <Label prefHeight="18.0" prefWidth="277.0" text="%reader" />
+            <Label prefHeight="18.0" prefWidth="252.0" text="%how.many.books.to.rent" GridPane.rowIndex="2" />
+            <Label prefHeight="18.0" prefWidth="264.0" text="%reader.rental.date" GridPane.rowIndex="3" />
+            <Label prefHeight="18.0" prefWidth="293.0" text="%reader.return.date" GridPane.rowIndex="4" />
             <DatePicker fx:id="returnDataPicker" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label text="%title.book" GridPane.rowIndex="1" />
+            <Label prefHeight="18.0" prefWidth="300.0" text="%title.book" GridPane.rowIndex="1" />
             <Button fx:id="addButton" mnemonicParsing="false" onAction="#addReaderOnAction" text="%save.button" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <Label text="%reader.actual.date.of.return" GridPane.rowIndex="5" />
+            <Label prefHeight="30.0" prefWidth="258.0" text="%reader.actual.date.of.return" GridPane.rowIndex="5" />
             <DatePicker fx:id="actualReturnDate" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <ComboBox fx:id="booksComboBox" prefHeight="26.0" prefWidth="449.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="booksRentTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <DatePicker fx:id="lenderDataPicker" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <ComboBox fx:id="readerComboBox" prefHeight="26.0" prefWidth="447.0" GridPane.columnIndex="1" />
             <TextField fx:id="booksReturnedTextField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Label text="%number.returned.books" GridPane.rowIndex="6" />
+            <Label prefHeight="18.0" prefWidth="274.0" text="%number.returned.books" GridPane.rowIndex="6" />
          </children>
       </GridPane>
    </children>

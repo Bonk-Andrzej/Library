@@ -26,12 +26,12 @@
                 </Menu>
                 <Menu id="Edit" mnemonicParsing="false" text="%edit">
                     <items>
-                        <RadioMenuItem id="Caspian" mnemonicParsing="false" onAction="#setCaspian" text="%caspian">
+                        <RadioMenuItem id="Caspian" mnemonicParsing="false" onAction="#setStylesheetCaspian" text="%caspian">
                             <toggleGroup>
                                 <ToggleGroup fx:id="styleGroup" />
                             </toggleGroup>
                         </RadioMenuItem>
-                        <RadioMenuItem id="Modena" mnemonicParsing="false" onAction="#setModena" text="%modena" toggleGroup="$styleGroup" />
+                        <RadioMenuItem id="Modena" mnemonicParsing="false" onAction="#setStylesheetModena" text="%modena" toggleGroup="$styleGroup" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <RadioMenuItem id="Change language to Polish" mnemonicParsing="false" onAction="#setLanguageToPl" text="%change.to.pl">
                             <toggleGroup>

@@ -80,7 +80,6 @@ public class AuthorController {
         }
     }
 
-
     private void tableViewBindings() {
         authorTableView.setItems(authorModel.getAuthorFxObservableList());
         nameColumn.setCellValueFactory(cellDate -> cellDate.getValue().nameProperty());

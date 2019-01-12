@@ -10,18 +10,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.util.Locale;
 import java.util.Optional;
 
 import static javafx.application.Application.STYLESHEET_CASPIAN;
 import static javafx.application.Application.STYLESHEET_MODENA;
 
 public class MainController {
-    private static final Locale DEFAULT_LOCALE = Locale.getDefault();
-    private static final Locale ENGLISH_LOCALE = Locale.ENGLISH;
+    private static final String POLISH_LOCALE = "pl";
+    private static final String ENGLISH_LOCALE = "eng";
 
     @FXML
     private BorderPane borderPane;
@@ -48,12 +46,12 @@ public class MainController {
     }
 
     @FXML
-    private void setCaspian() {
+    private void setStylesheetCaspian() {
         Application.setUserAgentStylesheet(STYLESHEET_CASPIAN);
     }
 
     @FXML
-    private void setModena() {
+    private void setStylesheetModena() {
         Application.setUserAgentStylesheet(STYLESHEET_MODENA);
     }
 
@@ -72,12 +70,12 @@ public class MainController {
     @FXML
     private void setLanguageToPl() {
         Stage newPrimaryStage = new Stage();
-        Main.startWindow(newPrimaryStage, ENGLISH_LOCALE);
+        Main.startWindow(newPrimaryStage,POLISH_LOCALE);
     }
 
     @FXML
     private void setLanguageToEn() {
         Stage newPrimaryStage = new Stage();
-        Main.startWindow(newPrimaryStage, DEFAULT_LOCALE);
+        Main.startWindow(newPrimaryStage,ENGLISH_LOCALE);
     }
 }

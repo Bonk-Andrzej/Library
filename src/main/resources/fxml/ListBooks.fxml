@@ -17,13 +17,13 @@
                <HBox.margin>
                   <Insets top="5.0" />
                </HBox.margin></Label>
-            <ComboBox fx:id="categoryComboBox" onAction="#filterOnActionComboBox" prefWidth="150.0" />
+            <ComboBox fx:id="categoryComboBox" onAction="#filterOnActionComboBox" prefHeight="26.0" prefWidth="200.0" />
             <Button mnemonicParsing="false" onAction="#clearCategoryComboBox" text="%clear.button" />
             <Label text="%author.book">
                <HBox.margin>
                   <Insets top="5.0" />
                </HBox.margin></Label>
-            <ComboBox fx:id="authorComboBox" onAction="#filterOnActionComboBox" prefWidth="150.0" />
+            <ComboBox fx:id="authorComboBox" onAction="#filterOnActionComboBox" prefHeight="26.0" prefWidth="200.0" />
             <Button mnemonicParsing="false" onAction="#clearAuthorComboBox" text="%clear.button" />
          </children>
          <padding>

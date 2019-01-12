@@ -5,7 +5,8 @@ import bonk_andrzej.app.db.modelsDb.Book;
 import bonk_andrzej.app.db.modelsDb.Reader;
 import bonk_andrzej.app.fx.view.BookFx;
 import bonk_andrzej.app.fx.view.ReaderFx;
-import bonk_andrzej.app.utils.converter.*;
+import bonk_andrzej.app.utils.converter.BookConverter;
+import bonk_andrzej.app.utils.converter.ReaderConverter;
 import bonk_andrzej.app.utils.exceptions.ApplicationException;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -25,7 +26,7 @@ public class ReaderModel {
 
     public void initAllObservableList() throws ApplicationException {
         initObservableBookList();
-        initObsrvableReaderList();
+        initObservableReaderList();
     }
 
     private void initObservableBookList() throws ApplicationException {
@@ -37,7 +38,7 @@ public class ReaderModel {
         });
     }
 
-    public void initObsrvableReaderList() throws ApplicationException {
+    public void initObservableReaderList() throws ApplicationException {
         List<Reader> readers = crudFacade.getAll(Reader.class);
         readerFxObservableList.clear();
         readers.forEach(reader -> {
@@ -49,14 +50,14 @@ public class ReaderModel {
     public void saveOrUpdateReaderToDB() throws ApplicationException {
         Reader reader = readerConverter.convertReaderFxToReader(getReaderFxObjectProperty());
         crudFacade.createOrUpdate(reader);
-        initObsrvableReaderList();
+        initObservableReaderList();
     }
 
     public void deleteAuthorInDB() throws ApplicationException {
         Reader authorTodelete = (Reader) crudFacade.getById(
                 Reader.class, getReaderFxObjectProperty().getId());
         crudFacade.delete(authorTodelete);
-        initObsrvableReaderList();
+        initObservableReaderList();
     }
 
 

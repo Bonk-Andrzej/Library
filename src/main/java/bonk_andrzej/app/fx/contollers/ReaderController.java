@@ -1,8 +1,6 @@
 package bonk_andrzej.app.fx.contollers;
 
-import bonk_andrzej.app.db.modelsDb.Reader;
 import bonk_andrzej.app.fx.modelsFx.ReaderModel;
-import bonk_andrzej.app.fx.view.AuthorFx;
 import bonk_andrzej.app.fx.view.ReaderFx;
 import bonk_andrzej.app.utils.DialogsUtils;
 import bonk_andrzej.app.utils.exceptions.ApplicationException;

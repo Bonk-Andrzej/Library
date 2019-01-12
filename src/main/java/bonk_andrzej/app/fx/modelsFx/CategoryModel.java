@@ -32,7 +32,7 @@ public class CategoryModel {
     }
 
     public void saveOrUpdateCategoryInDB() throws ApplicationException {
-        Category categoryToUpdate = categoryConverter.converCategoryFxToCategory(getCategoryFxObjectProperty());
+        Category categoryToUpdate = categoryConverter.convertCategoryFxToCategory(getCategoryFxObjectProperty());
         crudFacade.createOrUpdate(categoryToUpdate);
         initializeCategoryFromDB();
     }

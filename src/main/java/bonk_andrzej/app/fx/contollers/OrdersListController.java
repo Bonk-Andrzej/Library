@@ -1,9 +1,10 @@
 package bonk_andrzej.app.fx.contollers;
 
-import bonk_andrzej.app.db.modelsDb.Reader;
-import bonk_andrzej.app.fx.modelsFx.BooksOrdersModel;
 import bonk_andrzej.app.fx.modelsFx.OrdersListModel;
-import bonk_andrzej.app.fx.view.*;
+import bonk_andrzej.app.fx.view.AuthorFx;
+import bonk_andrzej.app.fx.view.BookOrdersFx;
+import bonk_andrzej.app.fx.view.CategoryFx;
+import bonk_andrzej.app.fx.view.ReaderFx;
 import bonk_andrzej.app.utils.DialogsUtils;
 import bonk_andrzej.app.utils.FxmlUtils;
 import bonk_andrzej.app.utils.exceptions.ApplicationException;
@@ -13,7 +14,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 

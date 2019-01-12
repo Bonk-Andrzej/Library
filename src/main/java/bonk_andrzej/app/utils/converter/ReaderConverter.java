@@ -1,12 +1,7 @@
 package bonk_andrzej.app.utils.converter;
 
-import bonk_andrzej.app.db.modelsDb.Book;
 import bonk_andrzej.app.db.modelsDb.Reader;
-
 import bonk_andrzej.app.fx.view.ReaderFx;
-import com.sun.org.apache.xerces.internal.xs.datatypes.ObjectList;
-
-import java.util.List;
 
 public class ReaderConverter {
 
