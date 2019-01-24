@@ -55,7 +55,7 @@ public class BookController {
         }
     }
 
-    protected void bindProperties() {
+    void bindProperties() {
         categoryComboBox.setItems(bookModel.getCategoryFxObservableList());
         authorComboBox.setItems(bookModel.getAuthorFxObservableList());
 
@@ -93,7 +93,7 @@ public class BookController {
         amountBooksTextField.clear();
     }
 
-    public BookModel getBookModel() {
+    BookModel getBookModel() {
         return bookModel;
     }
 }

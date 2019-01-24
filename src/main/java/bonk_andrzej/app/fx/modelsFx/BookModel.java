@@ -1,6 +1,6 @@
 package bonk_andrzej.app.fx.modelsFx;
 
-import bonk_andrzej.app.db.dao.CrudFacade;
+import bonk_andrzej.app.db.dao.GenericCrud;
 import bonk_andrzej.app.db.modelsDb.Author;
 import bonk_andrzej.app.db.modelsDb.Book;
 import bonk_andrzej.app.db.modelsDb.Category;
@@ -22,7 +22,7 @@ public class BookModel {
     private ObjectProperty<BookFx> bookFxObjectProperty = new SimpleObjectProperty<>(new BookFx());
     private ObservableList<CategoryFx> categoryFxObservableList = FXCollections.observableArrayList();
     private ObservableList<AuthorFx> authorFxObservableList = FXCollections.observableArrayList();
-    private CrudFacade crudFacade = new CrudFacade();
+    private GenericCrud genericCrud = new GenericCrud();
     private AuthorConverter authorConverter = new AuthorConverter();
     private BookConverter bookConverter = new BookConverter();
     private CategoryConverter categoryConverter = new CategoryConverter();
@@ -35,11 +35,11 @@ public class BookModel {
 
     public void saveBookInDB() throws ApplicationException {
         Book book = bookConverter.convertBookFxToBook(getBookFxObjectProperty());
-        crudFacade.createOrUpdate(book);
+        genericCrud.createOrUpdate(book);
     }
 
     private void initAuthorFxList() throws ApplicationException {
-        List<Author> authors = crudFacade.getAll(Author.class);
+        List<Author> authors = genericCrud.getAll(Author.class);
         authorFxObservableList.clear();
         authors.forEach(author -> {
             AuthorFx authorFx = authorConverter
@@ -49,7 +49,7 @@ public class BookModel {
     }
 
     private void initCategoryFxList() throws ApplicationException {
-        List<Category> categories = crudFacade.getAll(Category.class);
+        List<Category> categories = genericCrud.getAll(Category.class);
         categoryFxObservableList.clear();
         categories.forEach(category -> {
             CategoryFx categoryFx = categoryConverter.convertCategoryToCategoryFx(category);

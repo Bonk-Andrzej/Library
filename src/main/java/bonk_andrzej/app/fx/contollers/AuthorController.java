@@ -97,5 +97,4 @@ public class AuthorController {
         deleteMenuItem.disableProperty().bind(authorTableView.getSelectionModel().selectedItemProperty().isNull());
     }
 
-
 }

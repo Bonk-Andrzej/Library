@@ -8,21 +8,22 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
-@NoArgsConstructor
+//@Data
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id")
     private long id;
-    @Column(name = "category_name", unique = true, length = 20)
+    @Column(unique = true, length = 20)
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "category", cascade = CascadeType.ALL)
-    private List<Book> bookListForCategory;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    private List<Book> books;
+
 
     @Override
     public boolean equals(Object o) {
@@ -31,11 +32,11 @@ public class Category {
         Category category = (Category) o;
         return id == category.id &&
                 Objects.equals(name, category.name) &&
-                Objects.equals(bookListForCategory, category.bookListForCategory);
+                Objects.equals(books, category.books);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, bookListForCategory);
+        return Objects.hash(id, name, books);
     }
 }

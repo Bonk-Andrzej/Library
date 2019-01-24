@@ -30,7 +30,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </HBox>
-      <TableView fx:id="readersTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0">
+      <TableView fx:id="ordersTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0">
          <columns>
             <TableColumn fx:id="titleColumn" prefWidth="75.0" text="%title.book" />
             <TableColumn fx:id="authorColumn" prefWidth="75.0" text="%author.book" />

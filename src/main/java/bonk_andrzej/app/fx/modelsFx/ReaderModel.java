@@ -1,6 +1,6 @@
 package bonk_andrzej.app.fx.modelsFx;
 
-import bonk_andrzej.app.db.dao.CrudFacade;
+import bonk_andrzej.app.db.dao.GenericCrud;
 import bonk_andrzej.app.db.modelsDb.Book;
 import bonk_andrzej.app.db.modelsDb.Reader;
 import bonk_andrzej.app.fx.view.BookFx;
@@ -19,7 +19,7 @@ public class ReaderModel {
     private ObjectProperty<ReaderFx> readerFxObjectProperty = new SimpleObjectProperty<>(new ReaderFx());
     private ObservableList<ReaderFx> readerFxObservableList = FXCollections.observableArrayList();
     private ObservableList<BookFx> bookFxObservableList = FXCollections.observableArrayList();
-    private CrudFacade crudFacade = new CrudFacade();
+    private GenericCrud genericCrud = new GenericCrud();
     private BookConverter bookConverter = new BookConverter();
     private ReaderConverter readerConverter = new ReaderConverter();
 
@@ -30,7 +30,7 @@ public class ReaderModel {
     }
 
     private void initObservableBookList() throws ApplicationException {
-        List<Book> books = crudFacade.getAll(Book.class);
+        List<Book> books = genericCrud.getAll(Book.class);
         bookFxObservableList.clear();
         books.forEach(book -> {
             BookFx bookFx = bookConverter.convertBookToBookFx(book);
@@ -39,7 +39,7 @@ public class ReaderModel {
     }
 
     public void initObservableReaderList() throws ApplicationException {
-        List<Reader> readers = crudFacade.getAll(Reader.class);
+        List<Reader> readers = genericCrud.getAll(Reader.class);
         readerFxObservableList.clear();
         readers.forEach(reader -> {
             ReaderFx readerFx = readerConverter.convertReaderToReaderFx(reader);
@@ -49,14 +49,14 @@ public class ReaderModel {
 
     public void saveOrUpdateReaderToDB() throws ApplicationException {
         Reader reader = readerConverter.convertReaderFxToReader(getReaderFxObjectProperty());
-        crudFacade.createOrUpdate(reader);
+        genericCrud.createOrUpdate(reader);
         initObservableReaderList();
     }
 
     public void deleteAuthorInDB() throws ApplicationException {
-        Reader authorTodelete = (Reader) crudFacade.getById(
+        Reader authorTodelete = (Reader) genericCrud.getById(
                 Reader.class, getReaderFxObjectProperty().getId());
-        crudFacade.delete(authorTodelete);
+        genericCrud.delete(authorTodelete);
         initObservableReaderList();
     }
 

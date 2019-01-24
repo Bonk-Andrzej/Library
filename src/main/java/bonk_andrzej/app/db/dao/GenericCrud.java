@@ -11,13 +11,15 @@ import java.io.Serializable;
 import java.util.List;
 
 
-public class CrudFacade<T, I> implements GenericDao<T, I>, Serializable {
+public class GenericCrud<T, I> implements GenericDao<T, I>, Serializable {
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("my-persistence-unit");
-    private EntityManager entityManager;
+    private EntityManager entityManager = entityManagerFactory.createEntityManager();
+
 
     @Override
     public T createOrUpdate(T entity) throws ApplicationException {
         try {
+//            throw new NullPointerException();
             entityManager = entityManagerFactory.createEntityManager();
             entityManager.getTransaction().begin();
             entityManager.merge(entity);
@@ -25,7 +27,7 @@ public class CrudFacade<T, I> implements GenericDao<T, I>, Serializable {
             return entity;
         } catch (HibernateException e) {
             e.getMessage();
-            throw new ApplicationException(FxmlUtils.getBundleForApplicationErros().getString("error.create.or.update"));
+            throw new ApplicationException(FxmlUtils.getBundleForApplicationErrors().getString("error.create.or.update"));
         } finally {
             entityManager.close();
         }
@@ -41,7 +43,7 @@ public class CrudFacade<T, I> implements GenericDao<T, I>, Serializable {
             return object;
         } catch (HibernateException e) {
             e.getMessage();
-            throw new ApplicationException(FxmlUtils.getBundleForApplicationErros().getString("error.not.found"));
+            throw new ApplicationException(FxmlUtils.getBundleForApplicationErrors().getString("error.not.found"));
         } finally {
             entityManager.close();
         }
@@ -58,7 +60,7 @@ public class CrudFacade<T, I> implements GenericDao<T, I>, Serializable {
             return genericList;
         } catch (HibernateException e) {
             e.getMessage();
-            throw new ApplicationException(FxmlUtils.getBundleForApplicationErros().getString("error.not.found.all"));
+            throw new ApplicationException(FxmlUtils.getBundleForApplicationErrors().getString("error.not.found.all"));
         } finally {
             entityManager.close();
         }
@@ -74,7 +76,7 @@ public class CrudFacade<T, I> implements GenericDao<T, I>, Serializable {
 
         } catch (HibernateException e) {
             e.getMessage();
-            throw new ApplicationException(FxmlUtils.getBundleForApplicationErros().getString("error.delete"));
+            throw new ApplicationException(FxmlUtils.getBundleForApplicationErrors().getString("error.delete"));
         } finally {
             entityManager.close();
         }
@@ -91,7 +93,7 @@ public class CrudFacade<T, I> implements GenericDao<T, I>, Serializable {
 
         } catch (HibernateException e) {
             e.getMessage();
-            throw new ApplicationException(FxmlUtils.getBundleForApplicationErros().getString("error.delete"));
+            throw new ApplicationException(FxmlUtils.getBundleForApplicationErrors().getString("error.delete"));
         } finally {
             entityManager.close();
         }

@@ -9,7 +9,7 @@ public class MenuController {
     private static final String ADD_BOOK_FXML = "/fxml/AddBook.fxml";
     private static final String ADD_CATEGORY_FXML = "/fxml/AddCategory.fxml";
     private static final String ADD_AUTHOR_FXML = "/fxml/AddAuthor.fxml";
-    private static final String READER_LIST_FXML = "/fxml/ReaderList.fxml";
+    private static final String READER_LIST_FXML = "/fxml/OrdersList.fxml";
     private static final String RENT_BOOK_FXML = "/fxml/AddBookOrders.fxml";
 
     private MainController mainController;

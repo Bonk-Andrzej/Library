@@ -1,6 +1,6 @@
 package bonk_andrzej.app.fx.modelsFx;
 
-import bonk_andrzej.app.db.dao.CrudFacade;
+import bonk_andrzej.app.db.dao.GenericCrud;
 import bonk_andrzej.app.db.modelsDb.Author;
 import bonk_andrzej.app.fx.view.AuthorFx;
 import bonk_andrzej.app.utils.converter.AuthorConverter;
@@ -25,7 +25,7 @@ class AuthorModelTest {
     @Mock
     private ObjectProperty<AuthorFx> authorFxObjectProperty = new SimpleObjectProperty<>(new AuthorFx());
     @Mock
-    private CrudFacade crudFacade = new CrudFacade();
+    private GenericCrud genericCrud = new GenericCrud();
     @Mock
     private AuthorConverter authorConverter = new AuthorConverter();
 
@@ -53,7 +53,7 @@ class AuthorModelTest {
         expectedAuthor.setSurname("Bonk");
 
         when(authorConverter.convertAuthorFxToAuthor(authorFxToUpdate)).thenReturn(expectedAuthor);
-        when(crudFacade.createOrUpdate(authorToUpdate)).thenReturn(expectedAuthor);
+        when(genericCrud.createOrUpdate(authorToUpdate)).thenReturn(expectedAuthor);
         //when
         Author authorUpdated = authorModel.saveOrUpdateAuthorInDb();
         //then

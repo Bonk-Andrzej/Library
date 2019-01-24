@@ -1,6 +1,6 @@
 package bonk_andrzej.app.fx.modelsFx;
 
-import bonk_andrzej.app.db.dao.CrudFacade;
+import bonk_andrzej.app.db.dao.GenericCrud;
 import bonk_andrzej.app.db.modelsDb.Author;
 import bonk_andrzej.app.fx.view.AuthorFx;
 import bonk_andrzej.app.utils.converter.AuthorConverter;
@@ -17,26 +17,26 @@ public class AuthorModel {
     private ObservableList<AuthorFx> authorFxObservableList = FXCollections.observableArrayList();
     private ObjectProperty<AuthorFx> authorFxObjectProperty = new SimpleObjectProperty<>(new AuthorFx());
 
-    private CrudFacade crudFacade = new CrudFacade();
+    private GenericCrud genericCrud = new GenericCrud();
     private AuthorConverter authorConverter = new AuthorConverter();
 
 
     public Author saveOrUpdateAuthorInDb() throws ApplicationException {
         Author author = authorConverter.convertAuthorFxToAuthor(getAuthorFxObjectProperty());
-        crudFacade.createOrUpdate(author);
+        genericCrud.createOrUpdate(author);
         initializeAuthorFromDb();
         return author;
     }
 
     public void deleteAuthorInDB() throws ApplicationException {
-        Author authorToDelete = (Author) crudFacade.getById(
+        Author authorToDelete = (Author) genericCrud.getById(
                 Author.class, getAuthorFxObjectProperty().getId());
-        crudFacade.delete(authorToDelete);
+        genericCrud.delete(authorToDelete);
         initializeAuthorFromDb();
     }
 
     public void initializeAuthorFromDb() throws ApplicationException {
-        List<Author> authorList = crudFacade.getAll(Author.class);
+        List<Author> authorList = genericCrud.getAll(Author.class);
         authorFxObservableList.clear();
         authorList.forEach(author -> {
             AuthorFx authorFx = authorConverter.convertAuthorToAuthorFx(author);

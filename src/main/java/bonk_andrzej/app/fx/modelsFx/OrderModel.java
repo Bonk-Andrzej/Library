@@ -1,6 +1,6 @@
 package bonk_andrzej.app.fx.modelsFx;
 
-import bonk_andrzej.app.db.dao.CrudFacade;
+import bonk_andrzej.app.db.dao.GenericCrud;
 import bonk_andrzej.app.db.modelsDb.Book;
 import bonk_andrzej.app.db.modelsDb.BookOrder;
 import bonk_andrzej.app.db.modelsDb.Reader;
@@ -8,7 +8,9 @@ import bonk_andrzej.app.fx.view.BookFx;
 import bonk_andrzej.app.fx.view.BookOrdersFx;
 import bonk_andrzej.app.fx.view.ReaderFx;
 import bonk_andrzej.app.utils.DialogsUtils;
-import bonk_andrzej.app.utils.converter.*;
+import bonk_andrzej.app.utils.converter.BookConverter;
+import bonk_andrzej.app.utils.converter.BooksOrderConverter;
+import bonk_andrzej.app.utils.converter.ReaderConverter;
 import bonk_andrzej.app.utils.exceptions.ApplicationException;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -18,20 +20,18 @@ import javafx.collections.ObservableList;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BooksOrdersModel {
+public class OrderModel {
     private ObjectProperty<BookOrdersFx> bookOrdersFxObjectProperty = new SimpleObjectProperty<>(new BookOrdersFx());
     private ObservableList<BookOrdersFx> bookOrdersFxObservableList = FXCollections.observableArrayList();
     private ObservableList<BookFx> bookFxObservableList = FXCollections.observableArrayList();
     private ObservableList<ReaderFx> readerFxObservableList = FXCollections.observableArrayList();
-    private CrudFacade crudFacade = new CrudFacade();
+    private GenericCrud genericCrud = new GenericCrud();
     private BookConverter bookConverter = new BookConverter();
-    private BooksOrdersConverter booksOrdersConverter = new BooksOrdersConverter();
+    private BooksOrderConverter booksOrderConverter = new BooksOrderConverter();
     private ReaderConverter readerConverter = new ReaderConverter();
     private Book book;
     private Reader reader;
     private BookOrder bookOrder;
-
-
 
     public void initAllObservableList() throws ApplicationException {
         initObservableBookList();
@@ -39,7 +39,7 @@ public class BooksOrdersModel {
     }
 
     private void initObservableBookList() throws ApplicationException {
-        List<Book> books = crudFacade.getAll(Book.class);
+        List<Book> books = genericCrud.getAll(Book.class);
         bookFxObservableList.clear();
         books.forEach(book -> {
             BookFx bookFx = bookConverter.convertBookToBookFx(book);
@@ -48,7 +48,7 @@ public class BooksOrdersModel {
     }
 
     private void initObservableReaderList() throws ApplicationException {
-        List<Reader> readers = crudFacade.getAll(Reader.class);
+        List<Reader> readers = genericCrud.getAll(Reader.class);
         readerFxObservableList.clear();
         readers.forEach(reader -> {
             ReaderFx readerFx = readerConverter.convertReaderToReaderFx(reader);
@@ -56,11 +56,10 @@ public class BooksOrdersModel {
         });
     }
 
-
     public void updateOrderInDB() throws ApplicationException {
-        bookOrder = (BookOrder) crudFacade.getById(BookOrder.class, getBookOrdersFxObjectProperty().getId());
-        book = (Book) crudFacade.getById(Book.class, getBookOrdersFxObjectProperty().getBookFx().getId());
-        reader = (Reader) crudFacade.getById(Reader.class, getBookOrdersFxObjectProperty().getReaderFx().getId());
+        bookOrder = (BookOrder) genericCrud.getById(BookOrder.class, getBookOrdersFxObjectProperty().getId());
+        book = (Book) genericCrud.getById(Book.class, getBookOrdersFxObjectProperty().getBookFx().getId());
+        reader = (Reader) genericCrud.getById(Reader.class, getBookOrdersFxObjectProperty().getReaderFx().getId());
         int allToReturnBefore = bookOrder.getAmountBooksToReturn();
         int returnedBooksNow = Integer.parseInt(getBookOrdersFxObjectProperty().getAmountReturnedBooksNow());
         if (isGoodAmountReturnedBooks(allToReturnBefore, returnedBooksNow)) {
@@ -71,26 +70,21 @@ public class BooksOrdersModel {
             int allReturnedNow = returnedBooksBefore + returnedBooksNow;
             int allBorrowedBooks = bookOrder.getAmountAllBorrowedBooks();
             int allBooksToReturnNow = allBorrowedBooks - allReturnedNow;
-            List<Book> bookList = new ArrayList<>();
-            bookList.add(book);
 
-            updateBookOrder(bookOrder, allReturnedNow, allBooksToReturnNow, reader, bookList);
-            updateBook(book, reader, bookOrder, leftBooksForRent);
-            updateReader(book, reader, bookOrder);
-            crudFacade.createOrUpdate(bookOrder);
+            updateBookOrder(bookOrder, allReturnedNow, allBooksToReturnNow, reader, book);
+            updateBook(book, bookOrder, leftBooksForRent);
+            genericCrud.createOrUpdate(bookOrder);
             initAllObservableList();
-
-
         }
     }
 
     public void saveOrderToDB() throws ApplicationException {
-        book = (Book) crudFacade.getById(Book.class, getBookOrdersFxObjectProperty().getBookFx().getId());
+        book = (Book) genericCrud.getById(Book.class, getBookOrdersFxObjectProperty().getBookFx().getId());
         int allBorrowedBooks = Integer.parseInt(getBookOrdersFxObjectProperty().getAmountAllBorrowedBooks());
         int returnedBooks = Integer.parseInt(getBookOrdersFxObjectProperty().getAmountReturnedBooksNow());
         if (isBooksLeftForBorrow(book, allBorrowedBooks, returnedBooks)) {
-            bookOrder = booksOrdersConverter.convertBookOrdersFxToBookOrders(getBookOrdersFxObjectProperty());
-            reader = (Reader) crudFacade.getById(Reader.class, getBookOrdersFxObjectProperty().getReaderFx().getId());
+            bookOrder = booksOrderConverter.convertBookOrdersFxToBookOrders(getBookOrdersFxObjectProperty());
+            reader = (Reader) genericCrud.getById(Reader.class, getBookOrdersFxObjectProperty().getReaderFx().getId());
 
             if (isGoodAmountReturnedBooks(allBorrowedBooks, returnedBooks)) {
                 int amountAllBorrowedBooks = bookOrder.getAmountAllBorrowedBooks();
@@ -98,44 +92,29 @@ public class BooksOrdersModel {
                 int leftBooksForRent = book.getLeftBooksForRent();
                 int bookForReturnNow = amountAllBorrowedBooks - allReturned;
                 leftBooksForRent -= bookForReturnNow;
-                List<Book> bookList = new ArrayList<>();
-                bookList.add(book);
 
-                updateBook(book, reader, bookOrder, leftBooksForRent);
-                updateReader(book, reader, bookOrder);
-                updateBookOrder(bookOrder, allReturned, bookForReturnNow, reader, bookList);
-                crudFacade.createOrUpdate(bookOrder);
+                updateBook(book, bookOrder, leftBooksForRent);
+                updateBookOrder(bookOrder, allReturned, bookForReturnNow, reader, book);
+                genericCrud.createOrUpdate(bookOrder);
                 initAllObservableList();
             }
         }
     }
 
-    private void updateBookOrder(BookOrder bookOrder, int allReturnedNow, int allBooksToReturnNow, Reader reader, List<Book> bookList) {
+    private void updateBookOrder(BookOrder bookOrder, int allReturnedNow, int allBooksToReturnNow, Reader reader, Book book) {
         bookOrder.setAllReturnedBooks(allReturnedNow);
         bookOrder.setAmountBooksToReturn(allBooksToReturnNow);
         bookOrder.setReader(reader);
-        bookOrder.setBookList(bookList);
+        bookOrder.setBook(book);
     }
 
-    private void updateBook(Book book, Reader reader, BookOrder bookOrder, int leftBooksForRent) {
+
+    private void updateBook(Book book, BookOrder bookOrder, int leftBooksForRent) throws ApplicationException {
         book.setLeftBooksForRent(leftBooksForRent);
         List<BookOrder> bookOrderList = new ArrayList<>();
         bookOrderList.add(bookOrder);
         book.setBookOrderList(bookOrderList);
-
-        List<Reader> readerList = new ArrayList<>();
-        readerList.add(reader);
-        book.setReaderList(readerList);
-    }
-
-    private void updateReader(Book book, Reader reader, BookOrder bookOrder) {
-        List<Book> bookList = new ArrayList<>();
-        bookList.add(book);
-        reader.setBookList(bookList);
-
-        List<BookOrder> bookOrderList = new ArrayList<>();
-        bookOrderList.add(bookOrder);
-        reader.setBookOrderList(bookOrderList);
+        genericCrud.createOrUpdate(book);
     }
 
     private boolean isGoodAmountReturnedBooks(int amountToReturn, int returnedBooks) {

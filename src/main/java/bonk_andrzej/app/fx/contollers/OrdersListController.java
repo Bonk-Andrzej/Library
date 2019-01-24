@@ -1,10 +1,7 @@
 package bonk_andrzej.app.fx.contollers;
 
 import bonk_andrzej.app.fx.modelsFx.OrdersListModel;
-import bonk_andrzej.app.fx.view.AuthorFx;
-import bonk_andrzej.app.fx.view.BookOrdersFx;
-import bonk_andrzej.app.fx.view.CategoryFx;
-import bonk_andrzej.app.fx.view.ReaderFx;
+import bonk_andrzej.app.fx.view.*;
 import bonk_andrzej.app.utils.DialogsUtils;
 import bonk_andrzej.app.utils.FxmlUtils;
 import bonk_andrzej.app.utils.exceptions.ApplicationException;
@@ -27,7 +24,7 @@ public class OrdersListController {
     @FXML
     private ComboBox titleComboBox;
     @FXML
-    private TableView<BookOrdersFx> readersTableView;
+    private TableView<BookOrdersFx> ordersTableView;
     @FXML
     private TableColumn<BookOrdersFx, String> titleColumn;
     @FXML
@@ -53,10 +50,6 @@ public class OrdersListController {
     @FXML
     private TableColumn<BookOrdersFx, BookOrdersFx> editColumn;
     private OrdersListModel ordersListModel;
-
-    public OrdersListModel getOrdersListModel() {
-        return ordersListModel;
-    }
 
     @FXML
     public void initialize() {
@@ -90,10 +83,10 @@ public class OrdersListController {
             Button button = FxmlUtils.createButton(this.getClass(), "/icons/delete.png");
 
             @Override
-            protected void updateItem(BookOrdersFx item, boolean empty) {
-                super.updateItem(item, empty);
+            protected void updateItem(BookOrdersFx item, boolean isEmpty) {
+                super.updateItem(item, isEmpty);
                 button.setAlignment(Pos.CENTER);
-                if (empty) {
+                if (isEmpty) {
                     setGraphic(null);
                     return;
                 }
@@ -108,7 +101,6 @@ public class OrdersListController {
                     } catch (ApplicationException e) {
                         DialogsUtils.errorDialogs(e.getMessage());
                     }
-
                 });
             }
         });
@@ -119,10 +111,10 @@ public class OrdersListController {
             Button button = FxmlUtils.createButton(this.getClass(), "/icons/edit.png");
 
             @Override
-            protected void updateItem(BookOrdersFx item, boolean empty) {
-                super.updateItem(item, empty);
+            protected void updateItem(BookOrdersFx item, boolean isEmpty) {
+                super.updateItem(item, isEmpty);
 
-                if (empty) {
+                if (isEmpty) {
                     setGraphic(null);
                     return;
                 }
@@ -137,19 +129,20 @@ public class OrdersListController {
                         e.printStackTrace();
                     }
                     EditBooksOrdersController editBookOrderController = loader.getController();
-                    editBookOrderController.getBooksOrdersModel().setBookOrdersFxObjectProperty(item);
+                    editBookOrderController.getOrderModel().setBookOrdersFxObjectProperty(item);
                     editBookOrderController.bindProperties();
                     Stage stage = new Stage();
                     stage.setScene(scene);
                     stage.initModality(Modality.APPLICATION_MODAL);
                     stage.showAndWait();
+                    initialize();
                 });
             }
         });
     }
 
     private void bindProperties() {
-        readersTableView.setItems(ordersListModel.getBookOrdersFxObservableList());
+        ordersTableView.setItems(ordersListModel.getBookOrdersFxObservableList());
         titleColumn.setCellValueFactory(infoInCell -> infoInCell.getValue().bookTitleProperty());
         authorColumn.setCellValueFactory(infoInCell -> infoInCell.getValue().authorFxProperty());
         categoryColumn.setCellValueFactory(infoInCell -> infoInCell.getValue().categoryFxProperty());

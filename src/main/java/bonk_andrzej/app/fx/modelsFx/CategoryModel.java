@@ -1,10 +1,10 @@
 package bonk_andrzej.app.fx.modelsFx;
 
-import bonk_andrzej.app.db.dao.CrudFacade;
+import bonk_andrzej.app.db.dao.GenericCrud;
 import bonk_andrzej.app.db.modelsDb.Category;
-import bonk_andrzej.app.utils.converter.*;
-import bonk_andrzej.app.utils.exceptions.ApplicationException;
 import bonk_andrzej.app.fx.view.CategoryFx;
+import bonk_andrzej.app.utils.converter.CategoryConverter;
+import bonk_andrzej.app.utils.exceptions.ApplicationException;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -19,26 +19,26 @@ public class CategoryModel {
     private ObjectProperty<CategoryFx> categoryFxObjectProperty = new SimpleObjectProperty<>(new CategoryFx());
     private ObservableList<CategoryFx> categoryFxObservableList = FXCollections.observableArrayList();
     private TreeItem<String> treeItemRoot = new TreeItem<>();
-    private CrudFacade crudFacade = new CrudFacade();
+    private GenericCrud genericCrud = new GenericCrud();
 
     private CategoryConverter categoryConverter = new CategoryConverter();
 
 
     public void deleteCategory() throws ApplicationException {
-        Category categoryToDelete = (Category) crudFacade.getById(
+        Category categoryToDelete = (Category) genericCrud.getById(
                 Category.class, getCategoryFxObjectProperty().getId());
-        crudFacade.delete(categoryToDelete);
+        genericCrud.delete(categoryToDelete);
         initializeCategoryFromDB();
     }
 
     public void saveOrUpdateCategoryInDB() throws ApplicationException {
         Category categoryToUpdate = categoryConverter.convertCategoryFxToCategory(getCategoryFxObjectProperty());
-        crudFacade.createOrUpdate(categoryToUpdate);
+        genericCrud.createOrUpdate(categoryToUpdate);
         initializeCategoryFromDB();
     }
 
     public void initializeCategoryFromDB() throws ApplicationException {
-        List<Category> categories = crudFacade.getAll(Category.class);
+        List<Category> categories = genericCrud.getAll(Category.class);
         initializeCategoryFxList(categories);
         initializeItemRoot(categories);
     }
@@ -47,7 +47,7 @@ public class CategoryModel {
         treeItemRoot.getChildren().clear();
         categories.forEach(c -> {
             TreeItem<String> categoryItem = new TreeItem<>(c.getName());
-            c.getBookListForCategory().forEach(
+            c.getBooks().forEach(
                     book -> categoryItem.getChildren()
                             .add(new TreeItem<>(book.getTitle())));
             treeItemRoot.getChildren().add(categoryItem);

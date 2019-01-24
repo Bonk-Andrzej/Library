@@ -1,7 +1,5 @@
 package bonk_andrzej.app.utils;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.control.*;
 
 import java.util.Optional;
@@ -12,7 +10,7 @@ public class DialogsUtils {
     private DialogsUtils() {
     }
 
-    static ResourceBundle bundle = FxmlUtils.getResourceBundle();
+    private static ResourceBundle bundle = FxmlUtils.getResourceBundle();
 
     public static void dialogAboutApplication() {
         Alert informationAlert = new Alert(Alert.AlertType.INFORMATION);
@@ -26,8 +24,7 @@ public class DialogsUtils {
         Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
         confirmationDialog.setTitle(bundle.getString("exit.title"));
         confirmationDialog.setHeaderText(bundle.getString("exit.header"));
-        Optional<ButtonType> result = confirmationDialog.showAndWait();
-        return result;
+        return confirmationDialog.showAndWait();
     }
 
     public static void errorDialogs(String error) {
@@ -58,13 +55,9 @@ public class DialogsUtils {
     }
 
     public static void setTextFieldNumericOnly(TextField textFieldName) {
-        textFieldName.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    textFieldName.setText(newValue.replaceAll("[^\\d]", ""));
-                }
+        textFieldName.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                textFieldName.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
     }

@@ -127,6 +127,7 @@ public class BooksListController {
                     stage.setScene(scene);
                     stage.initModality(Modality.APPLICATION_MODAL);
                     stage.showAndWait();
+                    initialize();
                 });
             }
         });

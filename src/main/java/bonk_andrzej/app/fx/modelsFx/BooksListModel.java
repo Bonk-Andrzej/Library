@@ -1,19 +1,21 @@
 package bonk_andrzej.app.fx.modelsFx;
 
-import bonk_andrzej.app.db.dao.CrudFacade;
+import bonk_andrzej.app.db.dao.GenericCrud;
 import bonk_andrzej.app.db.modelsDb.Author;
 import bonk_andrzej.app.db.modelsDb.Book;
+import bonk_andrzej.app.db.modelsDb.BookOrder;
 import bonk_andrzej.app.db.modelsDb.Category;
 import bonk_andrzej.app.fx.view.AuthorFx;
 import bonk_andrzej.app.fx.view.BookFx;
 import bonk_andrzej.app.fx.view.CategoryFx;
-import bonk_andrzej.app.utils.converter.*;
+import bonk_andrzej.app.utils.converter.AuthorConverter;
+import bonk_andrzej.app.utils.converter.BookConverter;
+import bonk_andrzej.app.utils.converter.CategoryConverter;
 import bonk_andrzej.app.utils.exceptions.ApplicationException;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +31,7 @@ public class BooksListModel {
     private ObjectProperty<CategoryFx> categoryFx = new SimpleObjectProperty<>();
     private List<BookFx> bookFxList = new ArrayList<>();
 
-    private CrudFacade crudFacade = new CrudFacade();
+    private GenericCrud genericCrud = new GenericCrud();
     private AuthorConverter authorConverter = new AuthorConverter();
     private BookConverter bookConverter = new BookConverter();
     private CategoryConverter categoryConverter = new CategoryConverter();
@@ -43,7 +45,7 @@ public class BooksListModel {
 
     private void initAuthorFxList() throws ApplicationException {
         authorFxObservableList.clear();
-        List<Author> authors = crudFacade.getAll(Author.class);
+        List<Author> authors = genericCrud.getAll(Author.class);
         authors.forEach(author -> {
             AuthorFx authorFx = authorConverter
                     .convertAuthorToAuthorFx(author);
@@ -53,8 +55,9 @@ public class BooksListModel {
 
     private void initCategoryFxList() throws ApplicationException {
         categoryFxObservableList.clear();
-        List<Category> categories = crudFacade.getAll(Category.class);
-        categories.forEach(category -> { categoryFxObservableList.add(categoryConverter.convertCategoryToCategoryFx(category));
+        List<Category> categories = genericCrud.getAll(Category.class);
+        categories.forEach(category -> {
+            categoryFxObservableList.add(categoryConverter.convertCategoryToCategoryFx(category));
             CategoryFx categoryFx = categoryConverter.convertCategoryToCategoryFx(category);
             categoryFxObservableList.add(categoryFx);
         });
@@ -62,14 +65,23 @@ public class BooksListModel {
 
     private void initBookFxList() throws ApplicationException {
         bookFxList.clear();
-        List<Book> books = crudFacade.getAll(Book.class);
+        List<Book> books = genericCrud.getAll(Book.class);
         books.forEach(book -> bookFxList.add(bookConverter.convertBookToBookFx(book)));
         bookFxObservableList.setAll(bookFxList);
     }
 
     public void deleteBook(BookFx bookFx) throws ApplicationException {
         Book book = bookConverter.convertBookFxToBook(bookFx);
-        crudFacade.delete(book);
+        List<BookOrder> bookOrderList = book.getBookOrderList();
+        bookOrderList.forEach(bookOrder -> {
+            try {
+                BookOrder bookOrderTodele = (BookOrder) genericCrud.getById(BookOrder.class, bookOrder.getId());
+                genericCrud.delete(bookOrderTodele);
+            } catch (ApplicationException e) {
+                e.printStackTrace();
+            }
+        });
+        genericCrud.delete(book);
         initAllObservableList();
     }
 

@@ -3,8 +3,6 @@ package bonk_andrzej.app.fx.view;
 import javafx.beans.property.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class BookOrdersFx {
 
@@ -23,8 +21,6 @@ public class BookOrdersFx {
     private ObjectProperty<CategoryFx> categoryFx = new SimpleObjectProperty<>();
     private ObjectProperty<AuthorFx> authorFx = new SimpleObjectProperty<>();
 
-    private List<BookFx> bookFxList = new ArrayList<>();
-
 
     public String getBookTitle() {
         return bookTitle.get();
@@ -36,14 +32,6 @@ public class BookOrdersFx {
 
     public void setBookTitle(String bookTitle) {
         this.bookTitle.set(bookTitle);
-    }
-
-    public void setBookFxList(List<BookFx> bookFxList) {
-        this.bookFxList = bookFxList;
-    }
-
-    public List<BookFx> getBookFxList() {
-        return bookFxList;
     }
 
     public BookFx getBookFx() {

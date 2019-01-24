@@ -1,6 +1,6 @@
 //package bonk_andrzej.app.utils;
 //
-//import bonk_andrzej.app.db.dao.CrudFacade;
+//import bonk_andrzej.app.db.dao.GenericCrud;
 //import bonk_andrzej.app.db.modelsDb.*;
 //import bonk_andrzej.app.utils.exceptions.ApplicationException;
 //
@@ -12,7 +12,7 @@
 //
 //public class AddObjectToDB {
 //    public static void addObjectToDB() throws ApplicationException {
-//        CrudFacade crudFacade = new CrudFacade();
+//        GenericCrud crudFacade = new GenericCrud();
 //
 //
 //        Category category1 = new Category("Dramat");

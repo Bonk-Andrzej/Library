@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class CrudFacadeTest {
+class ApplicationExceptionTest {
 
     @Mock
     EntityManagerFactory entityManagerFactory;
@@ -27,7 +27,7 @@ class CrudFacadeTest {
     EntityManager entityManager;
 
     @InjectMocks
-    CrudFacade crudFacade = new CrudFacade();
+    GenericCrud genericCrud = new GenericCrud();
 
     @Before
     public void setUp() {
@@ -43,7 +43,7 @@ class CrudFacadeTest {
         when(entityManagerFactory.createEntityManager()).thenReturn(entityManager);
         when(entityManager.getTransaction()).thenThrow(new HibernateException("error"));
         try {
-            crudFacade.createOrUpdate(authorToAdd);
+            genericCrud.createOrUpdate(authorToAdd);
             Assert.fail("exception");
         } catch (ApplicationException e) {
             assertEquals("Problem with create or update data in database.", e.getMessage());
@@ -55,7 +55,7 @@ class CrudFacadeTest {
         when(entityManagerFactory.createEntityManager()).thenReturn(entityManager);
         when(entityManager.getTransaction()).thenThrow(new HibernateException("error"));
         try {
-            crudFacade.getById(Author.class,1);
+            genericCrud.getById(Author.class, 1);
             Assert.fail("exception");
         } catch (ApplicationException e) {
             assertEquals("Item not found in database.", e.getMessage());
@@ -68,7 +68,7 @@ class CrudFacadeTest {
         when(entityManagerFactory.createEntityManager()).thenReturn(entityManager);
         when(entityManager.getTransaction()).thenThrow(new HibernateException("error"));
         try {
-            crudFacade.getAll(Author.class);
+            genericCrud.getAll(Author.class);
             Assert.fail("exception");
         } catch (ApplicationException e) {
             assertEquals("Problem with retrieves the data from the database.", e.getMessage());
@@ -80,14 +80,10 @@ class CrudFacadeTest {
         when(entityManagerFactory.createEntityManager()).thenReturn(entityManager);
         when(entityManager.getTransaction()).thenThrow(new HibernateException("error"));
         try {
-            crudFacade.delete(Author.class);
+            genericCrud.delete(Author.class);
             Assert.fail("exception");
         } catch (ApplicationException e) {
             assertEquals("Problem with delete item.", e.getMessage());
         }
     }
-
-//    @Test
-//    void deleteById() {
-//    }
 }

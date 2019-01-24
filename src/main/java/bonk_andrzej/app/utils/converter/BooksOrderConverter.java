@@ -1,20 +1,11 @@
 package bonk_andrzej.app.utils.converter;
 
-import bonk_andrzej.app.db.dao.CrudFacade;
-import bonk_andrzej.app.db.modelsDb.Book;
 import bonk_andrzej.app.db.modelsDb.BookOrder;
-import bonk_andrzej.app.db.modelsDb.Reader;
-import bonk_andrzej.app.fx.view.BookFx;
 import bonk_andrzej.app.fx.view.BookOrdersFx;
-import bonk_andrzej.app.utils.exceptions.ApplicationException;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class BooksOrdersConverter {
+public class BooksOrderConverter {
     private BookConverter bookConverter = new BookConverter();
     private ReaderConverter readerConverter = new ReaderConverter();
-
 
     public BookOrder convertBookOrdersFxToBookOrders(BookOrdersFx bookOrdersFx) {
 
@@ -29,6 +20,7 @@ public class BooksOrdersConverter {
         bookOrder.setLenderDate(bookOrdersFx.getLenderDate());
         bookOrder.setReturnDate(bookOrdersFx.getReturnDate());
         bookOrder.setActualDateOfReturn(bookOrdersFx.getActualDateOfReturn());
+        bookOrder.setReader(readerConverter.convertReaderFxToReader(bookOrdersFx.getReaderFx()));
 
         return bookOrder;
     }
@@ -45,40 +37,31 @@ public class BooksOrdersConverter {
         bookOrdersFx.setReturnDate(bookOrder.getReturnDate());
         bookOrdersFx.setActualDateOfReturn(bookOrder.getActualDateOfReturn());
 
-        List<Book> bookOrdersList = new ArrayList<>(bookOrder.getBookList());
-        List<BookFx> bookFxList = new ArrayList<>();
-        bookOrdersList.forEach(book -> {
-            BookFx bookFx = (bookConverter.convertBookToBookFx(book));
-            bookFxList.add(bookFx);
-            bookOrdersFx.setCategoryFx(bookFx.getCategoryFx());
-            bookOrdersFx.setAuthorFx(bookFx.getAuthorFx());
-            bookOrdersFx.setBookTitle(bookFx.getTitle());
-        });
-        bookOrdersFx.setBookFxList(bookFxList);
+        bookOrdersFx.setBookFx(bookConverter.convertBookToBookFx(bookOrder.getBook()));
+        bookOrdersFx.setCategoryFx(bookOrdersFx.getBookFx().getCategoryFx());
+        bookOrdersFx.setAuthorFx(bookOrdersFx.getBookFx().getAuthorFx());
+        bookOrdersFx.setBookTitle(bookOrdersFx.getBookFx().getTitle());
         bookOrdersFx.setReaderFx(readerConverter.convertReaderToReaderFx(bookOrder.getReader()));
+
         return bookOrdersFx;
     }
 
 
     private int calculateAllReturnedBooks(BookOrder bookOrder) {
         int allReturnedBefore;
-        //todo moze doddac optionale
         if (bookOrder.getAllReturnedBooks() == null) {
             allReturnedBefore = 0;
         } else {
             allReturnedBefore = bookOrder.getAllReturnedBooks();
         }
         int returnedBooksNow = bookOrder.getAmountReturnedBooksNow();
-        int allReturned = allReturnedBefore + returnedBooksNow;
-        return allReturned;
+        return allReturnedBefore + returnedBooksNow;
     }
 
     private int calculateBooksToReturn(BookOrder bookOrder) {
         int allBorrowedBooks = bookOrder.getAmountAllBorrowedBooks();
         int allReturnedBefore = bookOrder.getAllReturnedBooks();
-        int booksToReturn = allBorrowedBooks - allReturnedBefore;
-        System.out.println(booksToReturn + " ksiazki do zwroptu");
-        return booksToReturn;
+        return allBorrowedBooks - allReturnedBefore;
     }
 
     private int calculateBooksReturnedNow(BookOrdersFx bookOrdersFx) {

@@ -15,7 +15,7 @@ public class FxmlUtils {
     }
 
     public static Pane fxmlLoader(String fxmlPath) {
-        FXMLLoader loader = new FXMLLoader(FxmlUtils.class.getClass().getResource(fxmlPath));
+        FXMLLoader loader = new FXMLLoader(FxmlUtils.class.getResource(fxmlPath));
         loader.setResources(getResourceBundle());
         try {
             return loader.load();
@@ -27,11 +27,10 @@ public class FxmlUtils {
     }
 
     public static ResourceBundle getResourceBundle() {
-        Locale.setDefault(new Locale("eng"));
         return ResourceBundle.getBundle("bundles.messages");
     }
 
-    public static ResourceBundle getBundleForApplicationErros() {
+    public static ResourceBundle getBundleForApplicationErrors() {
         Locale.setDefault(new Locale("eng"));
         return ResourceBundle.getBundle("bundles.messages");
     }
