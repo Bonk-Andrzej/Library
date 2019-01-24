@@ -17,8 +17,9 @@ public class Main extends Application {
 
     public void start(Stage primaryStage) {
 //        AddObjectToDB.addObjectToDB();
-        startWindow(primaryStage, ENGLISH_LOCALE);
         GenericCrud genericCrud = new GenericCrud();
+        startWindow(primaryStage, ENGLISH_LOCALE);
+
     }
 
     public static void startWindow(Stage primaryStage, String locale) {

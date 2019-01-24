@@ -103,16 +103,14 @@ public class BooksListModel {
     }
 
     private Predicate<BookFx> categoryPredicate() {
-        Predicate<BookFx> predicate = bookFx -> bookFx.getCategoryFx().getId()
+        return bookFx -> bookFx.getCategoryFx().getId()
                 == getCategoryFx().getId();
-        return predicate;
 
     }
 
     private Predicate<BookFx> authorPredicate() {
-        Predicate<BookFx> predicate = bookFx -> bookFx.getAuthorFx().getId()
+        return bookFx -> bookFx.getAuthorFx().getId()
                 == getAuthorFx().getId();
-        return predicate;
     }
 
 

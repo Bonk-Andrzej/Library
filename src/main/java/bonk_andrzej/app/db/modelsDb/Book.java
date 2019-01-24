@@ -34,7 +34,7 @@ public class Book {
     @JoinColumn(name = "author_id")
     private Author author;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "book")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "book", fetch = FetchType.EAGER)
     private List<BookOrder> bookOrderList;
 
     @Override

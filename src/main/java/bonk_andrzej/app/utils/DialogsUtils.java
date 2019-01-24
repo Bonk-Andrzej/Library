@@ -20,10 +20,10 @@ public class DialogsUtils {
         informationAlert.showAndWait();
     }
 
-    public static Optional<ButtonType> confirmAlert() {
+    public static Optional<ButtonType> confirmAlert(String title, String header) {
         Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmationDialog.setTitle(bundle.getString("exit.title"));
-        confirmationDialog.setHeaderText(bundle.getString("exit.header"));
+        confirmationDialog.setTitle(bundle.getString(title));
+        confirmationDialog.setHeaderText(bundle.getString(header));
         return confirmationDialog.showAndWait();
     }
 

@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 
+import java.util.Optional;
+
 public class AuthorController {
 
 
@@ -52,10 +54,13 @@ public class AuthorController {
 
     @FXML
     private void deleteAuthorOnAction() {
-        try {
-            authorModel.deleteAuthorInDB();
-        } catch (ApplicationException e) {
-            DialogsUtils.errorDialogs(e.getMessage());
+        Optional<ButtonType> result = DialogsUtils.confirmAlert("delete.author.title", "delete.author.header");
+        if (result.get() == ButtonType.OK) {
+            try {
+                authorModel.deleteAuthorInDB();
+            } catch (ApplicationException e) {
+                DialogsUtils.errorDialogs(e.getMessage());
+            }
         }
     }
 

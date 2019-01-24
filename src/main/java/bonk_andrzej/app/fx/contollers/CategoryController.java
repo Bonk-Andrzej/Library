@@ -7,6 +7,8 @@ import bonk_andrzej.app.utils.exceptions.ApplicationException;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.util.Optional;
+
 public class CategoryController extends TextField {
 
     @FXML
@@ -49,10 +51,13 @@ public class CategoryController extends TextField {
 
     @FXML
     private void onActionDeleteButton() {
-        try {
-            categoryModel.deleteCategory();
-        } catch (ApplicationException e) {
-            DialogsUtils.errorDialogs(e.getMessage());
+        Optional<ButtonType> result = DialogsUtils.confirmAlert("delete.category.title", "delete.category.header");
+        if (result.get() == ButtonType.OK) {
+            try {
+                categoryModel.deleteCategory();
+            } catch (ApplicationException e) {
+                DialogsUtils.errorDialogs(e.getMessage());
+            }
         }
     }
 
