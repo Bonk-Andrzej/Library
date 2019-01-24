@@ -34,10 +34,19 @@ public class BookModel {
     }
 
     public void saveBookInDB() throws ApplicationException {
-        Book book = bookConverter.convertBookFxToBook(getBookFxObjectProperty());
-        genericCrud.createOrUpdate(book);
+
+        if (isNewBookToAdd()) {
+            Book book = bookConverter.convertBookFxToBook(getBookFxObjectProperty());
+            genericCrud.createOrUpdate(book);
+        } else {
+            genericCrud.createOrUpdate(bookConverter.convertExistingBookInDB(getBookFxObjectProperty()));
+        }
     }
 
+    private boolean isNewBookToAdd() throws ApplicationException {
+        Book book = (Book) genericCrud.getById(Book.class, getBookFxObjectProperty().getId());
+        return book == null;
+    }
     private void initAuthorFxList() throws ApplicationException {
         List<Author> authors = genericCrud.getAll(Author.class);
         authorFxObservableList.clear();

@@ -1,11 +1,17 @@
 package bonk_andrzej.app.utils.converter;
 
+import bonk_andrzej.app.db.dao.GenericCrud;
+import bonk_andrzej.app.db.dao.GenericDao;
 import bonk_andrzej.app.db.modelsDb.Book;
 import bonk_andrzej.app.fx.view.BookFx;
+import bonk_andrzej.app.utils.exceptions.ApplicationException;
+
+import java.util.List;
 
 public class BookConverter {
     private CategoryConverter categoryConverter = new CategoryConverter();
     private AuthorConverter authorConverter = new AuthorConverter();
+    GenericCrud genericCrud = new GenericCrud();
 
     public Book convertBookFxToBook(BookFx bookFx) {
         Book book = new Book();
@@ -35,5 +41,17 @@ public class BookConverter {
         return bookFx;
     }
 
-
+    public Book convertExistingBookInDB(BookFx bookFx) throws ApplicationException {
+        Book book = (Book) genericCrud.getById(Book.class, bookFx.getId());
+        book.setId(bookFx.getId());
+        book.setTitle(bookFx.getTitle());
+        book.setDescription(bookFx.getDescription());
+        book.setRating(bookFx.getRating());
+        book.setIsbn(bookFx.getIsbn());
+        book.setLeftBooksForRent(Integer.valueOf(bookFx.getLeftBooksForRent()));
+        book.setReleaseDate(bookFx.getReleaseDate());
+        book.setCategory(categoryConverter.convertCategoryFxToCategory(bookFx.getCategoryFx()));
+        book.setAuthor(authorConverter.convertAuthorFxToAuthor(bookFx.getAuthorFx()));
+        return book;
+    }
 }

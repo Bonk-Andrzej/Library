@@ -65,7 +65,7 @@ public class OrdersListController {
 
     @FXML
     private void filterOnActionComboBox() {
-        ordersListModel.setFilterReaders();
+        ordersListModel.setFilterOrders();
     }
 
     @FXML

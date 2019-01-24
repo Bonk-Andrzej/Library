@@ -19,7 +19,6 @@ public class GenericCrud<T, I> implements GenericDao<T, I>, Serializable {
     @Override
     public T createOrUpdate(T entity) throws ApplicationException {
         try {
-//            throw new NullPointerException();
             entityManager = entityManagerFactory.createEntityManager();
             entityManager.getTransaction().begin();
             entityManager.merge(entity);

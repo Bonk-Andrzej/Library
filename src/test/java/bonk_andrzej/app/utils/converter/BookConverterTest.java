@@ -6,6 +6,7 @@ import bonk_andrzej.app.db.modelsDb.Category;
 import bonk_andrzej.app.fx.view.AuthorFx;
 import bonk_andrzej.app.fx.view.BookFx;
 import bonk_andrzej.app.fx.view.CategoryFx;
+import bonk_andrzej.app.utils.exceptions.ApplicationException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -58,7 +59,7 @@ class BookConverterTest {
     private final BookConverter bookConverter = new BookConverter();
 
     @Test
-    void shouldReturnBookWithTheSameFieldsLikeBookFx() {
+    void shouldReturnBookWithTheSameFieldsLikeBookFx() throws ApplicationException {
         //given
         Book expectedBook = prepareBookTestObject();
         BookFx bookFx = prepareBookFxTestObject();

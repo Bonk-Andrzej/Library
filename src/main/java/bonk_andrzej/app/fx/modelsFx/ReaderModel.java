@@ -54,9 +54,9 @@ public class ReaderModel {
     }
 
     public void deleteAuthorInDB() throws ApplicationException {
-        Reader authorTodelete = (Reader) genericCrud.getById(
+        Reader authorToDelete = (Reader) genericCrud.getById(
                 Reader.class, getReaderFxObjectProperty().getId());
-        genericCrud.delete(authorTodelete);
+        genericCrud.delete(authorToDelete);
         initObservableReaderList();
     }
 
