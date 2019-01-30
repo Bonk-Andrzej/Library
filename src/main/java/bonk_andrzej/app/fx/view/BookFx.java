@@ -3,6 +3,7 @@ package bonk_andrzej.app.fx.view;
 import javafx.beans.property.*;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class BookFx {
 
@@ -132,5 +133,26 @@ public class BookFx {
                 ", AUTHOR: " + authorFx.get() +
                 ", AMOUNT: " + leftBooksForRent.get();
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BookFx bookFx = (BookFx) o;
+        return this.authorFxProperty().get().equals(((BookFx)o).authorFx.get()) &&
+                Objects.equals(authorFx, bookFx.authorFx) &&
+                Objects.equals(id, bookFx.id) &&
+                Objects.equals(title, bookFx.title) &&
+                Objects.equals(description, bookFx.description) &&
+                Objects.equals(rating, bookFx.rating) &&
+                Objects.equals(isbn, bookFx.isbn) &&
+                Objects.equals(leftBooksForRent, bookFx.leftBooksForRent) &&
+                Objects.equals(releaseDate, bookFx.releaseDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(categoryFx, authorFx, id, title, description, rating, isbn, leftBooksForRent, releaseDate);
     }
 }

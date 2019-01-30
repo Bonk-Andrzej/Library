@@ -6,47 +6,38 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class CategoryConverterTest {
+class CategoryConverterTest extends AbstractTest{
 
     private final CategoryConverter categoryConverter = new CategoryConverter();
-    private final long idForConvert = 1L;
-    private final String nameForConvert = "Kryminał";
 
     @Test
-    public void shouldReturnCategoryWithTheSameFieldsLikeCategoryFx() {
+    void shouldReturnCategoryWithTheSameFieldsLikeCategoryFx() {
         //given
-        Category expectedCategory = setCategoryFields();
-        CategoryFx categoryFx = setCategoryFxFields();
+        Category expectedCategory = makeCategory();
+        CategoryFx categoryFx = makeCategoryFx();
         //when
         Category categoryAfterConvert = categoryConverter.convertCategoryFxToCategory(categoryFx);
         //then
-        assertThat(expectedCategory).isEqualTo(categoryAfterConvert);
+        assertThat(categoryAfterConvert).isEqualTo(expectedCategory);
     }
+
     @Test
-    public void shouldReturnCategoryFxWithTheSameFieldsLikeCategory() {
+    void shouldReturnCategoryFxWithTheSameFieldsLikeCategory() {
         //given
-        CategoryFx expectedCategoryFx = setCategoryFxFields();
-        Category category = setCategoryFields();
+        Category category = makeCategory();
+        CategoryFx expectedCategoryFx = makeCategoryFx();
         //when
         CategoryFx categoryFxAfterConvert = categoryConverter.convertCategoryToCategoryFx(category);
         //then
-        //todo
-        assertThat(categoryFxAfterConvert).isEqualToComparingFieldByField(expectedCategoryFx);
+        assertThat(categoryFxAfterConvert.getName()).isEqualTo(expectedCategoryFx.getName());
     }
 
-    private Category setCategoryFields() {
-        Category category = new Category();
-        category.setId(idForConvert);
-        category.setName(nameForConvert);
-        return category;
-    }
+   private  Category makeCategory(){
+        return super.createCategory();
+   }
 
-    private CategoryFx setCategoryFxFields() {
-        CategoryFx categoryFx = new CategoryFx();
-        categoryFx.setId(idForConvert);
-        categoryFx.setName(nameForConvert);
-        return categoryFx;
+    private  CategoryFx makeCategoryFx(){
+        return super.createCategoryFx();
     }
-
 
 }

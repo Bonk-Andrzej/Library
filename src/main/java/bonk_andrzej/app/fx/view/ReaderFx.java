@@ -5,6 +5,8 @@ import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.util.Objects;
+
 public class ReaderFx {
 
     private LongProperty id = new SimpleLongProperty();
@@ -52,4 +54,18 @@ public class ReaderFx {
         return name.get() + " " + surname.get();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ReaderFx readerFx = (ReaderFx) o;
+        return Objects.equals(id, readerFx.id) &&
+                Objects.equals(name, readerFx.name) &&
+                Objects.equals(surname, readerFx.surname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, surname);
+    }
 }

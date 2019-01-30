@@ -1,19 +1,17 @@
 package bonk_andrzej.app.db.modelsDb;
 
-import lombok.Getter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
 
-//@Data
-@Getter
-@Setter
+@EqualsAndHashCode(callSuper = false)
+@Data
 @NoArgsConstructor
 @Entity
-public class Category {
+public class Category extends BaseModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,18 +23,4 @@ public class Category {
     private List<Book> books;
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Category category = (Category) o;
-        return id == category.id &&
-                Objects.equals(name, category.name) &&
-                Objects.equals(books, category.books);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, books);
-    }
 }

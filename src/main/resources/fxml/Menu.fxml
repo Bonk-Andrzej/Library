@@ -20,8 +20,22 @@
                </image>
             </ImageView>
          </graphic></ToggleButton>
-      <ToggleButton mnemonicParsing="false" onAction="#openReaderListWindow" prefHeight="114.0" prefWidth="150.0" text="%reader.list" toggleGroup="$toggleButtons" />
-      <ToggleButton mnemonicParsing="false" onAction="#openRentBookWindow" prefHeight="114.0" prefWidth="150.0" text="%rent.book" toggleGroup="$toggleButtons" />
+      <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#openReaderListWindow" prefHeight="114.0" prefWidth="150.0" text="%reader.list" toggleGroup="$toggleButtons">
+         <graphic>
+            <ImageView fitHeight="80.0" fitWidth="78.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/readerListIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></ToggleButton>
+      <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#openRentBookWindow" prefHeight="114.0" prefWidth="150.0" text="%rent.book" toggleGroup="$toggleButtons">
+         <graphic>
+            <ImageView fitHeight="107.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/rentBookIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></ToggleButton>
         <ToggleButton contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#openAddReaderWindow" prefHeight="114.0" prefWidth="150.0" text="%add.reader" toggleGroup="$toggleButtons">
          <graphic>
             <ImageView fitHeight="96.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
