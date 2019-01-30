@@ -37,20 +37,21 @@ public class OrdersListModel {
     private ReaderConverter readerConverter = new ReaderConverter();
 
     public void initAllObservableList() throws ApplicationException {
-        initBookFxList();
+        initBookOrdersFxList();
         initReadersList();
-        initOrdersList();
+        initBooksList();
     }
 
-    private void initBookFxList() throws ApplicationException {
-        bookFxObservableList.clear();
-        List<Book> books = genericCrud.getAll(Book.class);
-        books.forEach(book -> bookFxObservableList.add(bookConverter.convertBookToBookFx(book)));
+    private void initBookOrdersFxList() throws ApplicationException {
+        bookOrdersFxList.clear();
+        List<BookOrder> bookOrders = genericCrud.getAll(BookOrder.class);
+        bookOrders.forEach(bookOrder -> bookOrdersFxList.add(booksOrderConverter.convertBookOrdersToBookOrdersFx(bookOrder)));
+        bookOrdersFxObservableList.setAll(bookOrdersFxList);
     }
 
     private void initReadersList() throws ApplicationException {
-        List<Reader> readers = genericCrud.getAll(Reader.class);
         readerFxObservableList.clear();
+        List<Reader> readers = genericCrud.getAll(Reader.class);
         readers.forEach(reader -> {
             ReaderFx readerFx = readerConverter
                     .convertReaderToReaderFx(reader);
@@ -58,13 +59,10 @@ public class OrdersListModel {
         });
     }
 
-    private void initOrdersList() throws ApplicationException {
-        bookOrdersFxObservableList.clear();
-        List<BookOrder> orders = genericCrud.getAll(BookOrder.class);
-        orders.forEach(order -> {
-            BookOrdersFx bookOrdersFx = booksOrderConverter.convertBookOrdersToBookOrdersFx(order);
-            bookOrdersFxObservableList.add(bookOrdersFx);
-        });
+    private void initBooksList() throws ApplicationException {
+        bookFxObservableList.clear();
+        List<Book> books = genericCrud.getAll(Book.class);
+        books.forEach(book -> bookFxObservableList.add(bookConverter.convertBookToBookFx(book)));
     }
 
     public void deleteOrders(BookOrdersFx bookOrdersFx) throws ApplicationException {
@@ -73,25 +71,24 @@ public class OrdersListModel {
         initAllObservableList();
     }
 
-    //todo do poprawy filtrowanie
-    public void setFilterReaders() {
+    public void setFilterOrders() {
         if (getBookFx() != null && getReaderFx() != null) {
-            filterReaderList(titlePredicate().and(readerPredicate()));
+            filterOrderList(bookPredicate().and(readerPredicate()));
         } else if (getBookFx() != null) {
-            filterReaderList(titlePredicate());
+            filterOrderList(bookPredicate());
         } else if (getReaderFx() != null) {
-            filterReaderList(readerPredicate());
+            filterOrderList(readerPredicate());
         } else {
             bookOrdersFxObservableList.setAll(bookOrdersFxList);
         }
     }
 
-    private void filterReaderList(Predicate<BookOrdersFx> predicate) {
+    private void filterOrderList(Predicate<BookOrdersFx> predicate) {
         List<BookOrdersFx> newList = bookOrdersFxList.stream().filter(predicate).collect(Collectors.toList());
         bookOrdersFxObservableList.setAll(newList);
     }
 
-    private Predicate<BookOrdersFx> titlePredicate() {
+    private Predicate<BookOrdersFx> bookPredicate() {
         return bookOrdersFx -> bookOrdersFx.getBookFx().getId()
                 == getBookFx().getId();
     }

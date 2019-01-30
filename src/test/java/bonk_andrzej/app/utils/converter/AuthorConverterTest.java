@@ -6,50 +6,43 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AuthorConverterTest {
+class AuthorConverterTest extends AbstractTest {
 
     private final AuthorConverter authorConverter = new AuthorConverter();
-    private final long idForConvert = 1L;
-    private final String nameForConvert = "Andrzej";
-    private final String surnameForConvert = "Bonk";
+
 
 
     @Test
-    public void shouldReturnAuthorWithTheSameFieldsLikeAuthorFx() {
+    void shouldReturnAuthorWithTheSameFieldsLikeAuthorFx() {
         //given
-        Author expectedAuthor = setAuthorFields();
-        AuthorFx authorFx = setAuthorFxFields();
+        Author expectedAuthor = makeAuthor();
+        AuthorFx authorFx = makeAuthorFx();
         //when
         Author authorAfterConvert = authorConverter.convertAuthorFxToAuthor(authorFx);
         //then
-        assertThat(expectedAuthor).isEqualTo(authorAfterConvert);
+        assertThat(authorAfterConvert).isEqualTo(expectedAuthor);
     }
 
     @Test
-    public void shouldReturnAuthorFxWithTheSameFieldsLikeAuthor() {
+    void shouldReturnAuthorFxWithTheSameFieldsLikeAuthor() {
         //given
-        AuthorFx expectedAuthorFx = setAuthorFxFields();
-        Author author = setAuthorFields();
+        AuthorFx expectedAuthorFx = makeAuthorFx();
+        Author author = makeAuthor();
         //when
         AuthorFx authorFxAfterConvert = authorConverter.convertAuthorToAuthorFx(author);
         //then
         assertThat(authorFxAfterConvert).isEqualToComparingFieldByField(expectedAuthorFx);
     }
 
-    private AuthorFx setAuthorFxFields() {
-        AuthorFx authorFx = new AuthorFx();
-        authorFx.setName(nameForConvert);
-        authorFx.setSurname(surnameForConvert);
-        authorFx.setId(idForConvert);
-        return authorFx;
+
+    private AuthorFx makeAuthorFx(){
+       return super.createAuthorFx();
+    }
+    private Author makeAuthor(){
+        return super.createAuthor();
     }
 
-    private Author setAuthorFields() {
-        Author author = new Author();
-        author.setName(nameForConvert);
-        author.setSurname(surnameForConvert);
-        author.setId(idForConvert);
-        return author;
-    }
+
+
 
 }

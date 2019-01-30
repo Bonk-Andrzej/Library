@@ -25,7 +25,7 @@ public class CategoryModel {
 
 
     public void deleteCategory() throws ApplicationException {
-        Category categoryToDelete = (Category) genericCrud.getById(
+       Category categoryToDelete = (Category) genericCrud.getById(
                 Category.class, getCategoryFxObjectProperty().getId());
         genericCrud.delete(categoryToDelete);
         initializeCategoryFromDB();

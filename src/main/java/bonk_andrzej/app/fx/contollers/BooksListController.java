@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class BooksListController {
     @FXML
@@ -147,10 +148,13 @@ public class BooksListController {
                 }
                 setGraphic(button);
                 button.setOnAction(event -> {
-                    try {
-                        booksListModel.deleteBook(item);
-                    } catch (ApplicationException e) {
-                        DialogsUtils.errorDialogs(e.getMessage());
+                    Optional<ButtonType> result = DialogsUtils.confirmAlert("delete.book.title", "delete.book.header");
+                    if (result.get() == ButtonType.OK) {
+                        try {
+                            booksListModel.deleteBook(item);
+                        } catch (ApplicationException e) {
+                            DialogsUtils.errorDialogs(e.getMessage());
+                        }
                     }
                 });
             }

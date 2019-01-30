@@ -6,48 +6,37 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-class ReaderConverterTest {
+class ReaderConverterTest extends AbstractTest {
     private final ReaderConverter readerConverter = new ReaderConverter();
-    private final long idForConvert = 1L;
-    private final String nameForConvert = "Andrzej";
-    private final String surnameForConvert = "Bonk";
 
     @Test
     void shouldReturnReaderWithTheSameFieldsLikeReaderFx() {
         //given
-        Reader expectedReader = setReaderFields();
-        ReaderFx readerFx = setReaderFxFields();
+        Reader expectedReader = makeReader();
+        ReaderFx readerFx = makeReaderFx();
         //when
         Reader readerAfterConvert = readerConverter.convertReaderFxToReader(readerFx);
         //then
-        assertThat(expectedReader).isEqualTo(readerAfterConvert);
+        assertThat(readerAfterConvert).isEqualTo(expectedReader);
     }
 
     @Test
     void shouldReturnReaderFxWithTheSameFieldsLikeReader() {
         //given
-        ReaderFx expectedReaderFx = setReaderFxFields();
-        Reader reader = setReaderFields();
+        ReaderFx expectedReaderFx = makeReaderFx();
+        Reader reader = makeReader();
         //when
         ReaderFx readerFxAfterConvert = readerConverter.convertReaderToReaderFx(reader);
         //then
-        assertThat(expectedReaderFx).isEqualToComparingFieldByField(readerFxAfterConvert);
+        assertThat(readerFxAfterConvert).isEqualToComparingFieldByField(expectedReaderFx);
     }
 
-    private Reader setReaderFields() {
-        Reader reader = new Reader();
-        reader.setId(idForConvert);
-        reader.setName(nameForConvert);
-        reader.setSurname(surnameForConvert);
-        return reader;
+    private ReaderFx makeReaderFx() {
+        return super.createReaderFx();
     }
 
-    private ReaderFx setReaderFxFields() {
-        ReaderFx readerFx = new ReaderFx();
-        readerFx.setId(idForConvert);
-        readerFx.setName(nameForConvert);
-        readerFx.setSurname(surnameForConvert);
-        return readerFx;
+    private Reader makeReader() {
+        return super.createReader();
     }
 
 }

@@ -28,19 +28,18 @@ public class MainController {
     private MenuController menuController;
 
 
-
     @FXML
     private void initialize() {
         menuController.setMainController(this);
     }
 
-   public void setCenter(String fxmlPath) {
+    public void setCenter(String fxmlPath) {
         borderPane.setCenter(FxmlUtils.fxmlLoader(fxmlPath));
     }
 
     @FXML
     private void closeApplication() {
-        Optional<ButtonType> result = DialogsUtils.confirmAlert();
+        Optional<ButtonType> result = DialogsUtils.confirmAlert("exit.title", "exit.header");
         if (result.get() == ButtonType.OK) {
             Platform.exit();
             System.exit(0);
@@ -72,12 +71,12 @@ public class MainController {
     @FXML
     private void setLanguageToPl() {
         Stage newPrimaryStage = new Stage();
-        Main.startWindow(newPrimaryStage,POLISH_LOCALE);
+        Main.startWindow(newPrimaryStage, POLISH_LOCALE);
     }
 
     @FXML
     private void setLanguageToEn() {
         Stage newPrimaryStage = new Stage();
-        Main.startWindow(newPrimaryStage,ENGLISH_LOCALE);
+        Main.startWindow(newPrimaryStage, ENGLISH_LOCALE);
     }
 }

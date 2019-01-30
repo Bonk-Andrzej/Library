@@ -3,6 +3,7 @@ package bonk_andrzej.app.fx.view;
 import javafx.beans.property.*;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class BookOrdersFx {
 
@@ -176,5 +177,30 @@ public class BookOrdersFx {
 
     public void setAmountAllReturnedBooks(int amountAllReturnedBooks) {
         this.amountAllReturnedBooks.set(amountAllReturnedBooks);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BookOrdersFx that = (BookOrdersFx) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(bookTitle, that.bookTitle) &&
+                Objects.equals(amountAllBorrowedBooks, that.amountAllBorrowedBooks) &&
+                Objects.equals(amountReturnedBooksNow, that.amountReturnedBooksNow) &&
+                Objects.equals(amountBooksToReturn, that.amountBooksToReturn) &&
+                Objects.equals(amountAllReturnedBooks, that.amountAllReturnedBooks) &&
+                Objects.equals(lenderDate, that.lenderDate) &&
+                Objects.equals(returnDate, that.returnDate) &&
+                Objects.equals(actualDateOfReturn, that.actualDateOfReturn) &&
+                Objects.equals(readerFx, that.readerFx) &&
+                Objects.equals(bookFx, that.bookFx) &&
+                Objects.equals(categoryFx, that.categoryFx) &&
+                Objects.equals(authorFx, that.authorFx);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, bookTitle, amountAllBorrowedBooks, amountReturnedBooksNow, amountBooksToReturn, amountAllReturnedBooks, lenderDate, returnDate, actualDateOfReturn, readerFx, bookFx, categoryFx, authorFx);
     }
 }

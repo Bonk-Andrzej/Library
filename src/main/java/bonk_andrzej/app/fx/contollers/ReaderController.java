@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 
+import java.util.Optional;
+
 public class ReaderController {
     @FXML
     private TextField nameTextField;
@@ -50,10 +52,13 @@ public class ReaderController {
 
     @FXML
     private void deleteReaderOnAction() {
-        try {
-            readerModel.deleteAuthorInDB();
-        } catch (ApplicationException e) {
-            DialogsUtils.errorDialogs(e.getMessage());
+        Optional<ButtonType> result = DialogsUtils.confirmAlert("delete.reader.title", "delete.reader.header");
+        if (result.get() == ButtonType.OK) {
+            try {
+                readerModel.deleteAuthorInDB();
+            } catch (ApplicationException e) {
+                DialogsUtils.errorDialogs(e.getMessage());
+            }
         }
     }
 

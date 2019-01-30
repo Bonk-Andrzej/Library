@@ -1,5 +1,6 @@
 package bonk_andrzej.app.db.dao;
 
+import bonk_andrzej.app.db.modelsDb.BaseModel;
 import bonk_andrzej.app.utils.FxmlUtils;
 import bonk_andrzej.app.utils.exceptions.ApplicationException;
 import org.hibernate.HibernateException;
@@ -11,7 +12,7 @@ import java.io.Serializable;
 import java.util.List;
 
 
-public class GenericCrud<T, I> implements GenericDao<T, I>, Serializable {
+public class GenericCrud<T extends BaseModel> implements GenericDao<T>, Serializable {
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("my-persistence-unit");
     private EntityManager entityManager = entityManagerFactory.createEntityManager();
 
@@ -19,7 +20,6 @@ public class GenericCrud<T, I> implements GenericDao<T, I>, Serializable {
     @Override
     public T createOrUpdate(T entity) throws ApplicationException {
         try {
-//            throw new NullPointerException();
             entityManager = entityManagerFactory.createEntityManager();
             entityManager.getTransaction().begin();
             entityManager.merge(entity);
@@ -34,7 +34,7 @@ public class GenericCrud<T, I> implements GenericDao<T, I>, Serializable {
     }
 
     @Override
-    public T getById(Class<T> classType, I id) throws ApplicationException {
+    public T getById(Class<T> classType, Long id) throws ApplicationException {
         try {
             entityManager = entityManagerFactory.createEntityManager();
             entityManager.getTransaction().begin();
@@ -72,23 +72,6 @@ public class GenericCrud<T, I> implements GenericDao<T, I>, Serializable {
             entityManager = entityManagerFactory.createEntityManager();
             entityManager.getTransaction().begin();
             entityManager.remove(entityManager.contains(entity) ? entity : entityManager.merge(entity));
-            entityManager.getTransaction().commit();
-
-        } catch (HibernateException e) {
-            e.getMessage();
-            throw new ApplicationException(FxmlUtils.getBundleForApplicationErrors().getString("error.delete"));
-        } finally {
-            entityManager.close();
-        }
-    }
-
-    @Override
-    public void deleteById(Class<T> classType, I id) throws ApplicationException {
-        try {
-            entityManager = entityManagerFactory.createEntityManager();
-            entityManager.getTransaction().begin();
-            T object = classType.cast(entityManager.find(classType.getClass(), id));
-            entityManager.remove(object);
             entityManager.getTransaction().commit();
 
         } catch (HibernateException e) {
