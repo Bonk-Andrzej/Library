@@ -14,6 +14,7 @@ public class AuthorFx {
     private StringProperty name = new SimpleStringProperty();
     private StringProperty surname = new SimpleStringProperty();
 
+
     public long getId() {
         return id.get();
     }

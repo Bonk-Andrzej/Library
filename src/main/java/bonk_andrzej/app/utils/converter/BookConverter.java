@@ -15,7 +15,7 @@ public class BookConverter {
         book.setId(bookFx.getId());
         book.setTitle(bookFx.getTitle());
         book.setDescription(bookFx.getDescription());
-        book.setRating(bookFx.getRating());
+        book.setRating(setRating(bookFx));
         book.setIsbn(bookFx.getIsbn());
         book.setLeftBooksForRent(Integer.valueOf(bookFx.getLeftBooksForRent()));
         book.setReleaseDate(bookFx.getReleaseDate());
@@ -50,5 +50,12 @@ public class BookConverter {
         book.setCategory(categoryConverter.convertCategoryFxToCategory(bookFx.getCategoryFx()));
         book.setAuthor(authorConverter.convertAuthorFxToAuthor(bookFx.getAuthorFx()));
         return book;
+    }
+
+    private int setRating(BookFx bookFx){
+        if (bookFx.getRating() == 0){
+            return 1;
+        }
+        else return bookFx.getRating();
     }
 }

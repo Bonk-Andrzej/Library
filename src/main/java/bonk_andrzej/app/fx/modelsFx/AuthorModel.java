@@ -24,7 +24,7 @@ public class AuthorModel {
     public Author saveOrUpdateAuthorInDb() throws ApplicationException {
         Author author = authorConverter.convertAuthorFxToAuthor(getAuthorFxObjectProperty());
         genericCrud.createOrUpdate(author);
-        initializeAuthorFromDb();
+        initAuthorObservableList();
         return author;
     }
 
@@ -32,10 +32,10 @@ public class AuthorModel {
         Author authorToDelete = (Author) genericCrud.getById(
                 Author.class, getAuthorFxObjectProperty().getId());
         genericCrud.delete(authorToDelete);
-        initializeAuthorFromDb();
+        initAuthorObservableList();
     }
 
-    public void initializeAuthorFromDb() throws ApplicationException {
+    public void initAuthorObservableList() throws ApplicationException {
         List<Author> authorList = genericCrud.getAll(Author.class);
         authorFxObservableList.clear();
         authorList.forEach(author -> {

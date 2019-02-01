@@ -45,9 +45,9 @@ public class CategoryModel {
 
     private void initializeItemRoot(List<Category> categories) {
         treeItemRoot.getChildren().clear();
-        categories.forEach(c -> {
-            TreeItem<String> categoryItem = new TreeItem<>(c.getName());
-            c.getBooks().forEach(
+        categories.forEach(category -> {
+            TreeItem<String> categoryItem = new TreeItem<>(category.getName());
+            category.getBooks().forEach(
                     book -> categoryItem.getChildren()
                             .add(new TreeItem<>(book.getTitle())));
             treeItemRoot.getChildren().add(categoryItem);

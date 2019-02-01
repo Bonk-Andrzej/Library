@@ -1,5 +1,6 @@
 package bonk_andrzej.app.db.modelsDb;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -31,6 +32,5 @@ public class BookOrder extends BaseModel{
     @ManyToOne
     @JoinColumn(name = "book_id")
     private Book book;
-
 
 }

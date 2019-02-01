@@ -20,7 +20,10 @@ public class Reader extends BaseModel{
     private String surname;
 
     @OneToMany(mappedBy = "reader", cascade = CascadeType.REMOVE)
-    private List<BookOrder> bookOrderList;
+    private List<BookOrder> bookOrders;
 
-
+    public Reader(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
 }

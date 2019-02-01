@@ -10,6 +10,7 @@ public class CategoryFx extends TreeItem<String> {
     private LongProperty id = new SimpleLongProperty();
     private StringProperty name = new SimpleStringProperty();
 
+
     public long getId() {
         return id.get();
     }

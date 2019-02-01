@@ -13,6 +13,7 @@ public class ReaderFx {
     private StringProperty name = new SimpleStringProperty();
     private StringProperty surname = new SimpleStringProperty();
 
+
     public long getId() {
         return id.get();
     }

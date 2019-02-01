@@ -80,7 +80,7 @@ public class BooksListModel {
         entityManager.getTransaction().begin();
 
         Book bookToDelete = entityManager.find(Book.class, book.getId());
-        bookToDelete.getBookOrderList().clear();
+        bookToDelete.getBookOrders().clear();
         entityManager.remove(bookToDelete);
         entityManager.getTransaction().commit();
         entityManager.close();

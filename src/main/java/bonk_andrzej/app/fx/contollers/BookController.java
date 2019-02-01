@@ -36,7 +36,7 @@ public class BookController {
     private void initialize() {
         bookModel = new BookModel();
         try {
-            bookModel.initObservableCategoryListAndAuthorList();
+            bookModel.initAllObservableList();
         } catch (ApplicationException e) {
             DialogsUtils.errorDialogs(e.getMessage());
         }

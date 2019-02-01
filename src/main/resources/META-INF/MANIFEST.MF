@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: bonk_andrzej.app.Main
+

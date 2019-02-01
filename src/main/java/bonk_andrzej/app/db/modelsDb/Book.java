@@ -32,9 +32,8 @@ public class Book extends BaseModel{
     @JoinColumn(name = "author_id")
     private Author author;
 
-    @OneToMany(mappedBy = "book", fetch = FetchType.EAGER ,orphanRemoval = true)
-    private List<BookOrder> bookOrderList;
-
+    @OneToMany(mappedBy = "book",orphanRemoval = true)
+    private List<BookOrder> bookOrders;
 
 }
 

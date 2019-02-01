@@ -35,8 +35,7 @@ public class ReaderController {
         } catch (ApplicationException e) {
             DialogsUtils.errorDialogs(e.getMessage());
         }
-        textFieldBindings();
-        tableViewBindings();
+        bindProperties();
     }
 
     @FXML
@@ -82,14 +81,21 @@ public class ReaderController {
         }
     }
 
-    private void textFieldBindings() {
+    @FXML
+    private void bindProperties() {
+        bindTextFields();
+        bindColumns();
+    }
+
+
+    private void bindTextFields() {
         readerModel.getReaderFxObjectProperty().nameProperty().bind(nameTextField.textProperty());
         readerModel.getReaderFxObjectProperty().surnameProperty().bind(surnameTextField.textProperty());
         addButton.disableProperty().bind(nameTextField.textProperty().isEmpty().or(surnameTextField.textProperty().isEmpty()));
         deleteMenuItem.disableProperty().bind(readerTableView.getSelectionModel().selectedItemProperty().isNull());
     }
 
-    private void tableViewBindings() {
+    private void bindColumns() {
         readerTableView.setItems(readerModel.getReaderFxObservableList());
         nameColumn.setCellValueFactory(cellDate -> cellDate.getValue().nameProperty());
         surnameColumn.setCellValueFactory(cellDate -> cellDate.getValue().surnameProperty());

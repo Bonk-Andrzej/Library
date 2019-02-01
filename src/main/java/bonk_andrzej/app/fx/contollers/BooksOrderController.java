@@ -53,17 +53,25 @@ public class BooksOrderController {
         }
     }
 
+    @FXML
     private void bindProperties() {
-        booksComboBox.setItems(orderModel.getBookFxObservableList());
-        readerComboBox.setItems(orderModel.getReaderFxObservableList());
+        bindComboBoxes();
+        bindTextFields();
+    }
 
-        booksComboBox.valueProperty().bindBidirectional(orderModel.getBookOrdersFxObjectProperty().bookFxProperty());
-        readerComboBox.valueProperty().bindBidirectional(orderModel.getBookOrdersFxObjectProperty().readerFxProperty());
+    private void bindTextFields() {
         booksRentTextField.textProperty().bindBidirectional(orderModel.getBookOrdersFxObjectProperty().amountAllBorrowedBooksProperty());
         booksReturnedTextField.textProperty().bindBidirectional(orderModel.getBookOrdersFxObjectProperty().amountReturnedBooksNowProperty());
         lenderDataPicker.valueProperty().bindBidirectional(orderModel.getBookOrdersFxObjectProperty().lenderDateProperty());
         actualReturnDate.valueProperty().bindBidirectional(orderModel.getBookOrdersFxObjectProperty().actualDateOfReturnProperty());
         returnDataPicker.valueProperty().bindBidirectional(orderModel.getBookOrdersFxObjectProperty().returnDateProperty());
+    }
+
+    private void bindComboBoxes() {
+        booksComboBox.setItems(orderModel.getBookFxObservableList());
+        readerComboBox.setItems(orderModel.getReaderFxObservableList());
+        booksComboBox.valueProperty().bindBidirectional(orderModel.getBookOrdersFxObjectProperty().bookFxProperty());
+        readerComboBox.valueProperty().bindBidirectional(orderModel.getBookOrdersFxObjectProperty().readerFxProperty());
     }
 
     private void disableAddButton() {
