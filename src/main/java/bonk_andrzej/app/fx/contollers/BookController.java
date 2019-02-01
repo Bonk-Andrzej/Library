@@ -55,18 +55,26 @@ public class BookController {
         }
     }
 
+    @FXML
     void bindProperties() {
-        categoryComboBox.setItems(bookModel.getCategoryFxObservableList());
-        authorComboBox.setItems(bookModel.getAuthorFxObservableList());
+        bindComboBoxes();
+        bindTextFields();
+    }
 
-        authorComboBox.valueProperty().bindBidirectional(bookModel.getBookFxObjectProperty().authorFxProperty());
-        categoryComboBox.valueProperty().bindBidirectional(bookModel.getBookFxObjectProperty().categoryFxProperty());
+    private void bindTextFields() {
         titleTextField.textProperty().bindBidirectional(bookModel.getBookFxObjectProperty().titleProperty());
         descTextArea.textProperty().bindBidirectional(bookModel.getBookFxObjectProperty().descriptionProperty());
         ratingSlider.valueProperty().bindBidirectional(bookModel.getBookFxObjectProperty().ratingProperty());
         isbnTextField.textProperty().bindBidirectional(bookModel.getBookFxObjectProperty().isbnProperty());
         releaseDatePicker.valueProperty().bindBidirectional(bookModel.getBookFxObjectProperty().releaseDateProperty());
         amountBooksTextField.textProperty().bindBidirectional(bookModel.getBookFxObjectProperty().leftBooksForRentProperty());
+    }
+
+    private void bindComboBoxes() {
+        categoryComboBox.setItems(bookModel.getCategoryFxObservableList());
+        authorComboBox.setItems(bookModel.getAuthorFxObservableList());
+        authorComboBox.valueProperty().bindBidirectional(bookModel.getBookFxObjectProperty().authorFxProperty());
+        categoryComboBox.valueProperty().bindBidirectional(bookModel.getBookFxObjectProperty().categoryFxProperty());
     }
 
     private void disableAddButtom() {

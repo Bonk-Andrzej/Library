@@ -37,8 +37,7 @@ public class AuthorController {
         } catch (ApplicationException e) {
             DialogsUtils.errorDialogs(e.getMessage());
         }
-        textFieldBindings();
-        tableViewBindings();
+        bindProperties();
     }
 
     @FXML
@@ -85,7 +84,13 @@ public class AuthorController {
         }
     }
 
-    private void tableViewBindings() {
+    private void bindProperties(){
+        bindColumns();
+        bindTextFields();
+    }
+
+
+    private void bindColumns() {
         authorTableView.setItems(authorModel.getAuthorFxObservableList());
         nameColumn.setCellValueFactory(cellDate -> cellDate.getValue().nameProperty());
         surnameColumn.setCellValueFactory(cellDate -> cellDate.getValue().surnameProperty());
@@ -95,7 +100,7 @@ public class AuthorController {
                 -> authorModel.setAuthorFxObjectProperty(newValue));
     }
 
-    private void textFieldBindings() {
+    private void bindTextFields() {
         authorModel.getAuthorFxObjectProperty().nameProperty().bind(nameTextField.textProperty());
         authorModel.getAuthorFxObjectProperty().surnameProperty().bind(surnameTextField.textProperty());
         addButton.disableProperty().bind(nameTextField.textProperty().isEmpty().or(surnameTextField.textProperty().isEmpty()));
