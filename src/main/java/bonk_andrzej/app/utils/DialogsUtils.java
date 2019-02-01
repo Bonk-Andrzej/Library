@@ -18,6 +18,7 @@ public class DialogsUtils {
         informationAlert.setHeaderText(bundle.getString("about.header"));
         informationAlert.setContentText(bundle.getString("about.content"));
         informationAlert.showAndWait();
+
     }
 
     public static Optional<ButtonType> confirmAlert(String title, String header) {
