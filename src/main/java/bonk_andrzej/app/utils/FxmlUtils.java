@@ -13,7 +13,6 @@ import java.util.ResourceBundle;
 public class FxmlUtils {
     private FxmlUtils() {
     }
-
     public static Pane fxmlLoader(String fxmlPath) {
         FXMLLoader loader = new FXMLLoader(FxmlUtils.class.getResource(fxmlPath));
         loader.setResources(getResourceBundle());

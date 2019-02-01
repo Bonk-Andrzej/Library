@@ -54,17 +54,25 @@ public class EditBooksOrdersController {
             DialogsUtils.errorDialogs(e.getMessage());
         }
     }
-
+    @FXML
     void bindProperties() {
+        bindComboBoxes();
+        bindTextFields();
+    }
+
+    private void bindTextFields() {
+        booksReturnedTextField.textProperty().bindBidirectional(orderModel.getBookOrdersFxObjectProperty().amountReturnedBooksNowProperty());
+        lenderDataPicker.valueProperty().bindBidirectional(orderModel.getBookOrdersFxObjectProperty().lenderDateProperty());
+        actualReturnDate.valueProperty().bindBidirectional(orderModel.getBookOrdersFxObjectProperty().actualDateOfReturnProperty());
+        returnDataPicker.valueProperty().bindBidirectional(orderModel.getBookOrdersFxObjectProperty().returnDateProperty());
+    }
+
+    private void bindComboBoxes() {
         booksComboBox.setItems(orderModel.getBookFxObservableList());
         readerComboBox.setItems(orderModel.getReaderFxObservableList());
 
         booksComboBox.valueProperty().bindBidirectional(orderModel.getBookOrdersFxObjectProperty().bookFxProperty());
         readerComboBox.valueProperty().bindBidirectional(orderModel.getBookOrdersFxObjectProperty().readerFxProperty());
-        booksReturnedTextField.textProperty().bindBidirectional(orderModel.getBookOrdersFxObjectProperty().amountReturnedBooksNowProperty());
-        lenderDataPicker.valueProperty().bindBidirectional(orderModel.getBookOrdersFxObjectProperty().lenderDateProperty());
-        actualReturnDate.valueProperty().bindBidirectional(orderModel.getBookOrdersFxObjectProperty().actualDateOfReturnProperty());
-        returnDataPicker.valueProperty().bindBidirectional(orderModel.getBookOrdersFxObjectProperty().returnDateProperty());
     }
 
     private void disableAddButton() {

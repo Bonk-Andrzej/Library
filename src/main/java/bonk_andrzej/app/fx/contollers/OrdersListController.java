@@ -78,6 +78,14 @@ public class OrdersListController {
         titleComboBox.getSelectionModel().clearSelection();
     }
 
+    @FXML
+    private void bindProperties() {
+        bindColumns();
+        bindComboBoxes();
+        setDeleteColumn();
+        setUpdateColumn();
+    }
+
     private void setDeleteColumn() {
         deleteColumn.setCellFactory(param -> new TableCell<BookOrdersFx, BookOrdersFx>() {
             Button button = FxmlUtils.createButton(this.getClass(), "/icons/delete.png");
@@ -141,7 +149,16 @@ public class OrdersListController {
         });
     }
 
-    private void bindProperties() {
+
+
+    private void bindComboBoxes() {
+        titleComboBox.setItems(ordersListModel.getBookFxObservableList());
+        readerComboBox.setItems(ordersListModel.getReaderFxObservableList());
+        titleComboBox.valueProperty().bindBidirectional(ordersListModel.bookFxProperty());
+        readerComboBox.valueProperty().bindBidirectional(ordersListModel.readerFxProperty());
+    }
+
+    private void bindColumns() {
         ordersTableView.setItems(ordersListModel.getBookOrdersFxObservableList());
         titleColumn.setCellValueFactory(infoInCell -> infoInCell.getValue().bookTitleProperty());
         authorColumn.setCellValueFactory(infoInCell -> infoInCell.getValue().authorFxProperty());
@@ -155,14 +172,5 @@ public class OrdersListController {
         actualReturnDateColumn.setCellValueFactory(infoInCell -> infoInCell.getValue().actualDateOfReturnProperty());
         deleteColumn.setCellValueFactory(infoInCell -> new SimpleObjectProperty<>(infoInCell.getValue()));
         editColumn.setCellValueFactory(infoInCell -> new SimpleObjectProperty<>(infoInCell.getValue()));
-
-        titleComboBox.setItems(ordersListModel.getBookFxObservableList());
-        readerComboBox.setItems(ordersListModel.getReaderFxObservableList());
-
-        titleComboBox.valueProperty().bindBidirectional(ordersListModel.bookFxProperty());
-        readerComboBox.valueProperty().bindBidirectional(ordersListModel.readerFxProperty());
-
-        setDeleteColumn();
-        setUpdateColumn();
     }
 }

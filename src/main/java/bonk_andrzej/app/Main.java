@@ -1,6 +1,6 @@
 package bonk_andrzej.app;
 
-import bonk_andrzej.app.db.dao.GenericCrud;
+import bonk_andrzej.app.utils.AddObjectToDB;
 import bonk_andrzej.app.utils.FxmlUtils;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -14,12 +14,9 @@ public class Main extends Application {
     private static final String BORDER_PAINE_MAIN_FXML = "/fxml/MainWindow.fxml";
     private static final String ENGLISH_LOCALE = "eng";
 
-
     public void start(Stage primaryStage) {
-//        AddObjectToDB.addObjectToDB();
-        GenericCrud genericCrud = new GenericCrud();
+        AddObjectToDB.addObjectToDB();
         startWindow(primaryStage, ENGLISH_LOCALE);
-
     }
 
     public static void startWindow(Stage primaryStage, String locale) {
@@ -31,4 +28,5 @@ public class Main extends Application {
         primaryStage.show();
         Application.setUserAgentStylesheet(STYLESHEET_CASPIAN);
     }
+
 }

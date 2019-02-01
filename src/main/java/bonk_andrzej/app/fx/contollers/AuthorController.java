@@ -33,7 +33,7 @@ public class AuthorController {
     private void initialize() {
         authorModel = new AuthorModel();
         try {
-            authorModel.initializeAuthorFromDb();
+            authorModel.initAuthorObservableList();
         } catch (ApplicationException e) {
             DialogsUtils.errorDialogs(e.getMessage());
         }

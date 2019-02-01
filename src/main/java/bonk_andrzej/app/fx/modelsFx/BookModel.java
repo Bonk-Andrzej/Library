@@ -28,7 +28,7 @@ public class BookModel {
     private CategoryConverter categoryConverter = new CategoryConverter();
 
 
-    public void initObservableCategoryListAndAuthorList() throws ApplicationException {
+    public void initAllObservableList() throws ApplicationException {
         initAuthorFxList();
         initCategoryFxList();
     }

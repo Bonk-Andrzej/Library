@@ -113,7 +113,7 @@ public class OrderModel {
         book.setLeftBooksForRent(leftBooksForRent);
         List<BookOrder> bookOrderList = new ArrayList<>();
         bookOrderList.add(bookOrder);
-        book.setBookOrderList(bookOrderList);
+        book.setBookOrders(bookOrderList);
         genericCrud.createOrUpdate(book);
     }
 

@@ -78,7 +78,7 @@ public class CategoryController extends TextField {
             }
         }
     }
-
+    @FXML
     private void bindProperties() {
         categoryComboBox.setItems(categoryModel.getCategoryFxObservableList());
         categoryTreeView.setRoot(categoryModel.getTreeItemRoot());

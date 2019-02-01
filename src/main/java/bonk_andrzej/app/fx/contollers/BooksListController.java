@@ -75,8 +75,15 @@ public class BooksListController {
     private void clearAuthorComboBox() {
         authorComboBox.getSelectionModel().clearSelection();
     }
-
+    @FXML
     private void bindProperties() {
+        bindColumns();
+        bindComboBoxes();
+        setDeleteColumn();
+        setUpdateColumn();
+    }
+
+    private void bindColumns() {
         booksTableView.setItems(booksListModel.getBookFxObservableList());
         titleColumn.setCellValueFactory(infoInCell -> infoInCell.getValue().titleProperty());
         authorColumn.setCellValueFactory(infoInCell -> infoInCell.getValue().authorFxProperty());
@@ -89,15 +96,14 @@ public class BooksListController {
         categoryColumn.setCellValueFactory(infoInCell -> infoInCell.getValue().categoryFxProperty());
         deleteColumn.setCellValueFactory(infoInCell -> new SimpleObjectProperty<>(infoInCell.getValue()));
         editColumn.setCellValueFactory(infoInCell -> new SimpleObjectProperty<>(infoInCell.getValue()));
+    }
 
+    private void bindComboBoxes() {
         categoryComboBox.setItems(booksListModel.getCategoryFxObservableList());
         authorComboBox.setItems(booksListModel.getAuthorFxObservableList());
 
         categoryComboBox.valueProperty().bindBidirectional(booksListModel.categoryFxProperty());
         authorComboBox.valueProperty().bindBidirectional(booksListModel.authorFxProperty());
-
-        setDeleteColumn();
-        setUpdateColumn();
     }
 
     private void setUpdateColumn() {
