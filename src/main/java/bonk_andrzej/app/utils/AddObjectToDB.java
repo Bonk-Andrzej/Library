@@ -18,10 +18,10 @@ public class AddObjectToDB {
     public static void addObjectToDB() {
         GenericCrud genericCrud = new GenericCrud();
 
-        Category category1 = new Category("Dramat");
-        Category category2 = new Category("Sensacja");
-        Category category3 = new Category("Reportaż");
-        Category category4 = new Category("Fantastyka");
+        Category category1 = new Category("Drama");
+        Category category2 = new Category("Action");
+        Category category3 = new Category("Adventure");
+        Category category4 = new Category("Fantasy");
 
         Author author1 = new Author("Jakub", "Ćwiek");
         Author author2 = new Author("Jarosław", "Grzędowicz");

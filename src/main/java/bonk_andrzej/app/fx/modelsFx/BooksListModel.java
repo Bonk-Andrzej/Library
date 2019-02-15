@@ -3,7 +3,6 @@ package bonk_andrzej.app.fx.modelsFx;
 import bonk_andrzej.app.db.dao.GenericCrud;
 import bonk_andrzej.app.db.modelsDb.Author;
 import bonk_andrzej.app.db.modelsDb.Book;
-import bonk_andrzej.app.db.modelsDb.BookOrder;
 import bonk_andrzej.app.db.modelsDb.Category;
 import bonk_andrzej.app.fx.view.AuthorFx;
 import bonk_andrzej.app.fx.view.BookFx;
@@ -60,7 +59,6 @@ public class BooksListModel {
         categoryFxObservableList.clear();
         List<Category> categories = genericCrud.getAll(Category.class);
         categories.forEach(category -> {
-            categoryFxObservableList.add(categoryConverter.convertCategoryToCategoryFx(category));
             CategoryFx categoryFx = categoryConverter.convertCategoryToCategoryFx(category);
             categoryFxObservableList.add(categoryFx);
         });
