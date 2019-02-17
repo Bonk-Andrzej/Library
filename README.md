@@ -1,5 +1,5 @@
 # LibraryApp
-Application for managing library
+Application for managing library. Built using MVC pattern.
 
 #### Stack
 * Java 8, JavaFx, Hibernate, MySQL, Mockito, JUnit5, Lombok, Maven, 
@@ -41,7 +41,7 @@ Application for managing library
 ![change language](img/library-changeLanguage.png)
 ![change style](img/library-changeStyle.png)
 ![rentBook error](img/library-rentBook-error-notEnough.png)
-![rentBook sort](library-rentBook-sort.png)
+![rentBook sort](img/library-rentBook-sort.png)
 ![exit](img/library-exit.png)
 
 
