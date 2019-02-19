@@ -12,8 +12,8 @@ Application for managing library. Built using MVC pattern.
 - [x] Validation for adding, editing and deleting category, author, book, reader, order 
 - [x] Validation for borrowing book 
 - [x] Each category shows a list of books in which it is concluded
-- [x] Sorting books by category and/or author
-- [x] Sorting orders by reader and/or book
+- [x] Filtering books by category and/or author
+- [x] Filtering orders by reader and/or book
 - [x] Sorting readers by name  or surname
 - [x] Sorting authors by name  or surname
 - [x] Changing language to polish or english
