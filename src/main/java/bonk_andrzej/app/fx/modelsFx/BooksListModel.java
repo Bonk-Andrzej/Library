@@ -16,6 +16,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -72,16 +73,9 @@ public class BooksListModel {
     }
 
     public void deleteBook(BookFx bookFx) throws ApplicationException {
-        Book book = bookConverter.convertBookFxToBook(bookFx);
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("my-persistence-unit");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-
-        Book bookToDelete = entityManager.find(Book.class, book.getId());
-        bookToDelete.getBookOrders().clear();
-        entityManager.remove(bookToDelete);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        Book convertedBook = bookConverter.convertBookFxToBook(bookFx);
+        Book bookToDelete = (Book) genericCrud.getById(Book.class, convertedBook.getId());
+        genericCrud.delete(bookToDelete);
 
         initAllObservableList();
     }
