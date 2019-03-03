@@ -1,4 +1,4 @@
-package bonk_andrzej.app.db.modelsDb;
+package bonk_andrzej.app.db.modelDb;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

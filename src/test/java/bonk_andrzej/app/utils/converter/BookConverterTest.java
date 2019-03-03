@@ -1,8 +1,8 @@
 package bonk_andrzej.app.utils.converter;
 
-import bonk_andrzej.app.db.modelsDb.Author;
-import bonk_andrzej.app.db.modelsDb.Book;
-import bonk_andrzej.app.db.modelsDb.Category;
+import bonk_andrzej.app.db.modelDb.Author;
+import bonk_andrzej.app.db.modelDb.Book;
+import bonk_andrzej.app.db.modelDb.Category;
 import bonk_andrzej.app.fx.view.AuthorFx;
 import bonk_andrzej.app.fx.view.BookFx;
 import bonk_andrzej.app.fx.view.CategoryFx;

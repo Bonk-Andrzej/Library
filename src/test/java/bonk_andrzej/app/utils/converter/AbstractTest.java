@@ -1,6 +1,6 @@
 package bonk_andrzej.app.utils.converter;
 
-import bonk_andrzej.app.db.modelsDb.*;
+import bonk_andrzej.app.db.modelDb.*;
 import bonk_andrzej.app.fx.view.*;
 
 import java.time.LocalDate;

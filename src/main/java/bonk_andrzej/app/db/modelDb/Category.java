@@ -1,4 +1,4 @@
-package bonk_andrzej.app.db.modelsDb;
+package bonk_andrzej.app.db.modelDb;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,23 +8,22 @@ import javax.persistence.*;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = false)
-@NoArgsConstructor
 @Data
+@NoArgsConstructor
 @Entity
-public class Author extends BaseModel{
+public class Category extends BaseModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(unique = true, length = 20)
     private String name;
-    private String surname;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private List<Book> books;
 
-
-    public Author(String name, String surname) {
+    public Category(String name) {
         this.name = name;
-        this.surname = surname;
     }
 
 }

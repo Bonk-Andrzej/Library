@@ -1,9 +1,9 @@
-package bonk_andrzej.app.fx.contollers;
+package bonk_andrzej.app.fx.contoller;
 
 import bonk_andrzej.app.fx.view.AuthorFx;
-import bonk_andrzej.app.fx.modelsFx.AuthorModel;
+import bonk_andrzej.app.fx.modelFx.AuthorModel;
 import bonk_andrzej.app.utils.DialogsUtils;
-import bonk_andrzej.app.utils.exceptions.ApplicationException;
+import bonk_andrzej.app.utils.exception.ApplicationException;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;

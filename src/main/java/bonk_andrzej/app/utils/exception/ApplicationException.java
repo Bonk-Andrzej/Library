@@ -1,4 +1,4 @@
-package bonk_andrzej.app.utils.exceptions;
+package bonk_andrzej.app.utils.exception;
 
 public class ApplicationException extends Exception {
 

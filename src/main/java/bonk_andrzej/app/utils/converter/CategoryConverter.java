@@ -1,6 +1,6 @@
 package bonk_andrzej.app.utils.converter;
 
-import bonk_andrzej.app.db.modelsDb.Category;
+import bonk_andrzej.app.db.modelDb.Category;
 import bonk_andrzej.app.fx.view.CategoryFx;
 
 public class CategoryConverter {

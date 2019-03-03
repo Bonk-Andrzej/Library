@@ -1,10 +1,10 @@
-package bonk_andrzej.app.fx.modelsFx;
+package bonk_andrzej.app.fx.modelFx;
 
 import bonk_andrzej.app.db.dao.GenericCrud;
-import bonk_andrzej.app.db.modelsDb.Category;
+import bonk_andrzej.app.db.modelDb.Category;
 import bonk_andrzej.app.fx.view.CategoryFx;
 import bonk_andrzej.app.utils.converter.CategoryConverter;
-import bonk_andrzej.app.utils.exceptions.ApplicationException;
+import bonk_andrzej.app.utils.exception.ApplicationException;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;

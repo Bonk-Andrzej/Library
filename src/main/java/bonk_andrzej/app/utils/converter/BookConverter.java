@@ -1,9 +1,9 @@
 package bonk_andrzej.app.utils.converter;
 
 import bonk_andrzej.app.db.dao.GenericCrud;
-import bonk_andrzej.app.db.modelsDb.Book;
+import bonk_andrzej.app.db.modelDb.Book;
 import bonk_andrzej.app.fx.view.BookFx;
-import bonk_andrzej.app.utils.exceptions.ApplicationException;
+import bonk_andrzej.app.utils.exception.ApplicationException;
 
 public class BookConverter {
     private CategoryConverter categoryConverter = new CategoryConverter();

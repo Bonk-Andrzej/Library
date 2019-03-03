@@ -1,16 +1,13 @@
 package bonk_andrzej.app.db.dao;
 
-import bonk_andrzej.app.db.modelsDb.Author;
-import bonk_andrzej.app.db.modelsDb.BaseModel;
-import bonk_andrzej.app.utils.exceptions.ApplicationException;
+import bonk_andrzej.app.db.modelDb.Author;
+import bonk_andrzej.app.utils.exception.ApplicationException;
 import org.hibernate.HibernateException;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.persistence.EntityManager;

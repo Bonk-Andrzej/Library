@@ -1,6 +1,6 @@
 package bonk_andrzej.app.utils.converter;
 
-import bonk_andrzej.app.db.modelsDb.Author;
+import bonk_andrzej.app.db.modelDb.Author;
 import bonk_andrzej.app.fx.view.AuthorFx;
 import org.junit.jupiter.api.Test;
 

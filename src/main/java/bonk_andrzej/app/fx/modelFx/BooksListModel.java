@@ -1,25 +1,22 @@
-package bonk_andrzej.app.fx.modelsFx;
+package bonk_andrzej.app.fx.modelFx;
 
 import bonk_andrzej.app.db.dao.GenericCrud;
-import bonk_andrzej.app.db.modelsDb.Author;
-import bonk_andrzej.app.db.modelsDb.Book;
-import bonk_andrzej.app.db.modelsDb.Category;
+import bonk_andrzej.app.db.modelDb.Author;
+import bonk_andrzej.app.db.modelDb.Book;
+import bonk_andrzej.app.db.modelDb.Category;
 import bonk_andrzej.app.fx.view.AuthorFx;
 import bonk_andrzej.app.fx.view.BookFx;
 import bonk_andrzej.app.fx.view.CategoryFx;
 import bonk_andrzej.app.utils.converter.AuthorConverter;
 import bonk_andrzej.app.utils.converter.BookConverter;
 import bonk_andrzej.app.utils.converter.CategoryConverter;
-import bonk_andrzej.app.utils.exceptions.ApplicationException;
+import bonk_andrzej.app.utils.exception.ApplicationException;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;

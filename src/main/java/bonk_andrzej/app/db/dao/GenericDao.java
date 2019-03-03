@@ -1,6 +1,6 @@
 package bonk_andrzej.app.db.dao;
 
-import bonk_andrzej.app.utils.exceptions.ApplicationException;
+import bonk_andrzej.app.utils.exception.ApplicationException;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package bonk_andrzej.app.fx.contollers;
+package bonk_andrzej.app.fx.contoller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ToggleGroup;

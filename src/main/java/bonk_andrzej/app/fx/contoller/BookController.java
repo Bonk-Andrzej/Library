@@ -1,10 +1,10 @@
-package bonk_andrzej.app.fx.contollers;
+package bonk_andrzej.app.fx.contoller;
 
 import bonk_andrzej.app.fx.view.AuthorFx;
-import bonk_andrzej.app.fx.modelsFx.BookModel;
+import bonk_andrzej.app.fx.modelFx.BookModel;
 import bonk_andrzej.app.fx.view.CategoryFx;
 import bonk_andrzej.app.utils.DialogsUtils;
-import bonk_andrzej.app.utils.exceptions.ApplicationException;
+import bonk_andrzej.app.utils.exception.ApplicationException;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 

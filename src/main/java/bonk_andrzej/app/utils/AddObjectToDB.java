@@ -1,10 +1,10 @@
 package bonk_andrzej.app.utils;
 
 import bonk_andrzej.app.db.dao.GenericCrud;
-import bonk_andrzej.app.db.modelsDb.Author;
-import bonk_andrzej.app.db.modelsDb.Category;
-import bonk_andrzej.app.db.modelsDb.Reader;
-import bonk_andrzej.app.utils.exceptions.ApplicationException;
+import bonk_andrzej.app.db.modelDb.Author;
+import bonk_andrzej.app.db.modelDb.Category;
+import bonk_andrzej.app.db.modelDb.Reader;
+import bonk_andrzej.app.utils.exception.ApplicationException;
 
 import java.util.Arrays;
 import java.util.List;

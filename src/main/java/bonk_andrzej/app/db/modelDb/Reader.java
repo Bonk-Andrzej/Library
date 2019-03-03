@@ -1,4 +1,4 @@
-package bonk_andrzej.app.db.modelsDb;
+package bonk_andrzej.app.db.modelDb;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,19 +11,19 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Entity
-public class Category extends BaseModel {
+public class Reader extends BaseModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(unique = true, length = 20)
     private String name;
+    private String surname;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    private List<Book> books;
+    @OneToMany(mappedBy = "reader", cascade = CascadeType.REMOVE)
+    private List<BookOrder> bookOrders;
 
-    public Category(String name) {
+    public Reader(String name, String surname) {
         this.name = name;
+        this.surname = surname;
     }
-
 }

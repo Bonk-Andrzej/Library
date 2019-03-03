@@ -1,9 +1,8 @@
-package bonk_andrzej.app.fx.contollers;
+package bonk_andrzej.app.fx.contoller;
 
-import bonk_andrzej.app.fx.modelsFx.OrderModel;
-import bonk_andrzej.app.fx.modelsFx.OrdersListModel;
+import bonk_andrzej.app.fx.modelFx.OrderModel;
 import bonk_andrzej.app.utils.DialogsUtils;
-import bonk_andrzej.app.utils.exceptions.ApplicationException;
+import bonk_andrzej.app.utils.exception.ApplicationException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;

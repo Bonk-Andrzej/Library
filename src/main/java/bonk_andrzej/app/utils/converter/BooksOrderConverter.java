@@ -1,6 +1,6 @@
 package bonk_andrzej.app.utils.converter;
 
-import bonk_andrzej.app.db.modelsDb.BookOrder;
+import bonk_andrzej.app.db.modelDb.BookOrder;
 import bonk_andrzej.app.fx.view.BookOrdersFx;
 
 public class BooksOrderConverter {

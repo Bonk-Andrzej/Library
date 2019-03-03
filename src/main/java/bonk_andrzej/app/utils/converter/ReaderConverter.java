@@ -1,6 +1,6 @@
 package bonk_andrzej.app.utils.converter;
 
-import bonk_andrzej.app.db.modelsDb.Reader;
+import bonk_andrzej.app.db.modelDb.Reader;
 import bonk_andrzej.app.fx.view.ReaderFx;
 
 public class ReaderConverter {

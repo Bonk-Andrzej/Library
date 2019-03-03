@@ -1,8 +1,8 @@
 package bonk_andrzej.app.db.dao;
 
-import bonk_andrzej.app.db.modelsDb.BaseModel;
+import bonk_andrzej.app.db.modelDb.BaseModel;
 import bonk_andrzej.app.utils.FxmlUtils;
-import bonk_andrzej.app.utils.exceptions.ApplicationException;
+import bonk_andrzej.app.utils.exception.ApplicationException;
 import org.hibernate.HibernateException;
 
 import javax.persistence.EntityManager;

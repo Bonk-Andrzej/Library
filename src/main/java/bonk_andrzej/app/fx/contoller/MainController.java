@@ -1,4 +1,4 @@
-package bonk_andrzej.app.fx.contollers;
+package bonk_andrzej.app.fx.contoller;
 
 import bonk_andrzej.app.Main;
 import bonk_andrzej.app.utils.DialogsUtils;
